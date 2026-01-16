@@ -32,6 +32,8 @@ try:
     from .styles import *
     from .styling import *
     from .iteration import *
+    from .compatability import *
+    from .gui_utilities import *
 except ImportError as ix:
     this_package_name = Path(__file__).parent.name
     logging.error(f"Make sure qgis module is available for {this_package_name}")

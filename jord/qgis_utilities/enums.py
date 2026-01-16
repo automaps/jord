@@ -1,5 +1,6 @@
 from enum import Enum
 
+# noinspection PyUnresolvedReferences
 from qgis._3d import Qgs3DTypes
 
 # noinspection PyUnresolvedReferences
@@ -16,7 +17,6 @@ from jord.geojson_utilities import GeoJsonGeometryTypesEnum
 __all__ = [
     "QgisRendererEnum",
     "QgisLayerTypeEnum",
-    "Qgis3dCullingMode",
     "Qgis3dFacade",
     "Qgis3dAltitudeBinding",
     "Qgis3dAltitudeClamping",
@@ -49,13 +49,6 @@ class QgisLayerTypeEnum(Enum):
     compound_curve = "CompoundCurve"
     multi_curve = "MultiCurve"
     no_geometry = "No Geometry"
-
-
-class Qgis3dCullingMode(Enum):
-    no_culling = 0  # Qgs3DTypes.CullingMode.NoCulling # 0
-    front_face = 1
-    back_face = 2
-    front_and_back_face = 3
 
 
 class Qgis3dAltitudeBinding(Enum):

@@ -1,9 +1,9 @@
 import logging
 import time
 from itertools import tee
-from typing import Any, Iterable, List, Mapping, Optional, Union
+from typing import Any, Callable, Iterable, List, Mapping, Optional, Union
 
-from warg import n_uint_mix_generator_builder, passes_kws_to
+from warg import TripleNumber, n_uint_mix_generator_builder, passes_kws_to
 
 from jord.typing_utilities.type_solving import (
     solve_attribute_uri,
@@ -41,7 +41,7 @@ def add_qgis_single_feature_layer(
     columns: Optional[Mapping[str, Any]] = None,
     index: bool = False,
     categorise_by_attribute: Optional[str] = None,
-    color_generator: callable = n_uint_mix_generator_builder(
+    color_generator: Callable[[], TripleNumber] = n_uint_mix_generator_builder(
         255, 255, 255, mix_min=(222, 222, 222)
     ),
     group: Any = None,

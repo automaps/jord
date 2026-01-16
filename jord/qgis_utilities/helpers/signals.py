@@ -1,8 +1,8 @@
-from logging import warning
+import logging
 from typing import Optional
 
 # noinspection PyUnresolvedReferences
-from qgis.PyQt import QtCore
+from qgis.PyQt.QtCore import pyqtSignal
 
 __author__ = "Christian Heider Lindbjerg"
 __doc__ = r"""
@@ -14,10 +14,10 @@ __all__ = ["disconnect_signal", "connect_signal", "reconnect_signal"]
 
 IS_DEBUGGING = False
 
+_logger = logging.getLogger(__name__)
 
-def connect_signal(
-    signal: QtCore.pyqtSignal, new_handler: Optional[callable] = None
-) -> None:
+
+def connect_signal(signal: pyqtSignal, new_handler: Optional[callable] = None) -> None:
     """
 
     :param signal:
@@ -29,11 +29,11 @@ def connect_signal(
     else:
         if IS_DEBUGGING:
             raise Exception("new_handler is None")
-        warning("new_handler is None")
+        _logger.warning("new_handler is None")
 
 
 def disconnect_signal(
-    signal: QtCore.pyqtSignal, old_handler: Optional[callable] = None
+    signal: pyqtSignal, old_handler: Optional[callable] = None
 ) -> None:
     """
 
@@ -58,14 +58,14 @@ def disconnect_signal(
 
 
 def reconnect_signal(
-    signal: QtCore.pyqtSignal,
+    signal: pyqtSignal,
     new_handler: Optional[callable] = None,
     old_handler: Optional[callable] = None,
 ) -> None:
     """
 
     :param signal:
-    :type signal: QtCore.pyqtSignal
+    :type signal: pyqtSignal
     :param new_handler:
     :type new_handler: Optional[callable]
     :param old_handler:

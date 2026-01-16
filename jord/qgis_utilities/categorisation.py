@@ -42,6 +42,11 @@ logger = logging.getLogger(__name__)
 
 
 def random_rgb(mix: TripleNumber = (255, 255, 255)) -> TripleNumber:
+    """
+
+    :param mix: The upper limit of each element of the RGB Tuple
+    :return: random RGB Tuple
+    """
     red = random.randrange(0, mix[0])
     green = random.randrange(0, mix[1])
     blue = random.randrange(0, mix[2])
@@ -49,6 +54,11 @@ def random_rgb(mix: TripleNumber = (255, 255, 255)) -> TripleNumber:
 
 
 def random_rgba(mix: QuadNumber = (1, 1, 1, 1)) -> QuadNumber:
+    """
+
+    :param mix: The upper limit of each element of the RGBA Tuple
+    :return: random RGBA Tuple
+    """
     red = random.randrange(0, mix[0])
     green = random.randrange(0, mix[1])
     blue = random.randrange(0, mix[2])
@@ -56,14 +66,28 @@ def random_rgba(mix: QuadNumber = (1, 1, 1, 1)) -> QuadNumber:
     return red, green, blue, alpha
 
 
-def random_color_generator() -> Generator[TripleNumber, None, None]:
+def random_color_generator(
+    mix: TripleNumber = (1, 1, 1)
+) -> Generator[TripleNumber, None, None]:
+    """
+
+    :param mix: The upper limit of each element of the RGBA Tuple
+    :return: A generator of random RGB Tuples
+    """
     while 1:
-        yield random_rgb()
+        yield random_rgb(mix=mix)
 
 
-def random_color_alpha_generator() -> Generator[QuadNumber, None, None]:
+def random_color_alpha_generator(
+    mix: QuadNumber = (1, 1, 1, 1)
+) -> Generator[QuadNumber, None, None]:
+    """
+
+    :param mix: The upper limit of each element of the RGBA Tuple
+    :return: A generator of random RGBA Tuples
+    """
     while 1:
-        yield random_rgba()
+        yield random_rgba(mix=mix)
 
 
 def categorise_layer(

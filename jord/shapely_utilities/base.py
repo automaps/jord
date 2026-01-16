@@ -1,5 +1,5 @@
 import logging
-from typing import Any, Mapping, Optional
+from typing import Any, Callable, Mapping, Optional
 
 import shapely.geometry
 from shapely import LineString, Point
@@ -34,8 +34,8 @@ clean_geometry = unflimmer = deflimmer
 
 def sanitise(
     geom: shapely.geometry.base.BaseGeometry,
-    *args: callable,
-    kwargs: Optional[Mapping[callable, Mapping[str, Any]]] = None
+    *args: Callable,
+    kwargs: Optional[Mapping[Callable, Mapping[str, Any]]] = None
 ) -> shapely.geometry.base.BaseGeometry:
     """
       #A positive distance produces a dilation, a negative distance an erosion. A very small or zero distance

@@ -1,6 +1,9 @@
 from geopandas import GeoDataFrame
 
 
+__all__ = ["raster_window"]
+
+
 def raster_window(
     window_min_x,
     window_min_y,

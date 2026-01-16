@@ -5,25 +5,25 @@ from pathlib import Path
 from typing import Any, Optional
 
 # noinspection PyUnresolvedReferences
-from qgis.core import QgsMessageLog
+from qgis.core import QgsMessageLog, Qgis
 
 __all__ = ["setup_qgs_logger", "add_logging_handler_once", "QgsLogHandler", "level_map"]
 
 level_map = {
-    logging.NOTSET: 0,  # Qgis.MessageLevel.NoLevel
+    logging.NOTSET: Qgis.MessageLevel.NoLevel,  # Qgis.MessageLevel.NoLevel
     # 0 When set on a logger, indicates that ancestor loggers are to be consulted to determine the effective
     # level. If that still resolves to NOTSET, then all events are logged. When set on a handler, all events
     # are handled.
-    logging.DEBUG: 0,  # Qgis.MessageLevel.Info
+    logging.DEBUG: Qgis.MessageLevel.Info,  # Qgis.MessageLevel.Info
     # 10 Detailed information, typically only of interest to a developer trying to diagnose a problem.
-    logging.INFO: 0,  # Qgis.MessageLevel.Info  #Qgis.MessageLevel.Success
+    logging.INFO: Qgis.MessageLevel.Info,  # Qgis.MessageLevel.Info  #Qgis.MessageLevel.Success
     # 20 Confirmation that things are working as expected.
-    logging.WARNING: 1,  # Qgis.MessageLevel.Warning
+    logging.WARNING: Qgis.MessageLevel.Warning,  # Qgis.MessageLevel.Warning
     # 30 An indication that something unexpected happened, or that a problem might occur in the near future
     # (e.g. ‘disk space low’). The software is still working as expected.
-    logging.ERROR: 2,  # Qgis.MessageLevel.Critical
+    logging.ERROR: Qgis.MessageLevel.Critical,  # Qgis.MessageLevel.Critical
     # 40 Due to a more serious problem, the software has not been able to perform some function.
-    logging.CRITICAL: 2,  # Qgis.MessageLevel.Critical
+    logging.CRITICAL: Qgis.MessageLevel.Critical,  # Qgis.MessageLevel.Critical
     # 50 A serious error, indicating that the program itself may be unable to continue running.}
 }
 

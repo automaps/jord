@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Callable
 
 # noinspection PyUnresolvedReferences
 from qgis.PyQt.QtGui import QIcon
@@ -14,7 +14,7 @@ __all__ = ["create_action"]
 def create_action(
     icon_path: str,
     text: str,
-    callback: callable,
+    callback: Callable,
     enabled_flag: bool = True,
     toolbar: Any = None,
     iface: Any = None,

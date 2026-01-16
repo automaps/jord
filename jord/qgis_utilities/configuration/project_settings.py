@@ -14,6 +14,7 @@ __all__ = [
     "store_project_setting",
     "read_project_setting",
     "restore_default_project_settings",
+    "delete_project_setting",
 ]
 
 
@@ -31,6 +32,21 @@ def restore_default_project_settings(
 
     for key, value in defaults.items():
         store_project_setting(key, value, project_name=project_name)
+
+
+def delete_project_setting(key: str, *, project_name: str = PROJECT_NAME) -> None:
+    """
+
+    :param key:
+    :param project_name:
+    :return:
+    """
+    # noinspection PyUnresolvedReferences
+    from qgis.core import QgsProject
+
+    qgis_project = QgsProject.instance()
+
+    qgis_project.removeEntry(project_name, key)
 
 
 def store_project_setting(
