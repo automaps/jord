@@ -94,7 +94,7 @@ def assertive_add_shapely_node(
         u,
         x=float(point.x),
         y=float(point.y),
-        id=u,
+        # id=u,
         **kwargs,
     )
 

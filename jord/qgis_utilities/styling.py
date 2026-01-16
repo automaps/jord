@@ -27,14 +27,16 @@ from qgis.core import (
 
 # noinspection PyUnresolvedReferences
 from qgis.utils import iface
-from warg import TripleNumber
+from warg import Number, TripleNumber
 
 from jord.qgis_utilities.enums import (
     Qgis3dAltitudeBinding,
     Qgis3dAltitudeClamping,
-    Qgis3dCullingMode,
     Qgis3dFacade,
 )
+
+# noinspection PyUnresolvedReferences
+from qgis._3d import Qgs3DTypes
 
 __all__ = [
     "style_layer_from_mapping",
@@ -242,7 +244,12 @@ def make_line_symbol(
 
 
 def make_point_symbol(
-    culling_mode, edge_color, edge_width, extrusion, facades, offset
+    culling_mode: Qgs3DTypes.CullingMode,
+    edge_color: TripleNumber,
+    edge_width: Number,
+    extrusion: Number,
+    facades: Qgis3dFacade,
+    offset: Number,
 ) -> Any:
     # ->q3d.QgsPolygon3DSymbol:
 
@@ -262,7 +269,7 @@ def set_3d_view_settings(
     extrusion: float = 4,
     color: TripleNumber = (222, 222, 222),
     facades: Qgis3dFacade = Qgis3dFacade.walls,
-    culling_mode: Qgis3dCullingMode = Qgis3dCullingMode.front_face,
+    culling_mode: Qgs3DTypes.CullingMode = Qgs3DTypes.CullingMode.Front,
     repaint: bool = True,
     edge_width: float = 1.0,
     edge_color: TripleNumber = (255, 255, 255),
@@ -321,7 +328,7 @@ def set_renderer(layer, line_renderer, point_renderer, polygon_renderer):
         logger.error(f"geometry type not supported: {layer.geometryType()}, skipping")
 
 
-def make_renderer(color, symbol):
+def make_renderer(color: TripleNumber, symbol: QgsSymbol) -> Any:  #    QgsRenderer
     apply_common_symbol_settings(symbol)
     apply_material(color, symbol)
     renderer = q3d.QgsVectorLayer3DRenderer()
@@ -331,12 +338,17 @@ def make_renderer(color, symbol):
 
 
 def make_polygon_symbol(
-    culling_mode, edge_color, edge_width, extrusion, facades, offset
+    culling_mode: Qgs3DTypes.CullingMode,
+    edge_color: TripleNumber,
+    edge_width: Number,
+    extrusion: Number,
+    facades: Qgis3dFacade,
+    offset: Number,
 ) -> Any:
     # ->q3d.QgsPolygon3DSymbol:
 
     symbol = q3d.QgsPolygon3DSymbol()
-    symbol.setCullingMode(culling_mode.value)
+    symbol.setCullingMode(culling_mode)
     symbol.setOffset(offset)
     symbol.setExtrusionHeight(extrusion)
     symbol.setRenderedFacade(facades.value)
@@ -354,7 +366,7 @@ def make_polygon_symbol(
     return symbol
 
 
-def apply_common_symbol_settings(symbol) -> None:
+def apply_common_symbol_settings(symbol: Any) -> None:
     if symbol is None:
         logger.error("symbol is None, skipping")
         return
@@ -365,7 +377,7 @@ def apply_common_symbol_settings(symbol) -> None:
         symbol.setAltitudeClamping(Qgis3dAltitudeClamping.absolute.value)
 
 
-def apply_material(color, symbol) -> None:
+def apply_material(color: TripleNumber, symbol: Any) -> None:
 
     material_settings = q3d.QgsPhongMaterialSettings()
 

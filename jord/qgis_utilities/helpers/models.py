@@ -11,6 +11,8 @@ from qgis.PyQt import QtCore
 
 __all__ = ["MyTableModel"]
 
+from jord.qgis_utilities.compatability import horizontal_orientation
+
 
 # noinspection PyPep8Naming
 class MyTableModel(QtCore.QAbstractTableModel):
@@ -29,7 +31,7 @@ class MyTableModel(QtCore.QAbstractTableModel):
     # noinspection PyMethodMayBeStatic
     def headerData(
         self, section: int, orientation: QtCore.Qt.Orientation, role: int
-    ) -> str:  # Do not rename
+    ) -> Optional[str]:  # Do not rename
         """
 
         :param section:
@@ -38,10 +40,12 @@ class MyTableModel(QtCore.QAbstractTableModel):
         :return:
         """
         if role == QtCore.Qt.DisplayRole:
-            if orientation == QtCore.Qt.Horizontal:
+            if orientation == horizontal_orientation:
                 return f"Column {str(section)}"
             else:
                 return f"Row {str(section)}"
+
+        return None
 
     def columnCount(self, parent: Any = None) -> int:  # Do not rename
         """
