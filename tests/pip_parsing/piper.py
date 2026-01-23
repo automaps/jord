@@ -13,6 +13,9 @@ __all__ = [
     "is_package_updatable",
 ]
 
+from importlib.metadata import Distribution
+from pathlib import Path
+
 import ensurepip
 import json
 import logging
@@ -20,17 +23,14 @@ import os
 import subprocess
 import sys
 from enum import Enum
-from importlib.metadata import Distribution
-from pathlib import Path
+from packaging import version
+from packaging.version import InvalidVersion, Version
 from typing import Iterable, List, Optional, Tuple, Union
 from urllib.error import HTTPError
 from urllib.request import (  # TODO: should use QgsNetworkAccessManager instead for networking
     Request,
     urlopen,
 )
-
-from packaging import version
-from packaging.version import InvalidVersion, Version
 
 # from warg import is_windows # avoid dependency import not standard python pkgs.
 CUR_OS = sys.platform

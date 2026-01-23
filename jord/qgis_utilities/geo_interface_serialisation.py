@@ -1,15 +1,14 @@
 import logging
-from typing import List, Union
-
 import shapely
 
 # noinspection PyUnresolvedReferences
 from qgis.core import QgsFeature, QgsGeometry, QgsPointXY
 from shapely.geometry import shape
+from typing import List, Union
 
 from jord.shapely_utilities import is_multi
 
-logger = logging.getLogger(__name__)
+_logger = logging.getLogger(__name__)
 
 
 def already_exist_question_mark(iface):
@@ -105,7 +104,7 @@ def q_point_geometry_creation(
         elif isinstance(shapely_geometry, shapely.MultiPolygon):
             geom = QgsGeometry.fromMultiPolygonXY(point_geoms)
         else:
-            logger.error(f"Geometry type {type(shapely_geometry)} is not supported")
+            _logger.error(f"Geometry type {type(shapely_geometry)} is not supported")
 
     else:
         point_geom = q_point_creation(shapely_geometry)
@@ -117,7 +116,7 @@ def q_point_geometry_creation(
         elif isinstance(shapely_geometry, shapely.Polygon):
             geom = QgsGeometry.fromPolygonXY(point_geom)
         else:
-            logger.error(f"Geometry type {type(shapely_geometry)} is not supported")
+            _logger.error(f"Geometry type {type(shapely_geometry)} is not supported")
 
     return geom
 

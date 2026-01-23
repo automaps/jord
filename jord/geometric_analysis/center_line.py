@@ -1,11 +1,10 @@
-from typing import Iterable, List, Tuple, Union
-
 import numpy
 import shapely.geometry
 from numpy import array
 from scipy.spatial import Voronoi
 from shapely.geometry import LineString, MultiLineString, MultiPolygon, Polygon
 from shapely.ops import unary_union
+from typing import Iterable, List, Tuple, Union
 from warg import Number
 
 from jord.shapely_utilities.polygons import iter_polygons, polygon_has_interior_rings

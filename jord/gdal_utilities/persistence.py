@@ -1,10 +1,10 @@
-from dataclasses import dataclass
-from enum import Enum
 from pathlib import Path
-from typing import Type, Union
 
 import shapely
+from dataclasses import dataclass
+from enum import Enum
 from osgeo import ogr
+from typing import Type, Union
 
 from .spatial_reference import get_spatial_reference_from_epsg
 

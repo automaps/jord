@@ -1,14 +1,13 @@
 import logging
+import numpy
+import shapely.geometry
 import time
+import tqdm
 import uuid
 from enum import Enum
 from itertools import tee
-from typing import Any, Iterable, List, Mapping, Optional, Tuple, Union
-
-import numpy
-import shapely.geometry
-import tqdm
 from pandas import DataFrame
+from typing import Any, Iterable, List, Mapping, Optional, Tuple, Union
 from warg import Number, ensure_existence, passes_kws_to
 
 from jord import PROJECT_APP_PATH
@@ -59,7 +58,7 @@ __all__ = [
     "QliveRPCMethodMap",
 ]
 
-logger = logging.getLogger(__name__)
+_logger = logging.getLogger(__name__)
 
 
 @passes_kws_to(add_qgis_single_feature_layer)
@@ -466,11 +465,11 @@ def add_dataframe_layer(
         ), f"only added {accum_feature_len}/{total_feature_len=} of geometries"
     else:
         if total_feature_len != split_accum_len:
-            logger.error(
+            _logger.error(
                 f"only iterated {split_accum_len}/{total_feature_len=} of geometries"
             )
         if total_feature_len != accum_feature_len:
-            logger.error(
+            _logger.error(
                 f"only added {accum_feature_len}/{total_feature_len=} of geometries"
             )
 
@@ -871,7 +870,7 @@ def add_no_geom_layer(
     )
 
     if not res:
-        logger.error(f"{layer_data_provider.lastError()}")
+        _logger.error(f"{layer_data_provider.lastError()}")
 
         assert (
             res

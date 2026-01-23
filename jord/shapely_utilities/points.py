@@ -1,9 +1,8 @@
-from typing import Generator, Iterable, List, Optional, Sequence, Tuple, Union
-
 import numpy
 import shapely
 import shapely.geometry
 from shapely.geometry import LineString, MultiPoint, Point
+from typing import Generator, Iterable, List, Optional, Sequence, Tuple, Union
 from warg import Number
 
 __all__ = [

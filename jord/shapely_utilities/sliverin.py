@@ -1,11 +1,11 @@
 from collections import defaultdict
-from copy import copy
-from typing import Collection, Dict, List, Sequence, Union
 
 import shapely
+from copy import copy
 from shapely.constructive import simplify
 from shapely.geometry.base import GeometrySequence
 from tqdm import tqdm
+from typing import Collection, Dict, List, Sequence, Union
 
 from jord.geometric_analysis import construct_centerline
 from jord.shapely_utilities import (

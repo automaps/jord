@@ -1,8 +1,7 @@
 import logging
-from typing import Any, Callable, Mapping, Optional
-
 import shapely.geometry
 from shapely import LineString, Point
+from typing import Any, Callable, Mapping, Optional
 
 from .morphology import clean_shape, closing, opening, zero_buffer
 
@@ -13,7 +12,7 @@ __all__ = [
     "sanitise",
 ]
 
-logger = logging.getLogger(__name__)
+_logger = logging.getLogger(__name__)
 DEFAULT_DISTANCE = 1e-7
 
 

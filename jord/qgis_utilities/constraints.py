@@ -1,5 +1,3 @@
-from typing import Iterable
-
 # noinspection PyUnresolvedReferences
 from qgis.PyQt.QtGui import QColor
 
@@ -11,6 +9,7 @@ from qgis.core import (
     QgsSymbol,
     QgsVectorLayer,
 )
+from typing import Iterable
 
 __all__ = ["set_geometry_constraints"]
 

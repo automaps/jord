@@ -1,9 +1,8 @@
-from typing import Any, Mapping
-
 import osmnx
 import shapely
 from draugr.numpy_utilities import positive_int_hash
 from networkx import MultiDiGraph, MultiGraph
+from typing import Any, Mapping
 
 __all__ = [
     "assertive_add_edge",

@@ -4,14 +4,13 @@ __doc__ = r"""
            Created on 02-12-2020
            """
 
-from typing import Any
-
 from PyQt5.QtWebKitWidgets import QWebView
 
 # noinspection PyUnresolvedReferences
 from qgis.PyQt.QtCore import (
     QUrl,
 )
+from typing import Any
 
 
 def get_web_view(parent: Any) -> QWebView:

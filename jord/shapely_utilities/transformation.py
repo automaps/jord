@@ -1,9 +1,8 @@
-from typing import Iterable, List, Tuple, Union
-
 import numpy
 import pyproj
 import shapely.geometry
 from shapely.ops import transform
+from typing import Iterable, List, Tuple, Union
 
 __all__ = [
     "crs_transform_shapely",

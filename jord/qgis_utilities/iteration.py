@@ -1,7 +1,6 @@
-from typing import Any, Generator
-
 # noinspection PyUnresolvedReferences
 from qgis.core import QgsLayerTreeGroup, QgsLayerTreeLayer
+from typing import Any, Generator
 
 __all__ = ["recurse_layers"]
 

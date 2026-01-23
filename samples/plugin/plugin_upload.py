@@ -7,9 +7,8 @@ git sha              : $TemplateVCSFormat
 import getpass
 import sys
 import xmlrpc.client
-from optparse import OptionParser
-
 from future.standard_library import install_aliases
+from optparse import OptionParser
 
 install_aliases()
 

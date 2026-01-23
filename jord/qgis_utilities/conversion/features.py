@@ -1,12 +1,11 @@
 import logging
-from typing import Any, Generator, Mapping, Optional, Tuple
-
 import shapely
 
 # noinspection PyUnresolvedReferences
 from qgis.PyQt.QtCore import QDateTime, QVariant
+from typing import Any, Generator, Mapping, Optional, Tuple
 
-logger = logging.getLogger(__name__)
+_logger = logging.getLogger(__name__)
 
 __all__ = [
     "MissingFeatureError",
@@ -125,11 +124,11 @@ def layer_data_generator(
             layer_feature_attributes = extract_feature_attributes(layer_feature)
 
             if len(layer_feature_attributes) == 0:
-                logger.error(
+                _logger.error(
                     f"Did not find attributes, skipping {layer_tree_layer.name()} {list(geometry_layer.getFeatures())}"
                 )
             else:
-                logger.info(
+                _logger.info(
                     f"found {layer_feature_attributes=} for {layer_tree_layer.name()=}"
                 )
             yield layer_feature_attributes, layer_feature
@@ -159,7 +158,7 @@ def qgs_geometry_to_shapely(
                     f"{geom_id} is not a valid geometry, {geom.lastError()}\n"
                     f"{geom.validateGeometry()}"
                 )
-                logger.error(msg)
+                _logger.error(msg)
 
                 if True:
                     raise GeometryIsInvalidError(msg)
@@ -224,11 +223,11 @@ def extract_layer_data_single(layer_tree_layer: Any) -> Tuple:
             }
 
             if len(layer_feature_attributes) == 0:
-                logger.error(
+                _logger.error(
                     f"Did not find attributes, skipping {layer_tree_layer.name()} {list(geometry_layer.getFeatures())}"
                 )
             else:
-                logger.info(
+                _logger.info(
                     f"found {layer_feature_attributes=} for {layer_tree_layer.name()=}"
                 )
 

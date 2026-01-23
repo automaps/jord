@@ -22,7 +22,7 @@ from qgis.core import (
 # noinspection PyUnresolvedReferences
 from qgis.utils import iface
 
-logger = logging.getLogger(__name__)
+_logger = logging.getLogger(__name__)
 
 
 def styled_field_value_categorised2(
@@ -40,7 +40,7 @@ def styled_field_value_categorised2(
         QgsVectorLayerUtils.getValues(layer, expression_str, selectedOnly=False)[0],
         strict=True,
     ):
-        logger.error(cat)
+        _logger.error(cat)
 
         if cat is not None and cat not in added_categories:
             sym = QgsSymbol.defaultSymbol(layer.geometryType())
@@ -52,12 +52,12 @@ def styled_field_value_categorised2(
                 if key in style_feature.fields().names():
                     fill_color = str(style_feature[key])
                     if "#" in fill_color:
-                        logger.error(
+                        _logger.error(
                             f"Set fill_color {fill_color} for {cat} in layer {layer.id()}"
                         )
                         sym.setColor(QColor(fill_color))
                     else:
-                        logger.error(
+                        _logger.error(
                             f"Did not set fill_color for {cat} in layer {layer.id()}"
                         )
 
@@ -117,7 +117,7 @@ def expression_field_value_categorised_do_not_use(layer, field_name="location_ty
     for cat in QgsVectorLayerUtils.getValues(layer, expression_str, selectedOnly=False)[
         0
     ]:
-        logger.error(cat)
+        _logger.error(cat)
 
         if cat is not None and cat not in added_categories:
             sym = QgsSymbol.defaultSymbol(layer.geometryType())

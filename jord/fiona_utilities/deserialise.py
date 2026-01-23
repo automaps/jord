@@ -5,6 +5,7 @@ __doc__ = r"""
            """
 
 from pathlib import Path
+
 from typing import Any, Tuple, Union
 
 __all__ = ["read_geometries"]

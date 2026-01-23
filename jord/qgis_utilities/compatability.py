@@ -25,6 +25,7 @@ __all__ = [
     "align_center",
     "align_left",
     "align_right",
+    "vertical_orientation",
 ]
 
 __doc__ = (
@@ -54,9 +55,12 @@ except AttributeError:
     echo_mode = QLineEdit.Password
 
 try:
-    horizontal_orientation = Qt.Horizontal
-except AttributeError:
     horizontal_orientation = Qt.Orientation.Horizontal
+    vertical_orientation = Qt.Orientation.Vertical
+
+except AttributeError:
+    horizontal_orientation = Qt.Horizontal
+    vertical_orientation = Qt.Vertical
 
 try:
     window_stays_on_top_hint = Qt.WindowType.WindowStaysOnTopHint

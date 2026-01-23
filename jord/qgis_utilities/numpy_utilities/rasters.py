@@ -1,6 +1,5 @@
-from typing import Any
-
 import numpy
+from typing import Any
 
 
 def convert_raster_to_numpy_array(lyr: Any) -> numpy.ndarray:

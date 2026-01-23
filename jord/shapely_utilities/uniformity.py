@@ -1,10 +1,9 @@
 import logging
-
 from shapely import Polygon
 
 from .rings import ensure_ccw_ring, ensure_cw_ring
 
-logger = logging.getLogger(__name__)
+_logger = logging.getLogger(__name__)
 
 __all__ = [
     "ensure_cw_poly",

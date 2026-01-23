@@ -8,7 +8,7 @@ from typing import Collection, Union, Any
 # noinspection PyUnresolvedReferences
 from qgis.core import QgsLayerTreeGroup, QgsLayerTreeLayer, QgsLayerTreeNode
 
-logger = logging.getLogger(__name__)
+_logger = logging.getLogger(__name__)
 
 
 def randomize_sub_tree_field(
@@ -22,12 +22,12 @@ def randomize_sub_tree_field(
         if selected_nodes.nodeType() == QgsLayerTreeNode.NodeGroup:
             randomize_sub_tree_field(selected_nodes.children(), field_name=field_name)
         else:
-            logger.error(
+            _logger.error(
                 f"Node {selected_nodes} was not supported in randomize_sub_tree_field, skipping"
             )
     else:
         if len(selected_nodes) == 0:
-            logger.error(
+            _logger.error(
                 f"'Number of selected nodes was {len(selected_nodes)}, please supply some"
             )
             return
@@ -41,11 +41,11 @@ def randomize_sub_tree_field(
                 if group.nodeType() == QgsLayerTreeNode.NodeGroup:
                     randomize_sub_tree_field(group.children(), field_name=field_name)
                 else:
-                    logger.error(
+                    _logger.error(
                         f"Node {group} was not supported in randomize_sub_tree_field, skipping"
                     )
             else:
-                logger.error(
+                _logger.error(
                     f"Node {group} was not supported in randomize_sub_tree_field, skipping"
                 )
 
@@ -62,7 +62,7 @@ def randomize_field(tree_layer: Any, field_name: str) -> None:  #: QgsLayerTreeL
         :return:
     """
     if tree_layer is None:
-        logger.error(f"Tree layer was None")
+        _logger.error(f"Tree layer was None")
         return
     # logger.info(f'Randomizing {field_name} in {tree_layer.layer().name()}')
 
@@ -73,7 +73,7 @@ def randomize_field(tree_layer: Any, field_name: str) -> None:  #: QgsLayerTreeL
     if field_idx >= 0:
         layer.startEditing()
         # layer.beginEditCommand(f"Regenerate {field_name}")
-        logger.info(
+        _logger.info(
             f"Randomizing {field_name}:{field_idx} in {tree_layer.layer().name()}"
         )
 
@@ -84,4 +84,4 @@ def randomize_field(tree_layer: Any, field_name: str) -> None:  #: QgsLayerTreeL
         # layer.endEditCommand()
         layer.commitChanges()
     else:
-        logger.error(f"Did not find {field_name} in {layer.name()}")
+        _logger.error(f"Did not find {field_name} in {layer.name()}")

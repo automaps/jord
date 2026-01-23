@@ -4,10 +4,11 @@ __doc__ = r"""
            Created on 02-12-2020
            """
 
+from pathlib import Path
+
 import os
 import subprocess
 import sys
-from pathlib import Path
 from subprocess import check_output
 from typing import Iterable, Optional, Tuple
 

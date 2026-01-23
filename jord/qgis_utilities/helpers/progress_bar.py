@@ -4,10 +4,9 @@ __doc__ = r"""
            Created on 02-12-2020
            """
 
-from typing import Any, Optional, Tuple
-
 # noinspection PyUnresolvedReferences
 from qgis.PyQt import QtWidgets
+from typing import Any, Optional, Tuple
 from warg import AlsoDecorator, passes_kws_to
 
 from jord.qt_utilities import WindowModalityEnum

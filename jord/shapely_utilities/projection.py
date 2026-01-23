@@ -1,10 +1,9 @@
-from typing import Iterable, Optional, Sequence, Tuple, Union
-
 import numpy
 import shapely
 import shapely.geometry
 from shapely import LinearRing, MultiLineString
 from shapely.geometry import LineString, Point, Polygon
+from typing import Iterable, Optional, Sequence, Tuple, Union
 from warg import Number, pairs
 
 from jord.shapely_utilities.morphology import dilate
