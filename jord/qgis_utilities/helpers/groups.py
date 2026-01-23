@@ -1,11 +1,11 @@
 import logging
-from typing import Any, Optional, Union
 
 # noinspection PyUnresolvedReferences
 from qgis.core import QgsLayerTreeGroup, QgsLayerTreeLayer, QgsProject
 
 # noinspection PyUnresolvedReferences
 from qgis.utils import iface
+from typing import Any, Optional, Union
 
 __all__ = [
     "duplicate_groups",
@@ -21,7 +21,7 @@ try:
 except ImportError:
     EllipsisType = type(...)
 
-logger = logging.getLogger(__name__)
+_logger = logging.getLogger(__name__)
 
 
 def duplicate_groups(
@@ -31,10 +31,10 @@ def duplicate_groups(
     new_name: Union[str, EllipsisType, None] = None,
 ) -> QgsLayerTreeGroup:
     if group_to_duplicate is None:
-        logger.error("Group was None")
+        _logger.error("Group was None")
         return
 
-    logger.info(f"Duplicating {group_to_duplicate.name()}")
+    _logger.info(f"Duplicating {group_to_duplicate.name()}")
 
     if new_name is ... or new_name == "" or new_name is None:
         new_name = f"{group_to_duplicate.name()} (Copy)"
@@ -62,7 +62,7 @@ def duplicate_groups(
                 duplicate_tree_node(new_group_parent, original_group_child)
             )
         else:
-            logger.error(f"{original_group_child} no supported in duplication")
+            _logger.error(f"{original_group_child} no supported in duplication")
 
     return new_group_parent, sub_items
 

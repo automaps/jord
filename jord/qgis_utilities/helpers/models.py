@@ -4,10 +4,9 @@ __doc__ = r"""
            Created on 02-12-2020
            """
 
-from typing import Any, Optional, Tuple
-
 # noinspection PyUnresolvedReferences
 from qgis.PyQt import QtCore
+from typing import Any, Optional, Tuple
 
 __all__ = ["MyTableModel"]
 

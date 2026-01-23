@@ -1,7 +1,6 @@
-from typing import Any, Collection, List, Mapping, Optional
-
 import pandas
 from pandas import DataFrame
+from typing import Any, Collection, List, Mapping, Optional
 
 __all__ = ["df_to_columns", "columns_to_df", "normalize_na"]
 

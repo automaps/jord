@@ -7,8 +7,9 @@ __doc__ = r"""
            Created on 5/5/22
            """
 
-import logging
 from pathlib import Path
+
+import logging
 
 with open(Path(__file__).parent / "README.md") as this_init_file:
     __doc__ += this_init_file.read()

@@ -1,7 +1,7 @@
 from pathlib import Path
-from typing import Optional
 
 from ezdxf.addons import odafc
+from typing import Optional
 
 __doc__ = r"""
 

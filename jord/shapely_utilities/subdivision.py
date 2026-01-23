@@ -1,8 +1,7 @@
-from typing import Union
-
 import shapely
 from shapely.geometry.linestring import LineString
 from shapely.geometry.polygon import LinearRing, Polygon
+from typing import Union
 from warg import pairs
 
 from jord.shapely_utilities.lines import linemerge

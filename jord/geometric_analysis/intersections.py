@@ -1,5 +1,3 @@
-from typing import Optional, Sequence, Tuple, Union
-
 from shapely import (
     GeometryCollection,
     LineString,
@@ -9,6 +7,7 @@ from shapely import (
     Point,
     Polygon,
 )
+from typing import Optional, Sequence, Tuple, Union
 
 from jord.shapely_utilities import (
     closest_object,

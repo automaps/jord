@@ -2,7 +2,6 @@ import logging
 import time
 from itertools import tee
 from typing import Any, Callable, Iterable, List, Mapping, Optional, Union
-
 from warg import TripleNumber, n_uint_mix_generator_builder, passes_kws_to
 
 from jord.typing_utilities.type_solving import (
@@ -30,7 +29,7 @@ __all__ = [
     "add_qgis_multi_feature_layer",
 ]
 
-logger = logging.getLogger(__name__)
+_logger = logging.getLogger(__name__)
 
 
 def add_qgis_single_feature_layer(
@@ -97,7 +96,7 @@ def add_qgis_single_feature_layer(
     geom_type = QgsWkbTypes.displayString(geom.wkbType())
 
     if True:
-        logger.error(f"{geom},{geom_type=}")
+        _logger.error(f"{geom},{geom_type=}")
 
     uri = geom_type  # TODO: URI MIGHT BE NONE?
 
@@ -142,7 +141,7 @@ def add_qgis_single_feature_layer(
             uri = QgsWkbTypes.displayString(g.wkbType())
 
             if True:
-                logger.error(f"{g},{uri=}")
+                _logger.error(f"{g},{uri=}")
 
             sub_type = uri  # TODO: URI MIGHT BE NONE?
 
@@ -240,7 +239,7 @@ def add_qgis_single_feature_layer(
         res, out_feats = layer_data_provider.addFeatures([feat])
 
         if not res:
-            logger.error(f"{layer_data_provider.lastError()}")
+            _logger.error(f"{layer_data_provider.lastError()}")
 
             assert (
                 res
@@ -468,7 +467,7 @@ def add_qgis_multi_feature_layer(
         ), f"Some features where dropped! {len(list(geoms))} != {len(features)}"
     else:
         if len(list(geoms)) != len(features):
-            logger.error(
+            _logger.error(
                 f"Some features where dropped! {len(list(geoms))} != {len(features)}"
             )
 
@@ -501,21 +500,21 @@ def add_qgis_multi_feature_layer(
     )
 
     if not res:
-        logger.error(f"{layer_data_provider.lastError()}")
+        _logger.error(f"{layer_data_provider.lastError()}")
 
         if not res:
             msg = (
                 f"Failure while adding features {res} {layer_data_provider.lastError()}"
             )
             assert res, msg
-            logger.warning(msg)
+            _logger.warning(msg)
 
         assert len(list(geoms)) == len(
             out_feats
         ), f"Some features where dropped! return status {res}:  {len(list(geoms))} != {len(out_feats)}"
 
     if len(list(geoms)) != layer.featureCount():
-        logger.error(f"{features}")
+        _logger.error(f"{features}")
 
     if STRICT:
         assert (
@@ -523,7 +522,7 @@ def add_qgis_multi_feature_layer(
         ), f"Some features where dropped! {len(list(geoms))} != {layer.featureCount()}"
     else:
         if len(list(geoms)) != layer.featureCount():
-            logger.error(
+            _logger.error(
                 f"Some features where dropped! {len(list(geoms))} != {layer.featureCount()}"
             )
 
@@ -546,7 +545,7 @@ def add_qgis_multi_feature_layer(
         ), f"Some features where dropped! {len(list(geoms))} != {layer.featureCount()}"
     else:
         if len(list(geoms)) != layer.featureCount():
-            logger.error(
+            _logger.error(
                 f"Some features where dropped! {len(list(geoms))} != {layer.featureCount()}"
             )
 
@@ -560,7 +559,7 @@ def add_qgis_multi_feature_layer(
         ), f"Some features where dropped! {len(list(geoms))} != {layer.featureCount()}"
     else:
         if len(list(geoms)) != layer.featureCount():
-            logger.error(
+            _logger.error(
                 f"Some features where dropped! {len(list(geoms))} != {layer.featureCount()}"
             )
 

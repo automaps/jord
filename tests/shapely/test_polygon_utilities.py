@@ -1,7 +1,6 @@
-from typing import Union
-
 import pytest
 import shapely
+from typing import Union
 
 from jord.shapely_utilities import discard_holes, has_holes
 

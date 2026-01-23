@@ -4,8 +4,6 @@ __doc__ = r"""
            Created on 02-12-2020
            """
 
-from typing import Any
-
 import numpy
 
 # noinspection PyUnresolvedReferences
@@ -16,6 +14,7 @@ from qgis.PyQt.QtCore import QEvent, Qt
 
 # noinspection PyUnresolvedReferences
 from qgis.gui import QgsPixmapLabel
+from typing import Any
 
 from .conversion import get_qimage_from_numpy
 

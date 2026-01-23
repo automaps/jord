@@ -1,11 +1,12 @@
+from pathlib import Path
+
 import logging
 import os
 import sys
-from pathlib import Path
-from typing import Any, Optional
 
 # noinspection PyUnresolvedReferences
-from qgis.core import QgsMessageLog, Qgis
+from qgis.core import Qgis, QgsMessageLog
+from typing import Any, Optional
 
 __all__ = ["setup_qgs_logger", "add_logging_handler_once", "QgsLogHandler", "level_map"]
 

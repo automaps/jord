@@ -1,5 +1,9 @@
 import datetime
 import logging
+import numpy
+import pandas
+import shapely
+from pandas.core.generic import NDFrame
 from typing import (
     Any,
     Collection,
@@ -11,11 +15,6 @@ from typing import (
     Tuple,
     Union,
 )
-
-import numpy
-import pandas
-import shapely
-from pandas.core.generic import NDFrame
 
 ADD_STRING_LEN = True
 NUM_MB16_CHARS = 16777216
@@ -29,7 +28,7 @@ __all__ = [
     "to_truth",
 ]
 
-logger = logging.getLogger(__name__)
+_logger = logging.getLogger(__name__)
 
 
 def solve_qgis_type(
@@ -128,7 +127,9 @@ def solve_qgis_type(
                 return "text"
         else:
             if False:
-                logger.error(f"Could not solve type {type(d)=}, {d.__class__.__name__}")
+                _logger.error(
+                    f"Could not solve type {type(d)=}, {d.__class__.__name__}"
+                )
     try:
         if to_truth(numpy.isnan(d)):
             return None
@@ -153,7 +154,7 @@ def solve_qgis_type(
                 return "string(255)"  # True, False (5)
         else:
             if False:
-                logger.error(f"Fallback solve type {type(d)=}, {d.__class__.__name__}")
+                _logger.error(f"Fallback solve type {type(d)=}, {d.__class__.__name__}")
             return "boolean"
 
     if False:

@@ -1,8 +1,8 @@
 import logging
-from typing import Optional
 
 # noinspection PyUnresolvedReferences
 from qgis.PyQt.QtCore import pyqtSignal
+from typing import Optional
 
 __author__ = "Christian Heider Lindbjerg"
 __doc__ = r"""

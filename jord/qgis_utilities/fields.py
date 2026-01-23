@@ -1,6 +1,5 @@
 import logging
 from enum import Enum, IntEnum
-from typing import Any, Iterable, Mapping, Sequence, Type
 
 # noinspection PyUnresolvedReferences
 from qgis.core import (
@@ -12,13 +11,13 @@ from qgis.core import (
     QgsFieldConstraints,
     QgsMapLayer,
 )
+from typing import Any, Iterable, Mapping, Sequence, Type
 
 from jord.qgis_utilities.helpers.widgets import (
     CHECKBOX_WIDGET,
     NULLABLE_CHECKBOX_WIDGET,
     UNIQUE_VALUES_WIDGET,
 )
-
 
 __all__ = [
     "set_field_widget",
@@ -117,7 +116,7 @@ ValueRelation
 
 """
 
-logger = logging.getLogger(__name__)
+_logger = logging.getLogger(__name__)
 
 
 def set_field_widget(layers: Any, field_name: str, form_widget: Any) -> None:
@@ -178,7 +177,7 @@ def make_field_unique(
             {},
         )
         if False:
-            logger.error(unique_widget.config())
+            _logger.error(unique_widget.config())
     elif auto_generate:
         default_value_generator = QgsDefaultValue()
         default_value_generator.setExpression("rtrim( ltrim( uuid(), '{'), '}')")

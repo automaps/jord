@@ -4,8 +4,9 @@ __doc__ = r"""
            Created on 5/5/22
            """
 
-import logging
 from logging import warning
+
+import logging
 from typing import Any, Mapping, Optional
 
 from jord import PROJECT_NAME, VERBOSE

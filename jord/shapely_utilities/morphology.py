@@ -1,10 +1,9 @@
 import logging
-from typing import Optional
-
 import shapely
 import shapely.geometry
 from shapely.validation import make_valid
-from warg import passes_kws_to
+from typing import Optional
+from warg import passes_kws_to, first
 
 from .uniformity import ensure_cw_poly
 
@@ -30,7 +29,7 @@ FALLBACK_POINT_CAPSTYLE = shapely.BufferCapStyle.round  # CAN BE OVERRIDDEN
 FALLBACK_POINT_JOINSTYLE = shapely.BufferCapStyle.round  # CAN BE OVERRIDDEN
 DEFAULT_DISTANCE = 1e-7
 
-logger = logging.getLogger(__name__)
+_logger = logging.getLogger(__name__)
 
 
 @passes_kws_to(shapely.geometry.base.BaseGeometry.buffer)
@@ -279,7 +278,7 @@ def clean_shape(
             try:
                 shape = make_valid(shape)
             except shapely.errors.GEOSException as e:
-                logger.error(e)
+                _logger.error(e)
 
         shape = shapely.set_precision(
             shape,
@@ -293,7 +292,7 @@ def clean_shape(
         try:
             shape = make_valid(shape)
         except shapely.errors.GEOSException as e:
-            logger.error(e)
+            _logger.error(e)
 
     if not original_shape.is_empty:
         if shape.is_empty:
@@ -306,7 +305,7 @@ def clean_shape(
 
     if isinstance(shape, shapely.GeometryCollection):
         if len(shape.geoms) == 1:
-            shape = shape.geoms[0]
+            shape = first(shape.geoms)
 
     return shape
 

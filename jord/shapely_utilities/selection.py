@@ -1,6 +1,5 @@
-from typing import List, Optional, Tuple
-
 import shapely
+from typing import List, Optional, Tuple
 
 __all__ = ["split_enveloping_geometry"]
 

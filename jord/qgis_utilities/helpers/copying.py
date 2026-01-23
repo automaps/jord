@@ -1,7 +1,6 @@
-from typing import Any
-
 # noinspection PyUnresolvedReferences
 from qgis.core import QgsFeatureRequest, QgsField, QgsFieldConstraints, QgsVectorLayer
+from typing import Any
 
 __all__ = ["deepcopy_layer"]
 

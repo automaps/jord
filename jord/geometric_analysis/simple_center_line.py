@@ -1,8 +1,7 @@
-from typing import Optional, Union
-
 import geopandas
 import momepy
 import shapely
+from typing import Optional, Union
 
 __all__ = ["construct_centerline"]
 

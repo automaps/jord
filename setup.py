@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
-import re
 from pathlib import Path
-from typing import List, Sequence, Union
 
+import re
 from setuptools import find_packages, setup
+from typing import List, Sequence, Union
 
 
 def python_version_check(major: int = 3, minor: int = 8) -> None:

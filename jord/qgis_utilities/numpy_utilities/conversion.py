@@ -5,8 +5,6 @@ __doc__ = r"""
            """
 
 import logging
-from typing import Sequence
-
 import numpy
 from PIL import Image
 
@@ -20,6 +18,7 @@ from qgis.core import (
     QgsPoint,
     QgsVectorLayer,
 )
+from typing import Sequence
 
 __all__ = [
     "get_qimage_from_numpy",

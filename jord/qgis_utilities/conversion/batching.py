@@ -1,7 +1,6 @@
 # !/usr/bin/python
 
 import logging
-from typing import Any, Collection, Optional, Union
 
 # noinspection PyUnresolvedReferences
 from qgis.analysis import QgsGcpGeometryTransformer, QgsGcpTransformerInterface
@@ -16,8 +15,9 @@ from qgis.core import (
     QgsLayerTreeNode,
     QgsProject,
 )
+from typing import Any, Collection, Optional, Union
 
-logger = logging.getLogger(__name__)
+_logger = logging.getLogger(__name__)
 
 __all__ = ["transform_features", "transform_sub_tree_features"]
 
@@ -51,12 +51,12 @@ def transform_sub_tree_features(
                 pre_transformer=pre_transformer,
             )
         else:
-            logger.error(
+            _logger.error(
                 f"Node {selected_nodes} was not supported in transform_sub_tree_features, skipping"
             )
     else:
         if len(selected_nodes) == 0:
-            logger.error(
+            _logger.error(
                 f"'Number of selected nodes was {len(selected_nodes)}, please supply some"
             )
             return
@@ -80,11 +80,11 @@ def transform_sub_tree_features(
                         pre_transformer=pre_transformer,
                     )
                 else:
-                    logger.error(
+                    _logger.error(
                         f"Node {group} was not supported in transform_sub_tree_features, skipping"
                     )
             else:
-                logger.error(
+                _logger.error(
                     f"Node {group} was not supported in transform_sub_tree_features, skipping"
                 )
 
@@ -103,18 +103,18 @@ def transform_features(
     """
 
     if tree_layer is None:
-        logger.error(f"Tree layer was None")
+        _logger.error(f"Tree layer was None")
         return
 
     layer = tree_layer.layer()
 
     if not layer.isValid():
-        logger.error(f"{layer.name()} is not valid!")
+        _logger.error(f"{layer.name()} is not valid!")
         return
 
     layer.startEditing()
 
-    logger.warning(
+    _logger.warning(
         f"Transforming geometry of layer with name: {tree_layer.layer().name()}"
     )
 
@@ -125,7 +125,7 @@ def transform_features(
                     feat.hasGeometry()
                 ), f"Feature {idx} of {layer.name()} has no geometry"
             else:
-                logger.error(
+                _logger.error(
                     f"Feature {idx} of {layer.name()} has no geometry, skipping"
                 )
                 continue
@@ -141,7 +141,7 @@ def transform_features(
             geom.transform(pre_transformer, Qgis.TransformDirection.ReverseTransform)
 
         if not ok:
-            logger.error(
+            _logger.error(
                 f"Error while transforming {geom} in layer {tree_layer.layer().name()}"
             )
         feat.setGeometry(geom)

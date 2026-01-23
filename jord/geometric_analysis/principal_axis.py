@@ -1,9 +1,8 @@
 import logging
-from enum import Enum
-from typing import Collection, Tuple, Union
-
 import shapely
+from enum import Enum
 from shapely import affinity
+from typing import Collection, Tuple, Union
 
 __all__ = [
     "compute_center_principal_axes",
@@ -13,7 +12,7 @@ __all__ = [
     "other_mass_projection_is_longer",
 ]
 
-logger = logging.getLogger(__name__)
+_logger = logging.getLogger(__name__)
 
 
 class PrincipalityMeasure(Enum):

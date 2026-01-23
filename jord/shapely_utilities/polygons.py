@@ -1,9 +1,8 @@
-import statistics
-from typing import Generator, Iterable, List, Sequence, Tuple, Union
-
 import shapely
 import shapely.geometry
+import statistics
 from shapely import MultiPolygon, Polygon
+from typing import Generator, Iterable, List, Sequence, Tuple, Union
 from warg import Number, pairs
 
 from .base import sanitise

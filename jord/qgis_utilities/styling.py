@@ -1,5 +1,4 @@
 import logging
-from typing import Any, Iterable, Mapping, Optional
 
 # noinspection PyUnresolvedReferences
 import qgis._3d as q3d
@@ -9,6 +8,9 @@ from qgis.PyQt.QtCore import QSizeF
 
 # noinspection PyUnresolvedReferences
 from qgis.PyQt.QtGui import QColor
+
+# noinspection PyUnresolvedReferences
+from qgis._3d import Qgs3DTypes
 
 # noinspection PyUnresolvedReferences
 from qgis.core import (
@@ -27,6 +29,7 @@ from qgis.core import (
 
 # noinspection PyUnresolvedReferences
 from qgis.utils import iface
+from typing import Any, Iterable, Mapping, Optional
 from warg import Number, TripleNumber
 
 from jord.qgis_utilities.enums import (
@@ -35,9 +38,6 @@ from jord.qgis_utilities.enums import (
     Qgis3dFacade,
 )
 
-# noinspection PyUnresolvedReferences
-from qgis._3d import Qgs3DTypes
-
 __all__ = [
     "style_layer_from_mapping",
     "set_3d_view_settings",
@@ -45,7 +45,7 @@ __all__ = [
     "set_layer_rendering_scale",
 ]
 
-logger = logging.getLogger(__name__)
+_logger = logging.getLogger(__name__)
 
 
 def style_layer_from_mapping(
@@ -325,7 +325,7 @@ def set_renderer(layer, line_renderer, point_renderer, polygon_renderer):
     elif layer.geometryType() == QgsWkbTypes.PolygonGeometry:  # QgsWkbTypes.Polygon:
         layer.setRenderer3D(polygon_renderer)
     else:
-        logger.error(f"geometry type not supported: {layer.geometryType()}, skipping")
+        _logger.error(f"geometry type not supported: {layer.geometryType()}, skipping")
 
 
 def make_renderer(color: TripleNumber, symbol: QgsSymbol) -> Any:  #    QgsRenderer
@@ -368,7 +368,7 @@ def make_polygon_symbol(
 
 def apply_common_symbol_settings(symbol: Any) -> None:
     if symbol is None:
-        logger.error("symbol is None, skipping")
+        _logger.error("symbol is None, skipping")
         return
 
     if hasattr(symbol, "setAltitudeBinding"):

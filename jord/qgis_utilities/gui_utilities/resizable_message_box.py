@@ -1,10 +1,9 @@
-from typing import Any
+# noinspection PyUnresolvedReferences
+from qgis.PyQt.QtCore import QEvent
 
 # noinspection PyUnresolvedReferences
 from qgis.PyQt.QtWidgets import QMessageBox, QTextEdit
-
-# noinspection PyUnresolvedReferences
-from qgis.PyQt.QtCore import QEvent
+from typing import Any
 
 try:
     _layout_event = QEvent.Type

@@ -1,6 +1,5 @@
-from enum import Enum
-
 import shapely
+from enum import Enum
 from shapely.geometry import (
     GeometryCollection,
     LineString,

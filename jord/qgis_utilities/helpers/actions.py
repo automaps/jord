@@ -1,10 +1,9 @@
-from typing import Any, Callable
-
 # noinspection PyUnresolvedReferences
 from qgis.PyQt.QtGui import QIcon
 
 # noinspection PyUnresolvedReferences
 from qgis.PyQt.QtWidgets import QAction, QWidget
+from typing import Any, Callable
 
 from jord.qgis_utilities.helpers.signals import reconnect_signal
 

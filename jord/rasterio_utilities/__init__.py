@@ -6,8 +6,9 @@ __doc__ = r"""
 
 __all__ = []
 
-import logging
 from pathlib import Path
+
+import logging
 
 try:
     ...

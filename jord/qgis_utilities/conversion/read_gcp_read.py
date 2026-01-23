@@ -1,5 +1,6 @@
-import csv
 from pathlib import Path
+
+import csv
 from typing import Generator, Tuple
 
 __all__ = ["read_gcp_file"]

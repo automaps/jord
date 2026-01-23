@@ -1,7 +1,6 @@
 import logging
 import random
 from itertools import cycle
-from typing import Any, Callable, Generator, Iterable, Sized
 
 # noinspection PyUnresolvedReferences
 from qgis.PyQt.QtCore import QVariant
@@ -27,6 +26,7 @@ from qgis.core import (
 
 # noinspection PyUnresolvedReferences
 from qgis.utils import iface
+from typing import Any, Callable, Generator, Iterable, Sized
 from warg import QuadNumber, TripleNumber, n_uint_mix_generator_builder
 
 __all__ = [
@@ -38,7 +38,7 @@ __all__ = [
     "styled_field_value_categorised",
 ]
 
-logger = logging.getLogger(__name__)
+_logger = logging.getLogger(__name__)
 
 
 def random_rgb(mix: TripleNumber = (255, 255, 255)) -> TripleNumber:
@@ -202,7 +202,7 @@ def styled_field_value_categorised(
 
         for ref, cat in zip(refs, cats, strict=True):
             if False:
-                logger.error(cat)
+                _logger.error(cat)
 
             if cat is not None and ref not in added_references:
                 sym = QgsSymbol.defaultSymbol(layer.geometryType())
@@ -215,13 +215,13 @@ def styled_field_value_categorised(
                         fill_color = str(style_feature[key])
                         if "#" in fill_color:
                             if False:
-                                logger.error(
+                                _logger.error(
                                     f"Set fill_color {fill_color} for {cat} in layer {layer.id()}"
                                 )
                             sym.setColor(QColor(fill_color))
                         else:
                             if False:
-                                logger.error(
+                                _logger.error(
                                     f"Did not set fill_color for {cat} in layer {layer.id()}"
                                 )
 

@@ -4,11 +4,10 @@ __doc__ = r"""
            Created on 02-12-2020
            """
 
-from typing import Any, Optional, Type
-
 from PyQt5.QtCore import (
     QSettings,
 )
+from typing import Any, Optional, Type
 
 __all__ = ["store_plugin_setting", "read_plugin_setting"]
 

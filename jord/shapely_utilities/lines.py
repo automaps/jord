@@ -38,12 +38,10 @@ __all__ = [
 
 import collections
 import logging
-from enum import Enum
-from typing import Iterable, List, Sequence, Tuple, Union
-
 import numpy
 import shapely
 import shapely.geometry
+from enum import Enum
 from shapely.geometry import (
     LineString,
     LinearRing,
@@ -52,6 +50,7 @@ from shapely.geometry import (
     Point,
     box,
 )
+from typing import Iterable, List, Sequence, Tuple, Union
 
 # from sorcery import assigned_names
 from warg import Number, pairs

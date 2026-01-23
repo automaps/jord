@@ -1,9 +1,9 @@
 from pathlib import Path
-from typing import Any, Generator
 
 import pandas
 import shapely
 from shapely import wkb
+from typing import Any, Generator
 
 __all__ = ["load_wkbs_from_csv", "csv_wkt_generator"]
 
