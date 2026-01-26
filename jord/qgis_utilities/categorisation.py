@@ -1,6 +1,7 @@
 import logging
 import random
 from itertools import cycle
+from typing import Any, Callable, Generator, Iterable, Sized
 
 # noinspection PyUnresolvedReferences
 from qgis.PyQt.QtCore import QVariant
@@ -26,7 +27,6 @@ from qgis.core import (
 
 # noinspection PyUnresolvedReferences
 from qgis.utils import iface
-from typing import Any, Callable, Generator, Iterable, Sized
 from warg import QuadNumber, TripleNumber, n_uint_mix_generator_builder
 
 __all__ = [
@@ -137,11 +137,14 @@ def categorise_layer(
     for cat in layer.uniqueValues(layer.fields().indexFromName(field_name)):
         if cat is not None:
             sym = QgsSymbol.defaultSymbol(layer.geometryType())
-            set_symbol_styling(color_iter, opacity, outline_only, outline_width, sym)
+            if sym is not None:
+                set_symbol_styling(
+                    color_iter, opacity, outline_only, outline_width, sym
+                )
 
-            render_categories.append(
-                QgsRendererCategory(cat, symbol=sym, label=str(cat), render=True)
-            )
+                render_categories.append(
+                    QgsRendererCategory(cat, symbol=sym, label=str(cat), render=True)
+                )
 
     if True:  # add default
         sym = QgsSymbol.defaultSymbol(layer.geometryType())
@@ -155,11 +158,14 @@ def categorise_layer(
         # FillColor
         # FillStyle
 
-        set_symbol_styling(color_iter, opacity, outline_only, outline_width, sym)
+        if sym is not None:
+            set_symbol_styling(color_iter, opacity, outline_only, outline_width, sym)
 
-        render_categories.append(
-            QgsRendererCategory(QVariant(""), symbol=sym, label="default", render=True)
-        )
+            render_categories.append(
+                QgsRendererCategory(
+                    QVariant(""), symbol=sym, label="default", render=True
+                )
+            )
 
         if False:
             # render_categories.append(QgsRendererCategory()) # crashes qgis
@@ -273,7 +279,7 @@ def styled_field_value_categorised(
 
 
 def set_symbol_styling(
-    color_iter, opacity: float, outline_only: bool, outline_width: float, sym
+    color_iter, opacity: float, outline_only: bool, outline_width: float, sym: Any
 ) -> None:
     col = next(color_iter)
     if len(col) == 3:

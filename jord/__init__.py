@@ -1,6 +1,6 @@
 __project__ = "Jord"
 __author__ = "Christian Heider Lindbjerg"
-__version__ = "0.10.2"
+__version__ = "0.10.3"
 __doc__ = r"""
 .. module:: jord
    :platform: Unix, Windows
