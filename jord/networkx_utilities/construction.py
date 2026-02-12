@@ -54,7 +54,9 @@ def assertive_add_edge(
     """
     if not allow_loops:
         if u == v:
-            raise IllegalLoopException(f"{u} == {v}")
+            raise IllegalLoopException(
+                f"Graph edge {key} is self-referencing node ids, {u} == {v}"
+            )
 
     assert isinstance(u, int), f"{u=} is not int, but {type(u)=}"
     assert isinstance(v, int), f"{v=} is not int, but {type(v)=}"

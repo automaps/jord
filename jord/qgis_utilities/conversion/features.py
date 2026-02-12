@@ -194,7 +194,7 @@ def feature_to_shapely(
     :return:
     """
     return qgs_geometry_to_shapely(
-        layer_feature.geometry(), geom_id=f"{layer_feature.id()=}"
+        layer_feature.geometry(), geom_id=f"{layer_feature.id()=}", validate=validate
     )
 
 

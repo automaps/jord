@@ -1,11 +1,11 @@
 import logging
+from typing import Any, Optional, Union
 
 # noinspection PyUnresolvedReferences
 from qgis.core import QgsLayerTreeGroup, QgsLayerTreeLayer, QgsProject
 
 # noinspection PyUnresolvedReferences
 from qgis.utils import iface
-from typing import Any, Optional, Union
 
 __all__ = [
     "duplicate_groups",
@@ -31,7 +31,7 @@ def duplicate_groups(
     new_name: Union[str, EllipsisType, None] = None,
 ) -> QgsLayerTreeGroup:
     if group_to_duplicate is None:
-        _logger.error("Group was None")
+        _logger.warning("Group was None")
         return
 
     _logger.info(f"Duplicating {group_to_duplicate.name()}")

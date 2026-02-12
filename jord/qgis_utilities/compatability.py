@@ -26,6 +26,7 @@ __all__ = [
     "align_left",
     "align_right",
     "vertical_orientation",
+    "message_box_warning",
 ]
 
 __doc__ = (
@@ -36,10 +37,17 @@ try:
     yes_button = QtWidgets.QMessageBox.Yes
     no_button = QtWidgets.QMessageBox.No
     help_button = QtWidgets.QMessageBox.Help
+
 except AttributeError:
     yes_button = QtWidgets.QMessageBox.StandardButton.Yes
     no_button = QtWidgets.QMessageBox.StandardButton.No
     help_button = QtWidgets.QMessageBox.StandardButton.Help
+
+
+try:
+    message_box_warning = QtWidgets.QMessageBox.Warning
+except AttributeError:
+    message_box_warning = QtWidgets.QMessageBox.Icon.Warning
 
 
 try:

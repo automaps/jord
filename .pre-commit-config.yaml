@@ -64,10 +64,10 @@ repos:
         entry: check-ast
         language: python
         types: [python]
-      - id: check-byte-order-marker
-        name: "check BOM - deprecated: use fix-byte-order-marker"
+      - id: fix-byte-order-marker
+        name: "fix-byte-order-marker"
         description: forbids files which have a utf-8 byte-order marker.
-        entry: check-byte-order-marker
+        entry: fix-byte-order-marker
         language: python
         types: [text]
       - id: check-builtin-literals
