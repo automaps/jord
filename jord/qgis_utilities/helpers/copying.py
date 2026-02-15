@@ -1,4 +1,3 @@
-# noinspection PyUnresolvedReferences
 from qgis.core import QgsFeatureRequest, QgsField, QgsFieldConstraints, QgsVectorLayer
 from typing import Any
 

@@ -1,9 +1,9 @@
 import logging
 
-# noinspection PyUnresolvedReferences
+
 from qgis.PyQt.QtGui import QColor
 
-# noinspection PyUnresolvedReferences
+
 from qgis.core import (
     QgsCategorizedSymbolRenderer,
     QgsExpression,
@@ -19,7 +19,7 @@ from qgis.core import (
     QgsVectorLayerUtils,
 )
 
-# noinspection PyUnresolvedReferences
+
 from qgis.utils import iface
 
 _logger = logging.getLogger(__name__)

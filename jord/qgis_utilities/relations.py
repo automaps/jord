@@ -1,4 +1,3 @@
-# noinspection PyUnresolvedReferences
 from qgis.core import (
     QgsEditorWidgetSetup,
     QgsFeatureRequest,
@@ -6,7 +5,7 @@ from qgis.core import (
     QgsVectorLayer,
 )
 
-# noinspection PyUnresolvedReferences
+
 from qgis.utils import iface
 
 __all__ = ["add_value_relation_field"]

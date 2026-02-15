@@ -70,7 +70,7 @@ def add_qgis_single_feature_layer(
     :return: None
     :rtype: None
     """
-    # noinspection PyUnresolvedReferences
+
     from qgis.core import (
         QgsVectorLayer,
         QgsFeature,
@@ -81,7 +81,6 @@ def add_qgis_single_feature_layer(
     )
     from jord.qgis_utilities import categorise_layer
 
-    # noinspection PyUnresolvedReferences
     import qgis
 
     # uri = geom.type()
@@ -306,7 +305,7 @@ def add_qgis_multi_feature_layer(
     ] = None,
     categorise_by_attribute: Optional[str] = None,
     color_generator: Iterable = n_uint_mix_generator_builder(
-        255, 255, 255, mix_min=(222, 222, 222)
+        255, 255, 255, mix_min=(255 // 2, 255 // 2, 255 // 2)
     ),
     index: bool = False,
     group: Any = None,
@@ -339,7 +338,6 @@ def add_qgis_multi_feature_layer(
 
     from jord.qgis_utilities.categorisation import categorise_layer
 
-    # noinspection PyUnresolvedReferences
     from qgis.core import (
         QgsFeature,
         QgsVectorLayer,
@@ -348,7 +346,6 @@ def add_qgis_multi_feature_layer(
         QgsWkbTypes,
     )
 
-    # noinspection PyUnresolvedReferences
     import qgis
 
     # uri = geom.type()

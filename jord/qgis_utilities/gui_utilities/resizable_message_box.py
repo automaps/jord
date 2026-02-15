@@ -1,7 +1,6 @@
-# noinspection PyUnresolvedReferences
 from qgis.PyQt.QtCore import QEvent
 
-# noinspection PyUnresolvedReferences
+
 from qgis.PyQt.QtWidgets import QMessageBox, QTextEdit
 from typing import Any
 

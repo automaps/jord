@@ -1,9 +1,9 @@
 from enum import Enum
 
-# noinspection PyUnresolvedReferences
+
 from qgis._3d import Qgs3DTypes
 
-# noinspection PyUnresolvedReferences
+
 from qgis.core import (
     QgsMultiBandColorRenderer,
     QgsPalettedRasterRenderer,

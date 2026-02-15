@@ -8,7 +8,7 @@ from typing import Any
 
 __all__ = ["add_settings"]
 
-# noinspection PyUnresolvedReferences
+
 from qgis.core import QgsProject, QgsSettings, QgsVectorLayer
 
 

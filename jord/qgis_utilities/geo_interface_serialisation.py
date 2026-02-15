@@ -1,7 +1,7 @@
 import logging
 import shapely
 
-# noinspection PyUnresolvedReferences
+
 from qgis.core import QgsFeature, QgsGeometry, QgsPointXY
 from shapely.geometry import shape
 from typing import List, Union

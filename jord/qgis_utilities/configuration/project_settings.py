@@ -42,7 +42,7 @@ def delete_project_setting(key: str, *, project_name: str = PROJECT_NAME) -> Non
     :param project_name:
     :return:
     """
-    # noinspection PyUnresolvedReferences
+
     from qgis.core import QgsProject
 
     qgis_project = QgsProject.instance()
@@ -60,7 +60,7 @@ def store_project_setting(
     :param project_name:
     :return:
     """
-    # noinspection PyUnresolvedReferences
+
     from qgis.core import QgsProject
 
     qgis_project = QgsProject.instance()
@@ -94,7 +94,7 @@ def read_project_setting(
     :param project_name:
     :return:
     """
-    # noinspection PyUnresolvedReferences
+
     from qgis.core import QgsProject
 
     qgis_project = QgsProject.instance()

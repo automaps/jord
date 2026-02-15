@@ -4,7 +4,7 @@ __doc__ = r"""
            Created on 02-12-2020
            """
 
-# noinspection PyUnresolvedReferences
+
 from qgis.PyQt import QtCore
 from typing import Any, Optional, Tuple
 

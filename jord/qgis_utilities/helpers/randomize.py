@@ -5,7 +5,7 @@ __all__ = ["randomize_field", "randomize_sub_tree_field"]
 
 from typing import Collection, Union, Any
 
-# noinspection PyUnresolvedReferences
+
 from qgis.core import QgsLayerTreeGroup, QgsLayerTreeLayer, QgsLayerTreeNode
 
 _logger = logging.getLogger(__name__)

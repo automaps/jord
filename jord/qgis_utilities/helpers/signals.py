@@ -1,6 +1,6 @@
 import logging
 
-# noinspection PyUnresolvedReferences
+
 from qgis.PyQt.QtCore import pyqtSignal
 from typing import Optional
 

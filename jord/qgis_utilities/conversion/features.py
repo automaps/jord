@@ -1,7 +1,7 @@
 import logging
 import shapely
 
-# noinspection PyUnresolvedReferences
+
 from qgis.PyQt.QtCore import QDateTime, QVariant
 from typing import Any, Generator, Mapping, Optional, Tuple
 
@@ -51,10 +51,9 @@ def parse_q_value(v: Any) -> Any:
     :param v:
     :return:
     """
-    # noinspection PyUnresolvedReferences
+
     from qgis.PyQt.QtCore import QVariant
 
-    # noinspection PyUnresolvedReferences
     from qgis.PyQt.QtGui import QColor
 
     if isinstance(v, QColor):

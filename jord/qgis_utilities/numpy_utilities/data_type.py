@@ -1,7 +1,7 @@
 import numpy
 from enum import Enum
 
-# noinspection PyUnresolvedReferences
+
 from qgis.core import Qgis
 from typing import Any
 

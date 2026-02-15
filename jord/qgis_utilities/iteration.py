@@ -1,4 +1,3 @@
-# noinspection PyUnresolvedReferences
 from qgis.core import QgsLayerTreeGroup, QgsLayerTreeLayer
 from typing import Any, Generator
 

@@ -70,7 +70,7 @@ def add_wkb(qgis_instance_handle: Any, wkb: bytes, *args, **kwargs) -> List:
     :param kwargs:
     :return:
     """
-    # noinspection PyUnresolvedReferences
+
     from qgis.core import QgsGeometry
 
     return add_qgis_single_feature_layer(
@@ -101,7 +101,7 @@ def add_wkbs(
 def add_wkb_layer(
     qgis_instance_handle: Any, wkbs: Iterable[bytes], *args, **kwargs
 ) -> List:
-    # noinspection PyUnresolvedReferences
+
     from qgis.core import QgsGeometry
 
     if isinstance(wkbs, bytes):
@@ -178,7 +178,7 @@ def add_geojson_layer(
       :param kwargs:
       :return:
     """
-    # noinspection PyUnresolvedReferences
+
     from qgis.core import QgsGeometry
 
     return add_qgis_multi_feature_layer(
@@ -198,7 +198,7 @@ def add_wkt(qgis_instance_handle: Any, wkt: str, *args, **kwargs) -> List:
     :param kwargs:
     :return:
     """
-    # noinspection PyUnresolvedReferences
+
     from qgis.core import QgsGeometry
 
     return add_qgis_single_feature_layer(
@@ -229,7 +229,7 @@ def add_wkts(
 def add_wkt_layer(
     qgis_instance_handle: Any, wkts: Iterable[str], *args, **kwargs
 ) -> List:
-    # noinspection PyUnresolvedReferences
+
     from qgis.core import QgsGeometry
 
     if isinstance(wkts, str):
@@ -592,7 +592,7 @@ def add_raster(
     :return: None
     :rtype: None
     """
-    # noinspection PyUnresolvedReferences
+
     from qgis.core import (
         QgsRectangle,
         QgsCoordinateReferenceSystem,
@@ -799,10 +799,8 @@ def add_no_geom_layer(
     :return:
     """
 
-    # noinspection PyUnresolvedReferences
     from qgis.core import QgsFeature, QgsVectorLayer, QgsProject, QgsFeatureSink
 
-    # noinspection PyUnresolvedReferences
     import qgis
 
     return_collection = []

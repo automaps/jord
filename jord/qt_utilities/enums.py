@@ -92,7 +92,7 @@ except:
     try:
         from PyQt5.QtCore import Qt
     except:
-        # noinspection PyUnresolvedReferences
+
         from qgis.PyQt.QtCore import Qt
 
     class AlignmentFlag(Enum):

@@ -1,10 +1,10 @@
 import logging
 from typing import Any, Optional, Union
 
-# noinspection PyUnresolvedReferences
+
 from qgis.core import QgsLayerTreeGroup, QgsLayerTreeLayer, QgsProject
 
-# noinspection PyUnresolvedReferences
+
 from qgis.utils import iface
 
 __all__ = [

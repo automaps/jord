@@ -1,18 +1,18 @@
 import logging
 
-# noinspection PyUnresolvedReferences
+
 import qgis._3d as q3d
 
-# noinspection PyUnresolvedReferences
+
 from qgis.PyQt.QtCore import QSizeF
 
-# noinspection PyUnresolvedReferences
+
 from qgis.PyQt.QtGui import QColor
 
-# noinspection PyUnresolvedReferences
+
 from qgis._3d import Qgs3DTypes
 
-# noinspection PyUnresolvedReferences
+
 from qgis.core import (
     QgsCategorizedSymbolRenderer,
     QgsLineSymbol,
@@ -27,7 +27,7 @@ from qgis.core import (
     QgsWkbTypes,
 )
 
-# noinspection PyUnresolvedReferences
+
 from qgis.utils import iface
 from typing import Any, Iterable, Mapping, Optional
 from warg import Number, TripleNumber

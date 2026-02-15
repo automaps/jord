@@ -1,6 +1,6 @@
 from pathlib import Path
 
-# noinspection PyUnresolvedReferences
+
 from qgis.PyQt.QtGui import QTransform
 from typing import Any
 

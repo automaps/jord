@@ -1,9 +1,9 @@
 from pathlib import Path
 
-# noinspection PyUnresolvedReferences
+
 from qgis.analysis import QgsGcpGeometryTransformer, QgsGcpTransformerInterface
 
-# noinspection PyUnresolvedReferences
+
 from qgis.core import QgsPointXY
 
 __all__ = ["get_gcp_transformer_from_file"]

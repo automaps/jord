@@ -1,7 +1,6 @@
-# noinspection PyUnresolvedReferences
 import qgis
 
-# noinspection PyUnresolvedReferences
+
 from qgis.core import QgsProject
 
 __all__ = ["gc_layers"]

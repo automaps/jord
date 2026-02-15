@@ -6,26 +6,17 @@ __doc__ = r"""
 
 import time
 
-# noinspection PyUnresolvedReferences
+
 from qgis.PyQt import QtGui
 
-# noinspection PyUnresolvedReferences
+
 from qgis.PyQt.QtCore import Qt
 from typing import Any
 from warg import Triple
 
 __all__ = ["qt_draw_timestamp"]
 
-
-try:
-    _jord_default_font_style = QtGui.QFont.StyleNormal
-except AttributeError:
-    _jord_default_font_style = QtGui.QFont.Style.StyleNormal
-
-try:
-    _jord_default_font_weight = QtGui.QFont.Normal
-except AttributeError:
-    _jord_default_font_weight = QtGui.QFont.Weight.Normal
+from jord.qgis_utilities.compatability import normal_font_style, normal_font_weight
 
 
 def qt_draw_timestamp(
@@ -33,8 +24,8 @@ def qt_draw_timestamp(
     font_size: int = 10,
     font_color: Triple = (255, 255, 255),
     font_family: str = "Arial",
-    font_style: int = _jord_default_font_style,
-    font_weight: int = _jord_default_font_weight,
+    font_style: int = normal_font_style,
+    font_weight: int = normal_font_weight,
 ) -> None:
     """
 

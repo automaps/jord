@@ -1,10 +1,5 @@
-# noinspection PyUnresolvedReferences
 from qgis.PyQt import QtGui, QtWidgets, uic
-
-# noinspection PyUnresolvedReferences
 from qgis.PyQt.QtCore import Qt
-
-# noinspection PyUnresolvedReferences
 from qgis.PyQt.QtWidgets import QDialog, QHBoxLayout, QLabel, QLineEdit, QWidget
 
 __all__ = [
@@ -27,6 +22,8 @@ __all__ = [
     "align_right",
     "vertical_orientation",
     "message_box_warning",
+    "normal_font_weight",
+    "normal_font_style",
 ]
 
 __doc__ = (
@@ -101,3 +98,11 @@ except AttributeError:
     align_center = Qt.AlignCenter
     align_left = Qt.AlignLeft
     align_right = Qt.AlignRight
+
+
+try:
+    normal_font_weight = QtGui.QFont.Normal
+    normal_font_style = QtGui.QFont.StyleNormal
+except AttributeError:
+    normal_font_weight = QtGui.QFont.Weight.Normal
+    normal_font_style = QtGui.QFont.Style.StyleNormal

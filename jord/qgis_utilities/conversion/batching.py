@@ -2,10 +2,10 @@
 
 import logging
 
-# noinspection PyUnresolvedReferences
+
 from qgis.analysis import QgsGcpGeometryTransformer, QgsGcpTransformerInterface
 
-# noinspection PyUnresolvedReferences
+
 from qgis.core import (
     Qgis,
     QgsCoordinateReferenceSystem,

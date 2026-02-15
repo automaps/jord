@@ -6,7 +6,7 @@ __doc__ = r"""
 
 from PyQt5.QtWebKitWidgets import QWebView
 
-# noinspection PyUnresolvedReferences
+
 from qgis.PyQt.QtCore import (
     QUrl,
 )

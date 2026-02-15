@@ -1,7 +1,6 @@
-# noinspection PyUnresolvedReferences
 from qgis.PyQt.QtGui import QColor
 
-# noinspection PyUnresolvedReferences
+
 from qgis.core import (
     QgsCategorizedSymbolRenderer,
     QgsLineSymbol,

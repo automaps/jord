@@ -16,7 +16,7 @@ if __name__ == "__main__":
 
         For Esri basemaps you will need a valid ArcGIS online subscription to use the maps.
         """
-        # noinspection PyUnresolvedReferences
+
         from qgis.PyQt.QtCore import QSettings
 
         """

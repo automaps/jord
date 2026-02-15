@@ -77,10 +77,8 @@ def serialise_qgis_layer(qgis_instance_handle: Any, layer: Any) -> None:
           :return:
     """
 
-    # noinspection PyUnresolvedReferences
     from qgis.core import QgsVectorLayer, QgsFeature, QgsJsonExporter
 
-    # noinspection PyUnresolvedReferences
     import qgis
 
     assert isinstance(layer, QgsVectorLayer)

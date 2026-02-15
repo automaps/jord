@@ -4,7 +4,7 @@ import logging
 import os
 import sys
 
-# noinspection PyUnresolvedReferences
+
 from qgis.core import Qgis, QgsMessageLog
 from typing import Any, Optional
 
@@ -188,7 +188,7 @@ def setup_qgs_logger(
         # We will only log exceptions.
         # Enable the 'plugins/use_sentry' QgsSettings option
         # before this will be enabled.
-        # noinspection PyUnresolvedReferences
+
         from qgis.core import QgsSettings
 
         settings = QgsSettings()
@@ -203,12 +203,11 @@ def setup_qgs_logger(
             )
             if third_party_path not in sys.path:
                 sys.path.append(third_party_path)
-            # noinspection PyUnresolvedReferences
+
             from raven.handlers.logging import (
                 SentryHandler,
             )  # Deprecated for  https://github.com/getsentry/sentry-python
 
-            # noinspection PyUnresolvedReferences
             from raven import Client
 
             client = Client(sentry_url)

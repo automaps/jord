@@ -4,7 +4,7 @@ __doc__ = r"""
            Created on 02-12-2020
            """
 
-# noinspection PyUnresolvedReferences
+
 from qgis.PyQt import QtWidgets
 from typing import Any, Optional, Tuple
 from warg import AlsoDecorator, passes_kws_to

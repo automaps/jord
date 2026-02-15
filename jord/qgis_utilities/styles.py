@@ -6,7 +6,7 @@ from typing import Any
 
 
 def add_xml_style(iface: Any, path: Path = "styles/my_directional_lines.xml") -> None:
-    # noinspection PyUnresolvedReferences
+
     from qgis.core import QgsStyle
 
     if not isinstance(path, Path):

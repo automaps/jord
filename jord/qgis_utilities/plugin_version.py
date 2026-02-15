@@ -2,7 +2,7 @@ __all__ = ["plugin_status"]
 
 
 def plugin_status(plugin_key: str) -> str:
-    # noinspection PyUnresolvedReferences
+
     from pyplugin_installer.installer_data import repositories, plugins  # QGIS CODE!
 
     all_plugins = plugins.all()

@@ -6,13 +6,13 @@ __doc__ = r"""
 
 import numpy
 
-# noinspection PyUnresolvedReferences
+
 from qgis.PyQt import QtGui
 
-# noinspection PyUnresolvedReferences
+
 from qgis.PyQt.QtCore import QEvent, Qt
 
-# noinspection PyUnresolvedReferences
+
 from qgis.gui import QgsPixmapLabel
 from typing import Any
 

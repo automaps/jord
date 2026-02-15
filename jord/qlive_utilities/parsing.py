@@ -18,7 +18,7 @@ def explode_geometry_collection() -> Collection[str]: ...
 
 
 def wkb_geom_constructor(wkb: bytes) -> Any:
-    # noinspection PyUnresolvedReferences
+
     from qgis.core import QgsGeometry
 
     geom = QgsGeometry()

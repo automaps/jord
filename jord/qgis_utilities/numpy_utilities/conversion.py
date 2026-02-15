@@ -8,10 +8,10 @@ import logging
 import numpy
 from PIL import Image
 
-# noinspection PyUnresolvedReferences
+
 from qgis.PyQt import QtGui
 
-# noinspection PyUnresolvedReferences
+
 from qgis.core import (
     QgsCoordinateReferenceSystem,
     QgsCoordinateTransform,

@@ -21,7 +21,7 @@ def store_plugin_setting(
     :param project_name:
     :return:
     """
-    # noinspection PyUnresolvedReferences
+
     from qgis.core import QgsSettings
 
     QgsSettings().setValue(f"{project_name}/{key}", value)
@@ -37,7 +37,7 @@ def read_plugin_setting(
     :param project_name:
     :return:
     """
-    # noinspection PyUnresolvedReferences
+
     from qgis.core import QgsSettings
 
     return QgsSettings().value(f"{project_name}/{key}", default_value)
@@ -50,7 +50,7 @@ def delete_plugin_setting(key: str, *, project_name: str = PROJECT_NAME) -> None
     :param project_name:
     :return:
     """
-    # noinspection PyUnresolvedReferences
+
     from qgis.core import QgsSettings
 
     QgsSettings().remove(f"{project_name}/{key}")

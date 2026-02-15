@@ -1,7 +1,7 @@
 import logging
 from enum import Enum, IntEnum
 
-# noinspection PyUnresolvedReferences
+
 from qgis.core import (
     QgsDefaultValue,
     QgsDefaultValue,
