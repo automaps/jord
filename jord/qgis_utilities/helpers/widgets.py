@@ -1,6 +1,5 @@
 from qgis.core import QgsEditorWidgetSetup
 
-
 HIDDEN_WIDGET = QgsEditorWidgetSetup("Hidden", {})
 
 CHECKBOX_WIDGET = QgsEditorWidgetSetup(

@@ -2,7 +2,7 @@ import logging
 
 
 from qgis.PyQt.QtCore import pyqtSignal
-from typing import Optional
+from typing import Any, Optional
 
 __author__ = "Christian Heider Lindbjerg"
 __doc__ = r"""
@@ -17,7 +17,7 @@ IS_DEBUGGING = False
 _logger = logging.getLogger(__name__)
 
 
-def connect_signal(signal: pyqtSignal, new_handler: Optional[callable] = None) -> None:
+def connect_signal(signal: Any, new_handler: Optional[callable] = None) -> None:
     """
 
     :param signal:
@@ -32,9 +32,7 @@ def connect_signal(signal: pyqtSignal, new_handler: Optional[callable] = None) -
         _logger.warning("new_handler is None")
 
 
-def disconnect_signal(
-    signal: pyqtSignal, old_handler: Optional[callable] = None
-) -> None:
+def disconnect_signal(signal: Any, old_handler: Optional[callable] = None) -> None:
     """
 
     :param signal:
@@ -58,7 +56,7 @@ def disconnect_signal(
 
 
 def reconnect_signal(
-    signal: pyqtSignal,
+    signal: Any,
     new_handler: Optional[callable] = None,
     old_handler: Optional[callable] = None,
 ) -> None:

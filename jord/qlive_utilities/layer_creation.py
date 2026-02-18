@@ -491,7 +491,7 @@ def add_qgis_multi_feature_layer(
     # pr.addAttributes([QgsField("name", QVariant.String),QgsField("age", QVariant.Int),QgsField("size",
     # QVariant.Double)])
 
-    (res, out_feats) = layer_data_provider.addFeatures(
+    res, out_feats = layer_data_provider.addFeatures(
         features
         # , QgsFeatureSink.RollBackOnErrors
     )

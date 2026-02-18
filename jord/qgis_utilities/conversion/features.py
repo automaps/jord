@@ -3,7 +3,7 @@ import shapely
 
 
 from qgis.PyQt.QtCore import QDateTime, QVariant
-from typing import Any, Generator, Mapping, Optional, Tuple
+from typing import Any, Generator, Mapping, Optional, Tuple, Union
 
 _logger = logging.getLogger(__name__)
 
@@ -197,9 +197,13 @@ def feature_to_shapely(
     )
 
 
-def extract_layer_data_single(layer_tree_layer: Any) -> Tuple:
+def extract_layer_data_single(
+    layer_tree_layer: Any, raise_if_empty: bool = True
+) -> Union[tuple[dict[Any, Any], Any], tuple[None, None]]:
     """
 
+    :param raise_if_empty:
+    :type raise_if_empty:
     :param layer_tree_layer:
     :return:
     """
@@ -232,7 +236,13 @@ def extract_layer_data_single(layer_tree_layer: Any) -> Tuple:
 
             return layer_feature_attributes, layer_feature
 
-    raise MissingFeatureError(f"no feature was not found for {layer_tree_layer.name()}")
+    msg = f"no feature was not found for {layer_tree_layer.name()}"
+    if raise_if_empty:
+
+        raise MissingFeatureError(msg)
+
+    _logger.warning(msg)
+    return None, None
 
 
 def parse_field(feature_attributes: Mapping[str, Any], field_name: str) -> Any:

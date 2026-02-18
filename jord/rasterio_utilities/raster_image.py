@@ -1,6 +1,5 @@
 from geopandas import GeoDataFrame
 
-
 __all__ = ["raster_window"]
 
 
