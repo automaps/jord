@@ -1,5 +1,5 @@
 import logging
-from typing import Any, Iterable, Mapping, Optional
+from typing import Any, Iterable, List, Mapping, Optional
 
 import qgis._3d as q3d
 from qgis.PyQt.QtCore import QSizeF
@@ -326,7 +326,7 @@ def make_point_symbol(
 
 
 def set_3d_view_settings(
-    layers: QgsVectorLayer,
+    layers: Iterable[QgsVectorLayer] | QgsVectorLayer,
     *,
     offset: float = 0,
     extrusion: float = 4,
