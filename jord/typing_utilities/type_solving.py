@@ -1,9 +1,5 @@
 import datetime
 import logging
-import numpy
-import pandas
-import shapely
-from pandas.core.generic import NDFrame
 from typing import (
     Any,
     Collection,
@@ -15,6 +11,11 @@ from typing import (
     Tuple,
     Union,
 )
+
+import numpy
+import pandas
+import shapely
+from pandas.core.generic import NDFrame
 
 ADD_STRING_LEN = True
 NUM_MB16_CHARS = 16777216
@@ -169,7 +170,19 @@ def solve_attribute_uri(
     floating_point_length: int = 20,
     floating_point_precision: int = 8,
 ) -> Tuple[Mapping[str, str], Mapping[str, str], int]:
+    """
 
+    :param attr_type_sampler:
+    :type attr_type_sampler:
+    :param columns:
+    :type columns:
+    :param floating_point_length:
+    :type floating_point_length:
+    :param floating_point_precision:
+    :type floating_point_precision:
+    :return:
+    :rtype:
+    """
     sample_row = next(attr_type_sampler)
     num_cols = len(sample_row)
 
@@ -218,6 +231,17 @@ def solve_attribute_uri(
 def solve_field_uri(
     field_type_configuration: Mapping, fields: Mapping, uri: str
 ) -> str:
+    """
+
+    :param field_type_configuration:
+    :type field_type_configuration:
+    :param fields:
+    :type fields:
+    :param uri:
+    :type uri:
+    :return:
+    :rtype:
+    """
     uri = str(uri).rstrip("&")
 
     for k, v in fields.items():
@@ -314,6 +338,13 @@ def solve_type_configuration(
 
 
 def to_truth(a: Any) -> bool:
+    """
+
+    :param a:
+    :type a:
+    :return:
+    :rtype:
+    """
     if isinstance(a, Iterable):
 
         try:

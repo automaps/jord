@@ -1,19 +1,20 @@
-from qgis.PyQt.QtGui import QColor
-
+from typing import Iterable
 
 from qgis.core import (
-    QgsCategorizedSymbolRenderer,
-    QgsLineSymbol,
-    QgsRendererCategory,
-    QgsSymbol,
     QgsVectorLayer,
 )
-from typing import Iterable
 
 __all__ = ["set_geometry_constraints"]
 
 
 def set_geometry_constraints(layers: QgsVectorLayer) -> None:
+    """
+
+    :param layers:
+    :type layers:
+    :return:
+    :rtype:
+    """
     if layers is None:
         return
 

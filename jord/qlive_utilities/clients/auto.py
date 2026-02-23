@@ -31,24 +31,42 @@ class AutoQliveClient(QliveClient):
                     ):  # TODO: RESOLVE PARTIAL APPLICATION SATISFACTION.
 
                         def a():
+                            """ """
                             self.send(partial_build_package())
 
                         rpc_method = a
                     elif True:
 
                         def a(*args):
+                            """
+
+                            :param args:
+                            :type args:
+                            """
                             self.send(partial_build_package(*args))
 
                         rpc_method = a
                     elif False:
 
                         def a(**kwargs):
+                            """
+
+                            :param kwargs:
+                            :type kwargs:
+                            """
                             self.send(partial_build_package(**kwargs))
 
                         rpc_method = a
                     elif False:
 
                         def a(*args, **kwargs):
+                            """
+
+                            :param args:
+                            :type args:
+                            :param kwargs:
+                            :type kwargs:
+                            """
                             self.send(partial_build_package(*args, **kwargs))
 
                         rpc_method = a
@@ -63,6 +81,17 @@ class AutoQliveClient(QliveClient):
                 else:
 
                     def wrapped(method_, *args_, **_kwargs) -> Callable:
+                        """
+
+                        :param method_:
+                        :type method_:
+                        :param args_:
+                        :type args_:
+                        :param _kwargs:
+                        :type _kwargs:
+                        :return:
+                        :rtype:
+                        """
                         return self.send(build_package(method_, *args_, **_kwargs))
 
                     rpc_method = partial(wrapped, method)
@@ -77,6 +106,7 @@ if __name__ == "__main__":
     # print(QliveClient().clear_all.__doc__)
     # print(QliveClient().__dict__)
     def uahdsuh():
+        """ """
         with AutoQliveClient() as qlive:
             qlive.add_wkts({"a": "POINT (-66.86 10.48)"})
 

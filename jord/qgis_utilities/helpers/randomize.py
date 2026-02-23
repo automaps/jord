@@ -5,7 +5,6 @@ __all__ = ["randomize_field", "randomize_sub_tree_field"]
 
 from typing import Collection, Union, Any
 
-
 from qgis.core import QgsLayerTreeGroup, QgsLayerTreeLayer, QgsLayerTreeNode
 
 _logger = logging.getLogger(__name__)
@@ -14,6 +13,15 @@ _logger = logging.getLogger(__name__)
 def randomize_sub_tree_field(
     selected_nodes: Union[Any, Collection[Any]], field_name: str
 ) -> None:
+    """
+
+    :param selected_nodes:
+    :type selected_nodes:
+    :param field_name:
+    :type field_name:
+    :return:
+    :rtype:
+    """
     if isinstance(selected_nodes, QgsLayerTreeLayer):
         randomize_field(selected_nodes, field_name=field_name)
     elif isinstance(selected_nodes, QgsLayerTreeGroup):
@@ -61,6 +69,7 @@ def randomize_field(tree_layer: Any, field_name: str) -> None:  #: QgsLayerTreeL
         :param tree_layer:
         :return:
     """
+
     if tree_layer is None:
         _logger.error(f"Tree layer was None")
         return
@@ -71,17 +80,27 @@ def randomize_field(tree_layer: Any, field_name: str) -> None:  #: QgsLayerTreeL
     field_idx = layer.fields().indexFromName(field_name)
 
     if field_idx >= 0:
-        layer.startEditing()
-        # layer.beginEditCommand(f"Regenerate {field_name}")
-        _logger.info(
+        was_editing = False
+        if layer.isEditable():
+            layer.beginEditCommand(f"Regenerate {field_name}")
+            was_editing = True
+        else:
+            layer.startEditing()
+
+        _logger.warning(
             f"Randomizing {field_name}:{field_idx} in {tree_layer.layer().name()}"
         )
 
         for i in range(layer.featureCount() + 1):
-            layer.changeAttributeValue(i, field_idx, uuid.uuid4().hex)
+            new_value = uuid.uuid4().hex
+            _logger.warning(f"Setting {field_name} to {new_value} for feature {i}")
+            layer.changeAttributeValue(i, field_idx, new_value)
 
-        # layer.rollBack()
-        # layer.endEditCommand()
-        layer.commitChanges()
+        if was_editing:
+            layer.endEditCommand()
+        else:
+            # end_editing = not was_editing
+            # layer.rollBack() # to roll back to the original values
+            layer.commitChanges(stopEditing=True)
     else:
         _logger.error(f"Did not find {field_name} in {layer.name()}")

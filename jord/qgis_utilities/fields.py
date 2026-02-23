@@ -1,17 +1,13 @@
 import logging
 from enum import Enum, IntEnum
-
+from typing import Any, Iterable, Mapping, Sequence, Type
 
 from qgis.core import (
     QgsDefaultValue,
-    QgsDefaultValue,
     QgsEditorWidgetSetup,
-    QgsEditorWidgetSetup,
-    QgsFieldConstraints,
     QgsFieldConstraints,
     QgsMapLayer,
 )
-from typing import Any, Iterable, Mapping, Sequence, Type
 
 from jord.qgis_utilities.helpers.widgets import (
     CHECKBOX_WIDGET,

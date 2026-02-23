@@ -1,10 +1,11 @@
+from typing import Iterable, List, Tuple, Union
+
 import numpy
 import shapely.geometry
 from numpy import array
 from scipy.spatial import Voronoi
 from shapely.geometry import LineString, MultiLineString, MultiPolygon, Polygon
 from shapely.ops import unary_union
-from typing import Iterable, List, Tuple, Union
 from warg import Number
 
 from jord.shapely_utilities.polygons import iter_polygons, polygon_has_interior_rings
@@ -74,6 +75,19 @@ def get_voronoi_vertices_and_ridges(
     minx: float,
     miny: float,
 ) -> Tuple[numpy.ndarray, List[List[int]]]:
+    """
+
+    :param _input_geometry:
+    :type _input_geometry:
+    :param _step_size:
+    :type _step_size:
+    :param minx:
+    :type minx:
+    :param miny:
+    :type miny:
+    :return:
+    :rtype:
+    """
     borders = densify_border(_input_geometry, _step_size, minx, miny)
 
     voronoi_diagram = Voronoi(borders)
@@ -81,18 +95,47 @@ def get_voronoi_vertices_and_ridges(
 
 
 def ridge_is_finite(ridge: Iterable) -> bool:
+    """
+
+    :param ridge:
+    :type ridge:
+    :return:
+    :rtype:
+    """
     return -1 not in ridge
 
 
 def create_point_with_restored_coordinates(
     x: float, y: float, _min_x: float, _min_y: float
 ) -> Tuple[float, float]:
+    """
+
+    :param x:
+    :type x:
+    :param y:
+    :type y:
+    :param _min_x:
+    :type _min_x:
+    :param _min_y:
+    :type _min_y:
+    :return:
+    :rtype:
+    """
     return x + _min_x, y + _min_y
 
 
 def linestring_is_within_input_geometry(
     linestring: LineString, input_geometry: shapely.geometry.base.BaseGeometry
 ) -> bool:
+    """
+
+    :param linestring:
+    :type linestring:
+    :param input_geometry:
+    :type input_geometry:
+    :return:
+    :rtype:
+    """
     return linestring.within(input_geometry) and len(linestring.coords[0]) > 1
 
 
@@ -102,6 +145,19 @@ def densify_border(
     minx: float,
     miny: float,
 ) -> numpy.ndarray:
+    """
+
+    :param _input_geometry:
+    :type _input_geometry:
+    :param _step_size:
+    :type _step_size:
+    :param minx:
+    :type minx:
+    :param miny:
+    :type miny:
+    :return:
+    :rtype:
+    """
     polygons = iter_polygons(_input_geometry)
     points = []
     for polygon in polygons:
@@ -121,6 +177,19 @@ def interpolated_boundary(
     minx: float,
     miny: float,
 ) -> List[Tuple[float, float]]:
+    """
+
+    :param boundary:
+    :type boundary:
+    :param _step_size:
+    :type _step_size:
+    :param minx:
+    :type minx:
+    :param miny:
+    :type miny:
+    :return:
+    :rtype:
+    """
     line = LineString(boundary)
 
     return (
@@ -135,12 +204,36 @@ def interpolated_boundary(
 def create_point_with_reduced_coordinates(
     x: float, y: float, _min_x: float, _min_y: float
 ) -> Tuple[float, float]:
+    """
+
+    :param x:
+    :type x:
+    :param y:
+    :type y:
+    :param _min_x:
+    :type _min_x:
+    :param _min_y:
+    :type _min_y:
+    :return:
+    :rtype:
+    """
     return x - _min_x, y - _min_y
 
 
 def get_coordinates_of_first_point(
     linestring: LineString, minx: float, miny: float
 ) -> Tuple[float, float]:
+    """
+
+    :param linestring:
+    :type linestring:
+    :param minx:
+    :type minx:
+    :param miny:
+    :type miny:
+    :return:
+    :rtype:
+    """
     return create_point_with_reduced_coordinates(
         x=linestring.xy[0][0], y=linestring.xy[1][0], _min_x=minx, _min_y=miny
     )
@@ -149,6 +242,17 @@ def get_coordinates_of_first_point(
 def get_coordinates_of_last_point(
     linestring: LineString, minx: float, miny: float
 ) -> Tuple[float, float]:
+    """
+
+    :param linestring:
+    :type linestring:
+    :param minx:
+    :type minx:
+    :param miny:
+    :type miny:
+    :return:
+    :rtype:
+    """
     return create_point_with_reduced_coordinates(
         x=linestring.xy[0][-1], y=linestring.xy[1][-1], _min_x=minx, _min_y=miny
     )
@@ -157,6 +261,19 @@ def get_coordinates_of_last_point(
 def get_coordinates_of_interpolated_points(
     linestring: LineString, _step_size: Number, min_x: float, min_y: float
 ) -> List[Tuple[float, float]]:
+    """
+
+    :param linestring:
+    :type linestring:
+    :param _step_size:
+    :type _step_size:
+    :param min_x:
+    :type min_x:
+    :param min_y:
+    :type min_y:
+    :return:
+    :rtype:
+    """
     interpolation_distance = _step_size
     intermediate_points = []
     while interpolation_distance < linestring.length:
@@ -173,6 +290,7 @@ def get_coordinates_of_interpolated_points(
 if __name__ == "__main__":
 
     def uashdua():
+        """ """
         from shapely.geometry import Polygon
         from jord.qlive_utilities import AutoQliveClient
 

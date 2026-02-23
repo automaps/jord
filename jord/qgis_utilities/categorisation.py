@@ -3,20 +3,10 @@ import random
 from itertools import cycle
 from typing import Any, Callable, Generator, Iterable, Sized
 
-
 from qgis.PyQt.QtCore import QVariant
-
-
 from qgis.PyQt.QtGui import QColor
-
-
 from qgis.core import (
     QgsCategorizedSymbolRenderer,
-    QgsExpression,
-    QgsExpressionContext,
-    QgsExpressionContextUtils,
-    QgsFeature,
-    QgsFeatureRequest,
     QgsProject,
     QgsRendererCategory,
     QgsSimpleFillSymbolLayer,
@@ -24,8 +14,6 @@ from qgis.core import (
     QgsVectorLayer,
     QgsVectorLayerUtils,
 )
-
-
 from qgis.utils import iface
 from warg import QuadNumber, TripleNumber, n_uint_mix_generator_builder
 
@@ -187,6 +175,15 @@ def categorise_layer(
 def styled_field_value_categorised(
     layer: Any, style_attributes_layer, field_name="location_type"
 ) -> None:
+    """
+
+    :param layer:
+    :type layer:
+    :param style_attributes_layer:
+    :type style_attributes_layer:
+    :param field_name:
+    :type field_name:
+    """
     expression_str = f'represent_value("{field_name}")'
     # expression_str_unquoted = f'represent_value({field_name})'
 
@@ -281,6 +278,19 @@ def styled_field_value_categorised(
 def set_symbol_styling(
     color_iter, opacity: float, outline_only: bool, outline_width: float, sym: Any
 ) -> None:
+    """
+
+    :param color_iter:
+    :type color_iter:
+    :param opacity:
+    :type opacity:
+    :param outline_only:
+    :type outline_only:
+    :param outline_width:
+    :type outline_width:
+    :param sym:
+    :type sym:
+    """
     col = next(color_iter)
     if len(col) == 3:
         col = (*col, 255)

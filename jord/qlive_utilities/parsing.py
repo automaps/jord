@@ -8,17 +8,29 @@ __all__ = [
 ]
 
 
-def sanitise_wkb() -> str: ...
+def sanitise_wkb() -> str:
+    """ """
+    ...
 
 
-def sanitise_wkt() -> str: ...
+def sanitise_wkt() -> str:
+    """ """
+    ...
 
 
-def explode_geometry_collection() -> Collection[str]: ...
+def explode_geometry_collection() -> Collection[str]:
+    """ """
+    ...
 
 
 def wkb_geom_constructor(wkb: bytes) -> Any:
+    """
 
+    :param wkb:
+    :type wkb:
+    :return:
+    :rtype:
+    """
     from qgis.core import QgsGeometry
 
     geom = QgsGeometry()

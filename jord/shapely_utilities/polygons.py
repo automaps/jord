@@ -1,8 +1,9 @@
+import statistics
+from typing import Generator, Iterable, List, Sequence, Tuple, Union
+
 import shapely
 import shapely.geometry
-import statistics
 from shapely import MultiPolygon, Polygon
-from typing import Generator, Iterable, List, Sequence, Tuple, Union
 from warg import Number, pairs
 
 from .base import sanitise
@@ -167,6 +168,13 @@ def prune_holes(
 def get_coords_from_polygonal_shape(
     shape: Union[shapely.Polygon, shapely.MultiPolygon],
 ) -> List[List[List[tuple[float, float]]]]:
+    """
+
+    :param shape:
+    :type shape:
+    :return:
+    :rtype:
+    """
     coords = []
 
     if isinstance(shape, shapely.Polygon):
@@ -186,6 +194,13 @@ def get_polygonal_shape_from_coords(
         Iterable[Iterable[tuple[float, float]]],
     ],
 ) -> Union[shapely.Polygon, shapely.MultiPolygon, None]:
+    """
+
+    :param coords:
+    :type coords:
+    :return:
+    :rtype:
+    """
     outer = next(iter(coords), None)
 
     assert isinstance(outer, Iterable)
@@ -259,6 +274,13 @@ def extract_poly_rings(geom: shapely.geometry.base.BaseGeometry) -> Tuple[List, 
 def discard_holes(
     shape: Union[shapely.Polygon, shapely.MultiPolygon],
 ) -> Union[shapely.Polygon, shapely.MultiPolygon]:
+    """
+
+    :param shape:
+    :type shape:
+    :return:
+    :rtype:
+    """
     if isinstance(shape, shapely.Polygon):
         return shapely.Polygon(shape.exterior.coords)
 
@@ -285,6 +307,13 @@ def discard_holes(
 
 
 def has_holes(shape: Union[shapely.Polygon, shapely.MultiPolygon]) -> bool:
+    """
+
+    :param shape:
+    :type shape:
+    :return:
+    :rtype:
+    """
     if is_multi(shape):
         return any(has_holes(s) for s in shape.geoms)
 
@@ -296,6 +325,13 @@ def has_holes(shape: Union[shapely.Polygon, shapely.MultiPolygon]) -> bool:
 
 
 def is_polygonal(cleaned):
+    """
+
+    :param cleaned:
+    :type cleaned:
+    :return:
+    :rtype:
+    """
     if isinstance(
         cleaned,
         (
@@ -380,6 +416,7 @@ def explode_polygons(
 if __name__ == "__main__":
 
     def aishdjauisd():
+        """ """
         # Import constructors for creating geometry collections
         from shapely.geometry import MultiPoint, MultiLineString
 
@@ -418,6 +455,7 @@ if __name__ == "__main__":
         pyplot.show()
 
     def ahsudh():
+        """ """
         # Import constructors for creating geometry collections
         from shapely.geometry import MultiPoint, MultiLineString
 

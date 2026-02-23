@@ -1,11 +1,12 @@
+import logging
 from collections import defaultdict
+from copy import copy
+from typing import Collection, Dict, Iterable, List, Sequence, Union
 
 import shapely
-from copy import copy
 from shapely.constructive import simplify
 from shapely.geometry.base import GeometrySequence
 from tqdm import tqdm
-from typing import Collection, Dict, List, Sequence, Union
 
 from jord.geometric_analysis import construct_centerline
 from jord.shapely_utilities import (
@@ -41,10 +42,21 @@ from jord.shapely_utilities.projection import (
     project_point_to_object,
 )
 
+_logger = logging.getLogger(__name__)
+
 
 def desliver(
     polygons: Collection[shapely.Polygon], buffer_size: float = 0.2
 ) -> List[shapely.geometry.Polygon]:
+    """
+
+    :param polygons:
+    :type polygons:
+    :param buffer_size:
+    :type buffer_size:
+    :return:
+    :rtype:
+    """
     buffered_exterior = []
 
     if isinstance(polygons, Sequence):
@@ -58,8 +70,18 @@ def desliver(
 
 
 def cut_polygon(
-    polygon: shapely.Polygon, line_split_collection: List[shapely.LineString]
+    polygon: shapely.Polygon,
+    line_split_collection: Iterable[shapely.LineString | shapely.MultiLineString],
 ) -> GeometrySequence:
+    """
+
+    :param polygon:
+    :type polygon:
+    :param line_split_collection:
+    :type line_split_collection:
+    :return:
+    :rtype:
+    """
     line_split_collection.append(
         polygon.boundary
     )  # collection of individual linestrings for splitting in a list and add the polygon lines to it.
@@ -72,6 +94,15 @@ def multi_line_extend(
     multi_line_string: Union[shapely.LineString, shapely.MultiLineString],
     distance: float,
 ) -> shapely.MultiLineString:
+    """
+
+    :param multi_line_string:
+    :type multi_line_string:
+    :param distance:
+    :type distance:
+    :return:
+    :rtype:
+    """
     isolated_endpoints = find_isolated_endpoints(multi_line_string)
 
     lines = []
@@ -113,6 +144,23 @@ def desliver_center_divide(
     simplify_center_line: bool = False,
     close_res: bool = False,
 ) -> List[shapely.geometry.Polygon]:
+    """
+
+    :param polygons:
+    :type polygons:
+    :param buffer_size:
+    :type buffer_size:
+    :param post_process:
+    :type post_process:
+    :param min_max_projection:
+    :type min_max_projection:
+    :param simplify_center_line:
+    :type simplify_center_line:
+    :param close_res:
+    :type close_res:
+    :return:
+    :rtype:
+    """
     buffered_exterior = []
 
     if not isinstance(polygons, Sequence):
@@ -129,6 +177,8 @@ def desliver_center_divide(
         a = buffered_exterior.copy()
         b = a.pop(ith)
         intersections.append(shapely.unary_union(a) & b)
+
+    minimum_clearance = 0
 
     for ith, intersection in tqdm(enumerate(intersections)):
         minimum_clearance = intersection.minimum_clearance
@@ -199,9 +249,14 @@ def desliver_center_divide(
             un = r | poly
             re = erode(dilate(un, distance=1e-10), distance=1e-9)
             if is_multi(re):
+                _logger.warning(f"Polygon was multi, skipping. {re}")
                 continue
 
             f = closing(un)
+
+            if is_multi(f):
+                _logger.warning(f"Closing resulted in multi, skipping. {f}")
+                continue
 
             if True:
                 augmented |= f
@@ -213,6 +268,11 @@ def desliver_center_divide(
                             augmented |= r
 
         augmented = pro_opening(augmented, distance=minimum_clearance / 2.0)
+
+        if is_multi(augmented):
+            _logger.warning(f"Augmented polygon is multi, skipping. {augmented}")
+            continue
+
         augmented_polygons.append(augmented)
 
     if post_process:
@@ -232,9 +292,10 @@ def desliver_center_divide(
             post_processed = augmented_polygons
 
         if True:
-            post_processed = shapely.MultiPolygon(post_processed).simplify(
-                tolerance=minimum_clearance / 2.0, preserve_topology=True
-            )
+
+            post_processed = shapely.MultiPolygon(
+                iter_polygons(post_processed)
+            ).simplify(tolerance=minimum_clearance / 2.0, preserve_topology=True)
 
             post_processed_list = list(post_processed.geoms)
         else:
@@ -289,6 +350,19 @@ def desliver_center_divide_shared(
     post_process: bool = True,
     min_max_projection: bool = False,
 ) -> List[shapely.geometry.Polygon]:
+    """
+
+    :param polygons:
+    :type polygons:
+    :param buffer_size:
+    :type buffer_size:
+    :param post_process:
+    :type post_process:
+    :param min_max_projection:
+    :type min_max_projection:
+    :return:
+    :rtype:
+    """
     buffered_exterior = []
 
     if isinstance(polygons, Sequence):
@@ -305,6 +379,8 @@ def desliver_center_divide_shared(
         a = buffered_exterior.copy()
         b = a.pop(ith)
         intersections.append(shapely.unary_union(a) & b)
+
+    minimum_clearance = 0
 
     for ith, intersection in tqdm(enumerate(intersections)):
         minimum_clearance = intersection.minimum_clearance
@@ -400,7 +476,7 @@ def desliver_center_divide_shared(
         #  ...
 
         post_processed = list(
-            shapely.MultiPolygon(post_processed)
+            shapely.MultiPolygon(iter_polygons(post_processed))
             .simplify(tolerance=minimum_clearance / 2.0)
             .geoms
         )
@@ -413,6 +489,15 @@ def desliver_center_divide_shared(
 def desliver_least_intersectors_first(
     polygons: Collection[shapely.Polygon], buffer_size: float = 0.2
 ) -> Dict[int, shapely.geometry.Polygon]:
+    """
+
+    :param polygons:
+    :type polygons:
+    :param buffer_size:
+    :type buffer_size:
+    :return:
+    :rtype:
+    """
     buffered_exterior = []
 
     if isinstance(polygons, Sequence):
@@ -474,6 +559,7 @@ def desliver_least_intersectors_first(
 if __name__ == "__main__":
 
     def sauihd2():
+        """ """
         polygons = list(shapely.from_wkt(a_wkt).geoms)
         once = desliver_least_intersectors_first(polygons)
         out = desliver_least_intersectors_first(list(once.values()))
@@ -482,6 +568,7 @@ if __name__ == "__main__":
         ...
 
     def sauihd():
+        """ """
         polygons = list(shapely.from_wkt(a_wkt).geoms)
         once = desliver(polygons)
         out = desliver(list(once.values()))
@@ -490,6 +577,7 @@ if __name__ == "__main__":
         ...
 
     def sauihd3():
+        """ """
         polygons = list(shapely.from_wkt(a_wkt).geoms)
         once = desliver_center_divide(polygons)
         out = desliver_center_divide(list(once.values()))

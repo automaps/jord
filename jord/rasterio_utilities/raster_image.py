@@ -13,6 +13,27 @@ def raster_window(
     features,
     window_features,
 ):
+    """
+
+    :param window_min_x:
+    :type window_min_x:
+    :param window_min_y:
+    :type window_min_y:
+    :param window_size_x:
+    :type window_size_x:
+    :param window_size_y:
+    :type window_size_y:
+    :param image_resolution_x:
+    :type image_resolution_x:
+    :param image_resolution_y:
+    :type image_resolution_y:
+    :param features:
+    :type features:
+    :param window_features:
+    :type window_features:
+    :return:
+    :rtype:
+    """
     window_df = GeoDataFrame({"geometry": window_features})
 
     # Creates upscaled resolution to initially create image

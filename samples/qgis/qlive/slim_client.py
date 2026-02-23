@@ -27,8 +27,6 @@ example_wkt_gm = (
 
 with QliveClient("tcp://localhost:5555") as qlive:
     if False:
-        from PIL import Image
-
         image = Image.open("exclude/mp.png")  # "exclude/duck_bat.jpg")
         if True:
             gray_scale = image.convert("L")
@@ -39,8 +37,6 @@ with QliveClient("tcp://localhost:5555") as qlive:
         raster_ = raster_.astype(numpy.uint8)
 
         if False:
-            from matplotlib import pyplot
-
             print(raster_.shape)
             pyplot.imshow(raster_, cmap="gray")
             pyplot.show()

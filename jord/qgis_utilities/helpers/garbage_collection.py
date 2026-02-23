@@ -7,6 +7,7 @@ __all__ = ["gc_layers"]
 
 
 def gc_layers() -> None:
+    """ """
     registry_layers = QgsProject.instance().mapLayers().keys()
     legend_layers = [
         layer.id() for layer in qgis.utils.iface.legendInterface().layers()

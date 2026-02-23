@@ -4,16 +4,22 @@ __doc__ = r"""
            Created on 02-12-2020
            """
 
+from typing import Any
+
 from PyQt5.QtWebKitWidgets import QWebView
-
-
 from qgis.PyQt.QtCore import (
     QUrl,
 )
-from typing import Any
 
 
 def get_web_view(parent: Any) -> QWebView:
+    """
+
+    :param parent:
+    :type parent:
+    :return:
+    :rtype:
+    """
     my_web_view = QWebView(parent)
     # self.my_web_page = QWebPage()
     # self.my_web_page

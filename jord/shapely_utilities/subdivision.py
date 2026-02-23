@@ -1,7 +1,8 @@
+from typing import Union
+
 import shapely
 from shapely.geometry.linestring import LineString
 from shapely.geometry.polygon import LinearRing, Polygon
-from typing import Union
 from warg import pairs
 
 from jord.shapely_utilities.lines import linemerge
@@ -12,6 +13,13 @@ __all__ = ["subdivide", "subdivide_polygon", "subdivide_line", "subdivide_ring"]
 def subdivide(
     geom: Union[LineString, LinearRing, Polygon],
 ) -> Union[LineString, LinearRing, Polygon]:
+    """
+
+    :param geom:
+    :type geom:
+    :return:
+    :rtype:
+    """
     if isinstance(geom, LineString):
         return subdivide_line(geom)
     elif isinstance(geom, LinearRing):
@@ -23,11 +31,25 @@ def subdivide(
 
 
 def subdivide_line(line: LineString) -> LineString:
+    """
+
+    :param line:
+    :type line:
+    :return:
+    :rtype:
+    """
     half_point = line.interpolate(0.5, normalized=True)
     return shapely.LineString((line.coords[0], *half_point.coords, line.coords[-1]))
 
 
 def subdivide_ring(ring: LinearRing) -> LinearRing:
+    """
+
+    :param ring:
+    :type ring:
+    :return:
+    :rtype:
+    """
     ring_segments = []
     for segment in pairs(list(ring.coords)):
         ring_segments.append(subdivide_line(LineString(segment)))
@@ -36,6 +58,13 @@ def subdivide_ring(ring: LinearRing) -> LinearRing:
 
 
 def subdivide_polygon(polygon: shapely.Polygon) -> shapely.Polygon:
+    """
+
+    :param polygon:
+    :type polygon:
+    :return:
+    :rtype:
+    """
     exterior = subdivide_ring(polygon.exterior)
 
     interiors = []
@@ -48,6 +77,7 @@ def subdivide_polygon(polygon: shapely.Polygon) -> shapely.Polygon:
 if __name__ == "__main__":
 
     def uihasud():
+        """ """
         from jord.shapely_utilities import dilate
 
         a = dilate(
@@ -58,6 +88,7 @@ if __name__ == "__main__":
         print(subdivide_ring(a.exterior))
 
     def uhasd():
+        """ """
         from jord.shapely_utilities import dilate
 
         a = dilate(

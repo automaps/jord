@@ -6,7 +6,13 @@ from typing import Any
 
 
 def add_xml_style(iface: Any, path: Path = "styles/my_directional_lines.xml") -> None:
+    """
 
+    :param iface:
+    :type iface:
+    :param path:
+    :type path:
+    """
     from qgis.core import QgsStyle
 
     if not isinstance(path, Path):

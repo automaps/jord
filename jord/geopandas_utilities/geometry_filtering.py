@@ -4,8 +4,9 @@ __doc__ = r"""
            Created on 5/5/22
            """
 
-from geopandas import GeoDataFrame
 from typing import Dict
+
+from geopandas import GeoDataFrame
 
 from jord.shapely_utilities import ShapelyGeometryTypesEnum
 

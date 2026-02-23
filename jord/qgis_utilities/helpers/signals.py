@@ -1,8 +1,7 @@
 import logging
-
+from typing import Any, Optional
 
 from qgis.PyQt.QtCore import pyqtSignal
-from typing import Any, Optional
 
 __author__ = "Christian Heider Lindbjerg"
 __doc__ = r"""

@@ -4,11 +4,10 @@ __doc__ = r"""
            Created on 02-12-2020
            """
 
-from pathlib import Path
-
 import os
 import subprocess
 import sys
+from pathlib import Path
 from subprocess import check_output
 from typing import Iterable, Optional, Tuple
 
@@ -32,8 +31,6 @@ def install_requirements_from_file(requirements_path: Path) -> None:
     # manually
 
     if False:
-        import pip
-
         pip.main(args)
 
     elif False:
@@ -44,6 +41,13 @@ def install_requirements_from_file(requirements_path: Path) -> None:
 
 
 def is_requirement_installed(requirement_name: str) -> bool:
+    """
+
+    :param requirement_name:
+    :type requirement_name:
+    :return:
+    :rtype:
+    """
     if requirement_has_version(requirement_name):
         if get_requirement_version(requirement_name) == get_installed_version(
             requirement_name
@@ -55,10 +59,24 @@ def is_requirement_installed(requirement_name: str) -> bool:
 
 
 def requirement_has_version(requirement_name: str) -> bool:
+    """
+
+    :param requirement_name:
+    :type requirement_name:
+    :return:
+    :rtype:
+    """
     return get_requirement_version(requirement_name) is not None
 
 
 def get_requirement_version(requirement_name: str) -> Optional[str]:
+    """
+
+    :param requirement_name:
+    :type requirement_name:
+    :return:
+    :rtype:
+    """
     s = requirement_name.split("==")
     if len(s) == 2:
         return s[-1]
@@ -66,6 +84,13 @@ def get_requirement_version(requirement_name: str) -> Optional[str]:
 
 
 def get_installed_version(requirement_name: str) -> Optional[str]:
+    """
+
+    :param requirement_name:
+    :type requirement_name:
+    :return:
+    :rtype:
+    """
     import pkg_resources
 
     try:
@@ -93,6 +118,15 @@ def get_newest_version(
     from urllib.request import Request, urlopen
 
     def get_charset(headers, default: str = "utf-8"):
+        """
+
+        :param headers:
+        :type headers:
+        :param default:
+        :type default:
+        :return:
+        :rtype:
+        """
         # this is annoying.
         try:
             charset = headers.get_content_charset(default)
@@ -108,6 +142,15 @@ def get_newest_version(
         return charset
 
     def json_get(url: str, headers: Tuple = (("Accept", "application/json"),)):
+        """
+
+        :param url:
+        :type url:
+        :param headers:
+        :type headers:
+        :return:
+        :rtype:
+        """
         request = Request(url=url, headers=dict(headers))
         response = urlopen(request)
         code = response.code
@@ -122,11 +165,29 @@ def get_newest_version(
         return data
 
     def get_data_pypi(name: str, index: str = pip_index):
+        """
+
+        :param name:
+        :type name:
+        :param index:
+        :type index:
+        :return:
+        :rtype:
+        """
         uri = f"{index.rstrip('/')}/{name.split('[')[0]}/json"
         data = json_get(uri)
         return data
 
     def get_versions_pypi(name: str, index: str = pip_index):
+        """
+
+        :param name:
+        :type name:
+        :param index:
+        :type index:
+        :return:
+        :rtype:
+        """
         data = get_data_pypi(name, index)
         version_numbers = sorted(data["releases"], key=parse_version)
         return tuple(version_numbers)
@@ -135,6 +196,13 @@ def get_newest_version(
 
 
 def is_requirement_updatable(requirement_name: str) -> bool:
+    """
+
+    :param requirement_name:
+    :type requirement_name:
+    :return:
+    :rtype:
+    """
     if not is_requirement_installed(requirement_name):
         return True
 
@@ -166,8 +234,6 @@ def install_requirements_from_name(*requirements_name: Iterable[str]) -> None:
     # manually
 
     if False:
-        import pip
-
         pip.main(args)
 
     elif False:
@@ -193,8 +259,6 @@ def remove_requirements_from_name(
 
     for _ in range(num_repeat):
         if False:
-            import pip
-
             pip.main(args)
 
         elif False:

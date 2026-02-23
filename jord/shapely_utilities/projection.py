@@ -1,9 +1,10 @@
+from typing import Iterable, Optional, Sequence, Tuple, Union
+
 import numpy
 import shapely
 import shapely.geometry
 from shapely import LinearRing, MultiLineString
 from shapely.geometry import LineString, Point, Polygon
-from typing import Iterable, Optional, Sequence, Tuple, Union
 from warg import Number, pairs
 
 from jord.shapely_utilities.morphology import dilate
@@ -120,6 +121,15 @@ def project_point_to_line_points(
 
 
 def project_point_to_line(point: Point, line: LineString) -> Point:
+    """
+
+    :param point:
+    :type point:
+    :param line:
+    :type line:
+    :return:
+    :rtype:
+    """
     line_coords = line.coords
 
     # assert line_coords == 2
@@ -165,6 +175,19 @@ def line_line_intersection(line: LineString, other: LineString) -> Optional[Poin
 def get_intersection_linear_functions(
     a1: Number, b1: Number, a2: Number, b2: Number
 ) -> Tuple[Number, Number]:
+    """
+
+    :param a1:
+    :type a1:
+    :param b1:
+    :type b1:
+    :param a2:
+    :type a2:
+    :param b2:
+    :type b2:
+    :return:
+    :rtype:
+    """
     A = numpy.array([[-a1, 1], [-a2, 1]])
     b = numpy.array([[b1], [b2]])
     # you have to solve linear System AX = b where X = [x y]'
@@ -192,6 +215,15 @@ def nearest_geometry(
 def get_min_max_projected_line(
     geom: SingularExtentGeometry, other: shapely.geometry.base.BaseGeometry
 ) -> shapely.LineString:
+    """
+
+    :param geom:
+    :type geom:
+    :param other:
+    :type other:
+    :return:
+    :rtype:
+    """
     if not isinstance(geom, shapely.LineString):
         geom = geom.boundary
 
@@ -234,6 +266,15 @@ def get_min_max_projected_line(
 def make_projected_ring(
     lines: Union[MultiLineString, Iterable[LineString]], ccw: bool = True
 ) -> LinearRing:
+    """
+
+    :param lines:
+    :type lines:
+    :param ccw:
+    :type ccw:
+    :return:
+    :rtype:
+    """
     points = []
 
     if isinstance(lines, MultiLineString):
@@ -258,6 +299,15 @@ def make_projected_ring(
 def make_extruded_ring(
     lines: Union[MultiLineString, Iterable[LineString]], ccw: bool = True
 ) -> LinearRing:
+    """
+
+    :param lines:
+    :type lines:
+    :param ccw:
+    :type ccw:
+    :return:
+    :rtype:
+    """
     points = []
 
     if isinstance(lines, MultiLineString):
@@ -282,6 +332,7 @@ def make_extruded_ring(
 if __name__ == "__main__":
 
     def uihasuih():
+        """ """
         print(
             line_line_intersection(
                 LineString([[0, 0], [1, 1]]), LineString([[1, 0], [0, 1]])
@@ -304,6 +355,7 @@ if __name__ == "__main__":
         )
 
     def uijhas():
+        """ """
         line = LineString([[0, 0], [1, 1], [2, 0], [1, -1]])
         poly = dilate(Point((1, 0)), distance=0.4)
         print(line)

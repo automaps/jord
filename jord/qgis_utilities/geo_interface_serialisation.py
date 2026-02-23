@@ -1,10 +1,9 @@
 import logging
+from typing import List, Union
+
 import shapely
-
-
 from qgis.core import QgsFeature, QgsGeometry, QgsPointXY
 from shapely.geometry import shape
-from typing import List, Union
 
 from jord.shapely_utilities import is_multi
 
@@ -12,6 +11,11 @@ _logger = logging.getLogger(__name__)
 
 
 def already_exist_question_mark(iface):
+    """
+
+    :param iface:
+    :type iface:
+    """
     layer = iface.activeLayer()
     feature = layer.selectedFeatures()[0]
     shape(feature.__geo_interface__["geometry"])
@@ -19,7 +23,20 @@ def already_exist_question_mark(iface):
 
 
 def monkey_patch():
+    """
+
+    :return:
+    :rtype:
+    """
+
     def mapping_feature(feature):
+        """
+
+        :param feature:
+        :type feature:
+        :return:
+        :rtype:
+        """
         geom = feature.geometry()
 
         properties = {}
@@ -32,6 +49,13 @@ def monkey_patch():
         }
 
     def mapping_geometry(geometry):
+        """
+
+        :param geometry:
+        :type geometry:
+        :return:
+        :rtype:
+        """
         geo = geometry.exportToGeoJSON()
 
         # We have to use eval because exportToGeoJSON() gives us

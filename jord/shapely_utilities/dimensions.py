@@ -2,6 +2,15 @@ import shapely
 
 
 def add_polygon_z(polygon_2d, z_s):
+    """
+
+    :param polygon_2d:
+    :type polygon_2d:
+    :param z_s:
+    :type z_s:
+    :return:
+    :rtype:
+    """
     poly_exterior_s = polygon_2d.exterior.coords[:-1]
     assert len(poly_exterior_s) == len(z_s), (len(poly_exterior_s), len(z_s))
 
@@ -13,6 +22,15 @@ def add_polygon_z(polygon_2d, z_s):
 
 
 def add_linestring_z(linestring_2d, z_s):
+    """
+
+    :param linestring_2d:
+    :type linestring_2d:
+    :param z_s:
+    :type z_s:
+    :return:
+    :rtype:
+    """
     linestring_s = linestring_2d.coords
     assert len(linestring_s) == len(z_s), (len(linestring_s), len(z_s))
 
@@ -24,16 +42,43 @@ def add_linestring_z(linestring_2d, z_s):
 
 
 def add_point_z(point_2d, z):
+    """
+
+    :param point_2d:
+    :type point_2d:
+    :param z:
+    :type z:
+    :return:
+    :rtype:
+    """
     return shapely.Point([point_2d.x, point_2d.y, z])
 
 
 def add_multipoint_z(multipoint_2d, z_s):
+    """
+
+    :param multipoint_2d:
+    :type multipoint_2d:
+    :param z_s:
+    :type z_s:
+    :return:
+    :rtype:
+    """
     return shapely.MultiPoint(
         [(x, y, z) for (x, y), z in zip(multipoint_2d, z_s, strict=True)]
     )
 
 
 def add_multilinestring_z(multilinestring_2d, z_s):
+    """
+
+    :param multilinestring_2d:
+    :type multilinestring_2d:
+    :param z_s:
+    :type z_s:
+    :return:
+    :rtype:
+    """
     return shapely.MultiLineString(
         [
             [(x, y, z) for (x, y), z in zip(linestring.coords, z_s, strict=True)]
@@ -43,6 +88,15 @@ def add_multilinestring_z(multilinestring_2d, z_s):
 
 
 def add_multipolygon_z(multipolygon_2d, z_s):
+    """
+
+    :param multipolygon_2d:
+    :type multipolygon_2d:
+    :param z_s:
+    :type z_s:
+    :return:
+    :rtype:
+    """
     return shapely.MultiPolygon(
         [
             [
@@ -57,6 +111,15 @@ def add_multipolygon_z(multipolygon_2d, z_s):
 
 
 def add_geometrycollection_z(geometrycollection_2d, z_s):
+    """
+
+    :param geometrycollection_2d:
+    :type geometrycollection_2d:
+    :param z_s:
+    :type z_s:
+    :return:
+    :rtype:
+    """
     return shapely.GeometryCollection(
         [
             add_geometry_z(geometry, z)
@@ -66,6 +129,15 @@ def add_geometrycollection_z(geometrycollection_2d, z_s):
 
 
 def add_geometry_z(geometry, z):
+    """
+
+    :param geometry:
+    :type geometry:
+    :param z:
+    :type z:
+    :return:
+    :rtype:
+    """
     if isinstance(geometry, shapely.geometry.Point):
         return add_point_z(geometry, z)
     elif isinstance(geometry, shapely.geometry.LineString):
@@ -85,6 +157,13 @@ def add_geometry_z(geometry, z):
 
 
 def strip_z(geometry):  # TODO: IMPLEMENT
+    """
+
+    :param geometry:
+    :type geometry:
+    :return:
+    :rtype:
+    """
     if isinstance(geometry, shapely.geometry.Point):
         return shapely.Point([geometry.x, geometry.y])
     elif isinstance(geometry, shapely.geometry.LineString):
@@ -110,6 +189,7 @@ def strip_z(geometry):  # TODO: IMPLEMENT
 if __name__ == "__main__":
 
     def iuasjhd():
+        """ """
         print(
             add_polygon_z(
                 shapely.geometry.Polygon([(0, 0), (1, 0), (1, 1), (0, 1)]), [0, 1, 2, 3]

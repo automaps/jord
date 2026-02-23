@@ -22,6 +22,7 @@ print(point.buffer(1, cap_style=shapely.BufferCapStyle.square))
 if __name__ == "__main__":
 
     def aishdjauisd():
+        """ """
         # Import constructors for creating geometry collections
         from shapely.geometry import MultiPoint, MultiLineString
 
@@ -64,6 +65,7 @@ if __name__ == "__main__":
         pyplot.show()
 
     def ahfuashdu():
+        """ """
         from random import random
         import matplotlib.pyplot
         import geopandas
@@ -140,11 +142,13 @@ if __name__ == "__main__":
         matplotlib.pyplot.show()
 
     def ahfuas3232hdu():
+        """ """
         lr = LinearRing([(-1, -1), (1, 1), (1, 1), (1, -1), (-1, -1)])
         print(dilate(lr))
         print(lr.buffer(0))
 
     def simple_dilate_example():
+        """ """
         print(dilate(shapely.Point(0, 0)))
         print(dilate(shapely.Point(0, 0), distance=0))
 

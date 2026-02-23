@@ -5,13 +5,10 @@ __doc__ = r"""
            """
 
 import time
-
+from typing import Any
 
 from qgis.PyQt import QtGui
-
-
 from qgis.PyQt.QtCore import Qt
-from typing import Any
 from warg import Triple
 
 __all__ = ["qt_draw_timestamp"]

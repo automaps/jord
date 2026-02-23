@@ -1,23 +1,14 @@
 import logging
-
+from typing import Any, Iterable, Mapping, Optional
 
 import qgis._3d as q3d
-
-
 from qgis.PyQt.QtCore import QSizeF
-
-
 from qgis.PyQt.QtGui import QColor
-
-
 from qgis._3d import Qgs3DTypes
-
-
 from qgis.core import (
     QgsCategorizedSymbolRenderer,
     QgsLineSymbol,
     QgsPalLayerSettings,
-    QgsProject,
     QgsRendererCategory,
     QgsSymbol,
     QgsTextBackgroundSettings,
@@ -26,10 +17,6 @@ from qgis.core import (
     QgsVectorLayerSimpleLabeling,
     QgsWkbTypes,
 )
-
-
-from qgis.utils import iface
-from typing import Any, Iterable, Mapping, Optional
 from warg import Number, TripleNumber
 
 from jord.qgis_utilities.enums import (
@@ -58,6 +45,25 @@ def style_layer_from_mapping(
     *,
     repaint: bool = True,
 ) -> None:
+    """
+
+    :param layer:
+    :type layer:
+    :param style_mapping_field_dict:
+    :type style_mapping_field_dict:
+    :param field_name:
+    :type field_name:
+    :param default_color:
+    :type default_color:
+    :param default_opacity:
+    :type default_opacity:
+    :param default_width:
+    :type default_width:
+    :param repaint:
+    :type repaint:
+    :return:
+    :rtype:
+    """
     if layer is None:
         return
 
@@ -149,6 +155,29 @@ def set_label_styling(
     background_svg: str = None,
     html_format: Optional[str] = None,
 ):
+    """
+
+    :param layers:
+    :type layers:
+    :param field_name:
+    :type field_name:
+    :param max_ratio:
+    :type max_ratio:
+    :param min_ratio:
+    :type min_ratio:
+    :param font_size:
+    :type font_size:
+    :param background:
+    :type background:
+    :param background_color:
+    :type background_color:
+    :param background_svg:
+    :type background_svg:
+    :param html_format:
+    :type html_format:
+    :return:
+    :rtype:
+    """
     # logger.warning(f"Setting layer label rendering scale {max_ratio=} {min_ratio=}")
 
     if layers is None:
@@ -232,6 +261,23 @@ def set_label_styling(
 def make_line_symbol(
     culling_mode, edge_color, edge_width, extrusion, facades, offset
 ) -> Any:
+    """
+
+    :param culling_mode:
+    :type culling_mode:
+    :param edge_color:
+    :type edge_color:
+    :param edge_width:
+    :type edge_width:
+    :param extrusion:
+    :type extrusion:
+    :param facades:
+    :type facades:
+    :param offset:
+    :type offset:
+    :return:
+    :rtype:
+    """
     # ->q3d.QgsPolygon3DSymbol:
 
     symbol = q3d.QgsLine3DSymbol()
@@ -251,6 +297,23 @@ def make_point_symbol(
     facades: Qgis3dFacade,
     offset: Number,
 ) -> Any:
+    """
+
+    :param culling_mode:
+    :type culling_mode:
+    :param edge_color:
+    :type edge_color:
+    :param edge_width:
+    :type edge_width:
+    :param extrusion:
+    :type extrusion:
+    :param facades:
+    :type facades:
+    :param offset:
+    :type offset:
+    :return:
+    :rtype:
+    """
     # ->q3d.QgsPolygon3DSymbol:
 
     symbol = q3d.QgsPoint3DSymbol()
@@ -274,6 +337,29 @@ def set_3d_view_settings(
     edge_width: float = 1.0,
     edge_color: TripleNumber = (255, 255, 255),
 ) -> None:
+    """
+
+    :param layers:
+    :type layers:
+    :param offset:
+    :type offset:
+    :param extrusion:
+    :type extrusion:
+    :param color:
+    :type color:
+    :param facades:
+    :type facades:
+    :param culling_mode:
+    :type culling_mode:
+    :param repaint:
+    :type repaint:
+    :param edge_width:
+    :type edge_width:
+    :param edge_color:
+    :type edge_color:
+    :return:
+    :rtype:
+    """
     if layers is None:
         return
 
@@ -318,6 +404,17 @@ def set_3d_view_settings(
 
 
 def set_renderer(layer, line_renderer, point_renderer, polygon_renderer):
+    """
+
+    :param layer:
+    :type layer:
+    :param line_renderer:
+    :type line_renderer:
+    :param point_renderer:
+    :type point_renderer:
+    :param polygon_renderer:
+    :type polygon_renderer:
+    """
     if layer.geometryType() == QgsWkbTypes.PointGeometry:  # QgsWkbTypes.Point:
         layer.setRenderer3D(point_renderer)
     elif layer.geometryType() == QgsWkbTypes.LineGeometry:  # QgsWkbTypes.Line:
@@ -329,6 +426,15 @@ def set_renderer(layer, line_renderer, point_renderer, polygon_renderer):
 
 
 def make_renderer(color: TripleNumber, symbol: QgsSymbol) -> Any:  #    QgsRenderer
+    """
+
+    :param color:
+    :type color:
+    :param symbol:
+    :type symbol:
+    :return:
+    :rtype:
+    """
     apply_common_symbol_settings(symbol)
     apply_material(color, symbol)
     renderer = q3d.QgsVectorLayer3DRenderer()
@@ -345,6 +451,23 @@ def make_polygon_symbol(
     facades: Qgis3dFacade,
     offset: Number,
 ) -> Any:
+    """
+
+    :param culling_mode:
+    :type culling_mode:
+    :param edge_color:
+    :type edge_color:
+    :param edge_width:
+    :type edge_width:
+    :param extrusion:
+    :type extrusion:
+    :param facades:
+    :type facades:
+    :param offset:
+    :type offset:
+    :return:
+    :rtype:
+    """
     # ->q3d.QgsPolygon3DSymbol:
 
     symbol = q3d.QgsPolygon3DSymbol()
@@ -367,6 +490,13 @@ def make_polygon_symbol(
 
 
 def apply_common_symbol_settings(symbol: Any) -> None:
+    """
+
+    :param symbol:
+    :type symbol:
+    :return:
+    :rtype:
+    """
     if symbol is None:
         _logger.error("symbol is None, skipping")
         return
@@ -378,7 +508,13 @@ def apply_common_symbol_settings(symbol: Any) -> None:
 
 
 def apply_material(color: TripleNumber, symbol: Any) -> None:
+    """
 
+    :param color:
+    :type color:
+    :param symbol:
+    :type symbol:
+    """
     material_settings = q3d.QgsPhongMaterialSettings()
 
     q_color = QColor(*color)

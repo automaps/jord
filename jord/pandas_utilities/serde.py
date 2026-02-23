@@ -1,6 +1,7 @@
+from typing import Any, Collection, List, Mapping, Optional
+
 import pandas
 from pandas import DataFrame
-from typing import Any, Collection, List, Mapping, Optional
 
 __all__ = ["df_to_columns", "columns_to_df", "normalize_na"]
 
@@ -8,6 +9,15 @@ __all__ = ["df_to_columns", "columns_to_df", "normalize_na"]
 def df_to_columns(
     shape_df: DataFrame, ignored_columns: Optional[Collection] = None
 ) -> List[Mapping[str, Any]]:
+    """
+
+    :param shape_df:
+    :type shape_df:
+    :param ignored_columns:
+    :type ignored_columns:
+    :return:
+    :rtype:
+    """
     columns = []
 
     for key, c in shape_df.iterrows():
@@ -22,10 +32,23 @@ def df_to_columns(
     return columns
 
 
-def columns_to_df(columns: List[Mapping[str, Any]]) -> DataFrame: ...
+def columns_to_df(columns: List[Mapping[str, Any]]) -> DataFrame:
+    """
+
+    :param columns:
+    :type columns:
+    """
+    ...
 
 
 def normalize_na(d: Any) -> Optional[str]:
+    """
+
+    :param d:
+    :type d:
+    :return:
+    :rtype:
+    """
     if pandas.isna(d):
         return None
 

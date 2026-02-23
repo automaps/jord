@@ -6,6 +6,11 @@ __all__ = ["available_driver_index_name_mapping"]
 
 
 def available_driver_index_name_mapping() -> Dict[str, int]:
+    """
+
+    :return:
+    :rtype:
+    """
     driver_map = {}
     for i in range(OGR.GetDriverCount()):
         driver_name = OGR.GetDriver(i).GetName()

@@ -18,7 +18,6 @@ target_folder = (
 
 if False:
     qgis_sys_path = Path(target_folder.anchor) / "OSGeo4W" / "apps" / "qgis" / "python"
-    import sys
 
     sys.path.append(str(qgis_sys_path))
     # C:\OSGeo4W\apps\qgis\python > qgis.pth

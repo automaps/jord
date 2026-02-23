@@ -14,11 +14,11 @@ __all__ = [
 ]
 
 from collections import deque
+from typing import List, Sequence, Union
 
 import shapely.geometry
 from shapely.geometry import LineString, MultiLineString, Point, Polygon
 from shapely.geometry.base import BaseMultipartGeometry
-from typing import List, Sequence, Union
 
 
 def split_line_string(line_string: LineString) -> Sequence[LineString]:

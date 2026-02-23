@@ -1,13 +1,19 @@
 from pathlib import Path
-
+from typing import Any
 
 from qgis.PyQt.QtGui import QTransform
-from typing import Any
 
 __all__ = ["read_wld_file"]
 
 
 def read_wld_file(geom: Any, wld_file_path: Path) -> None:
+    """
+
+    :param geom:
+    :type geom:
+    :param wld_file_path:
+    :type wld_file_path:
+    """
     assert wld_file_path is not None
     assert wld_file_path.exists()
 

@@ -28,6 +28,15 @@ def test_sanitise_kwargs():
     )
 
     def i(g, *, a=None):
+        """
+
+        :param g:
+        :type g:
+        :param a:
+        :type a:
+        :return:
+        :rtype:
+        """
         assert a == 1
         return g
 

@@ -1,4 +1,5 @@
 import logging
+
 from shapely import Polygon
 
 from .rings import ensure_ccw_ring, ensure_cw_ring

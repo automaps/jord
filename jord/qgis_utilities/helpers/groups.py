@@ -1,10 +1,7 @@
 import logging
 from typing import Any, Optional, Union
 
-
 from qgis.core import QgsLayerTreeGroup, QgsLayerTreeLayer, QgsProject
-
-
 from qgis.utils import iface
 
 __all__ = [
@@ -30,6 +27,17 @@ def duplicate_groups(
     group_parent: Optional[Any] = None,
     new_name: Union[str, EllipsisType, None] = None,
 ) -> QgsLayerTreeGroup:
+    """
+
+    :param group_to_duplicate:
+    :type group_to_duplicate:
+    :param group_parent:
+    :type group_parent:
+    :param new_name:
+    :type new_name:
+    :return:
+    :rtype:
+    """
     if group_to_duplicate is None:
         _logger.warning("Group was None")
         return
@@ -70,6 +78,17 @@ def duplicate_groups(
 def duplicate_tree_node(
     new_group_parent: Any, original_group_child: Any, new_name: Optional[str] = None
 ) -> Any:
+    """
+
+    :param new_group_parent:
+    :type new_group_parent:
+    :param original_group_child:
+    :type original_group_child:
+    :param new_name:
+    :type new_name:
+    :return:
+    :rtype:
+    """
     original_layer = original_group_child.layer()
     new_layer_copy = deepcopy_layer(original_layer)
 
@@ -111,6 +130,13 @@ def duplicate_tree_node(
 
 
 def select_layer_in_group(layer_name: Any, group_name: Any) -> None:
+    """
+
+    :param layer_name:
+    :type layer_name:
+    :param group_name:
+    :type group_name:
+    """
     group = QgsProject.instance().layerTreeRoot().findGroup(group_name)
     if group is not None:
         for child in group.children():
@@ -119,5 +145,12 @@ def select_layer_in_group(layer_name: Any, group_name: Any) -> None:
 
 
 def is_group_selected(group_name: Any) -> Any:
+    """
+
+    :param group_name:
+    :type group_name:
+    :return:
+    :rtype:
+    """
     group = QgsProject.instance().layerTreeRoot().findGroup(group_name)
     return group in iface.layerTreeView().selectedNodes()

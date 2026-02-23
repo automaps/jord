@@ -1,6 +1,5 @@
-from pathlib import Path
-
 import csv
+from pathlib import Path
 from typing import Generator, Tuple
 
 __all__ = ["read_gcp_file"]
@@ -9,6 +8,15 @@ __all__ = ["read_gcp_file"]
 def read_gcp_file(
     gcp_points_file_path: Path, filter_comments: bool = True
 ) -> Tuple[Generator, Generator]:
+    """
+
+    :param gcp_points_file_path:
+    :type gcp_points_file_path:
+    :param filter_comments:
+    :type filter_comments:
+    :return:
+    :rtype:
+    """
     with open(gcp_points_file_path, encoding="utf8", errors="ignore") as fp:
         if filter_comments:
             fp = filter(lambda row: row[0] != "#", fp)
@@ -29,6 +37,8 @@ def read_gcp_file(
 
 
 if __name__ == "__main__":
-    source_xy, dest_xy = read_gcp_file(r"C:\Users\chen\Documents\asdad.gpkg.points")
+    source_xy, dest_xy = read_gcp_file(
+        Path(r"C:\Users\chen\Documents\asdad.gpkg.points")
+    )
 
     print(list(source_xy), list(dest_xy))

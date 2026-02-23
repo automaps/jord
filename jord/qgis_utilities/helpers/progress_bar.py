@@ -5,8 +5,9 @@ __doc__ = r"""
            """
 
 
-from qgis.PyQt import QtWidgets
 from typing import Any, Optional, Tuple
+
+from qgis.PyQt import QtWidgets
 from warg import AlsoDecorator, passes_kws_to
 
 from jord.qt_utilities import WindowModalityEnum
@@ -26,6 +27,19 @@ def make_progress_bar(
     max_value: int = 100,
     parent: Optional[Any] = None
 ) -> QtWidgets.QProgressBar:
+    """
+
+    :param progress:
+    :type progress:
+    :param min_value:
+    :type min_value:
+    :param max_value:
+    :type max_value:
+    :param parent:
+    :type parent:
+    :return:
+    :rtype:
+    """
     bar = QtWidgets.QProgressBar(parent)
     bar.setTextVisible(True)
     bar.setValue(min_value)
@@ -75,6 +89,7 @@ def make_dialog_progress_bar(
 
 
 class DialogProgressBar(AlsoDecorator):  # TODO This freezes!
+    """ """
 
     # TODO Make it formatable with a unit or a title
     # self.progressBar.setFormat(f"{hms} - %p%")
@@ -96,6 +111,7 @@ class DialogProgressBar(AlsoDecorator):  # TODO This freezes!
 
 
 class InjectedProgressBar(AlsoDecorator):
+    """ """
 
     @passes_kws_to(make_progress_bar)
     def __init__(self, **kwargs):
@@ -115,6 +131,13 @@ class InjectedProgressBar(AlsoDecorator):
 if __name__ == "__main__":
 
     def calc(x, y):
+        """
+
+        :param x:
+        :type x:
+        :param y:
+        :type y:
+        """
         from time import sleep
 
         dialog, bar = make_dialog_progress_bar(0)

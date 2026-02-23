@@ -17,6 +17,15 @@ gdal_error_type_map = {v.value: str(v.name).capitalize() for v in GdalErrorTypeE
 
 
 def gdal_error_handler(err_class, err_num, err_msg) -> None:
+    """
+
+    :param err_class:
+    :type err_class:
+    :param err_num:
+    :type err_num:
+    :param err_msg:
+    :type err_msg:
+    """
     err_msg = err_msg.replace("\n", " ")
     err_class = gdal_error_type_map.get(err_class, "None")
     print(f"Error Number: {err_num}")

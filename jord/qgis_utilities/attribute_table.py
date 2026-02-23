@@ -6,6 +6,15 @@ from jord.qgis_utilities.configuration import read_plugin_setting, store_plugin_
 
 
 def set_column_visibility(layers: Any, column_name: str, visible: bool = False) -> None:
+    """
+
+    :param layers:
+    :type layers:
+    :param column_name:
+    :type column_name:
+    :param visible:
+    :type visible:
+    """
     if not isinstance(layers, Collection):
         layers = [layers]
 
@@ -22,6 +31,13 @@ def set_column_visibility(layers: Any, column_name: str, visible: bool = False) 
 
 
 def set_visible_columns(layers: Any, column_names: Collection[str]) -> None:
+    """
+
+    :param layers:
+    :type layers:
+    :param column_names:
+    :type column_names:
+    """
     if not isinstance(layers, Collection):
         layers = [layers]
 

@@ -5,20 +5,17 @@ __doc__ = r"""
            """
 
 import logging
+from typing import Sequence
+
 import numpy
 from PIL import Image
-
-
 from qgis.PyQt import QtGui
-
-
 from qgis.core import (
     QgsCoordinateReferenceSystem,
     QgsCoordinateTransform,
     QgsPoint,
     QgsVectorLayer,
 )
-from typing import Sequence
 
 __all__ = [
     "get_qimage_from_numpy",

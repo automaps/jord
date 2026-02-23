@@ -1,1 +1,2 @@
-momepy
+momepy>=0.3.0
+rtree>=0.9.7

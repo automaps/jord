@@ -77,9 +77,7 @@ def serialise_qgis_layer(qgis_instance_handle: Any, layer: Any) -> None:
           :return:
     """
 
-    from qgis.core import QgsVectorLayer, QgsFeature, QgsJsonExporter
-
-    import qgis
+    from qgis.core import QgsVectorLayer, QgsJsonExporter
 
     assert isinstance(layer, QgsVectorLayer)
 

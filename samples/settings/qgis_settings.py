@@ -13,13 +13,21 @@ from qgis.core import QgsProject, QgsSettings, QgsVectorLayer
 
 
 def global_settings(name: str) -> None:
+    """
+
+    :param name:
+    :type name:
+    """
+
     def store():
+        """ """
         s = QgsSettings()
         s.setValue("myplugin/mytext", "hello world")
         s.setValue("myplugin/myint", 10)
         s.setValue("myplugin/myreal", 3.14)
 
     def read():
+        """ """
         s = QgsSettings()
         mytext = s.value("myplugin/mytext", "default text")
         myint = s.value("myplugin/myint", 123)
@@ -32,6 +40,11 @@ def global_settings(name: str) -> None:
 
 
 def projects_settings(name: str) -> None:
+    """
+
+    :param name:
+    :type name:
+    """
     proj = QgsProject.instance()
 
     # store values
@@ -52,6 +65,11 @@ def projects_settings(name: str) -> None:
 
 
 def vector_layer_settings(name: str) -> None:
+    """
+
+    :param name:
+    :type name:
+    """
     vlayer = QgsVectorLayer()
     # save a value
     vlayer.setCustomProperty("mytext", "hello world")
@@ -61,6 +79,15 @@ def vector_layer_settings(name: str) -> None:
 
 
 def add_settings(settings, key: str, value: Any) -> None:
+    """
+
+    :param settings:
+    :type settings:
+    :param key:
+    :type key:
+    :param value:
+    :type value:
+    """
     if settings is None:
         settings = QgsSettings()
     settings.beginGroup("PostgreSQL/connections")

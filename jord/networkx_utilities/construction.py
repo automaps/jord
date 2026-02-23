@@ -1,8 +1,9 @@
+from typing import Any, Mapping
+
 import osmnx
 import shapely
 from draugr.numpy_utilities import positive_int_hash
 from networkx import MultiDiGraph, MultiGraph
-from typing import Any, Mapping
 
 __all__ = [
     "assertive_add_edge",
@@ -101,6 +102,13 @@ def assertive_add_shapely_node(
 
 
 def network_to_osm_xml(network: MultiDiGraph) -> bytes:
+    """
+
+    :param network:
+    :type network:
+    :return:
+    :rtype:
+    """
     osm_cache_path = ensure_existence(PROJECT_APP_PATH.site_cache) / "to_upload.osm"
 
     edge_tags = set(recursive_flatten([edge.keys() for edge in network.edges.values()]))
@@ -109,13 +117,22 @@ def network_to_osm_xml(network: MultiDiGraph) -> bytes:
     osmnx.settings.useful_tags_way = edge_tags
     osmnx.settings.useful_tags_node = node_tags
 
-    osmnx.save_graph_xml(G=network, filepath=osm_cache_path)
+    osmnx.save_graph_xml(
+        G=network, filepath=osm_cache_path
+    )  # PRECISION is 7 by default, which is sufficient for 1cm precision, which is more than enough for indoor navigation
 
     with open(osm_cache_path, "rb") as f:
         return f.read()
 
 
 def compute_node_id(point: shapely.geometry.Point) -> int:
+    """
+
+    :param point:
+    :type point:
+    :return:
+    :rtype:
+    """
     return positive_int_hash(
         ",".join(str(c) for c in (point.x, point.y, point.z if point.has_z else None))
     )

@@ -23,8 +23,6 @@ def test_qgis_import_package():
 
 def test_gdal_import_package():
     if False:
-        from jord import gdal_utilities
-
         print(gdal_utilities.__doc__)
 
 
@@ -59,8 +57,6 @@ def test_pillow_import_package():
 
 def test_qt_import_package():
     if False:
-        from jord import qt_utilities
-
         print(qt_utilities.__doc__)
 
 
@@ -87,8 +83,6 @@ def test_rasterio_import_package():
 
 def test_torch_import_package():
     if False:
-        from jord.exclude import torch_utilities
-
         print(torch_utilities.__doc__)
 
 

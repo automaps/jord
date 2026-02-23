@@ -1,9 +1,10 @@
 import logging
+from typing import Optional
+
 import shapely
 import shapely.geometry
 from shapely.validation import make_valid
-from typing import Optional
-from warg import passes_kws_to, first
+from warg import first, passes_kws_to
 
 from .uniformity import ensure_cw_poly
 
@@ -40,6 +41,21 @@ def morphology_buffer(
     join_style: shapely.BufferJoinStyle = shapely.BufferJoinStyle.mitre,
     **kwargs,
 ):
+    """
+
+    :param geom:
+    :type geom:
+    :param distance:
+    :type distance:
+    :param cap_style:
+    :type cap_style:
+    :param join_style:
+    :type join_style:
+    :param kwargs:
+    :type kwargs:
+    :return:
+    :rtype:
+    """
     if geom.is_empty:
         return geom
 
@@ -248,6 +264,13 @@ close = closing
 def zero_buffer(
     geom: shapely.geometry.base.BaseGeometry,
 ) -> shapely.geometry.base.BaseGeometry:
+    """
+
+    :param geom:
+    :type geom:
+    :return:
+    :rtype:
+    """
     return dilate(geom, distance=0)
 
 
@@ -313,4 +336,11 @@ def clean_shape(
 def collapse_duplicate_vertices(
     shape: shapely.geometry.base.BaseGeometry,
 ) -> shapely.geometry.base.BaseGeometry:
+    """
+
+    :param shape:
+    :type shape:
+    :return:
+    :rtype:
+    """
     return zero_buffer(shape).simplify(0)

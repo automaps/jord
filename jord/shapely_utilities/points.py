@@ -1,8 +1,9 @@
+from typing import Generator, Iterable, List, Optional, Sequence, Tuple, Union
+
 import numpy
 import shapely
 import shapely.geometry
 from shapely.geometry import LineString, MultiPoint, Point
-from typing import Generator, Iterable, List, Optional, Sequence, Tuple, Union
 from warg import Number
 
 __all__ = [
@@ -144,7 +145,13 @@ def azimuth(point1: Point, point2: Point) -> float:
 
 
 def off_center_point_inside_polygon(polygon: shapely.Polygon) -> shapely.Point:
+    """
 
+    :param polygon:
+    :type polygon:
+    :return:
+    :rtype:
+    """
     rep_point = polygon.representative_point()
     for x, y in zip(*polygon.exterior.coords.xy):
 

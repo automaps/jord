@@ -1,10 +1,18 @@
-from qgis.core import QgsFeatureRequest, QgsField, QgsFieldConstraints, QgsVectorLayer
 from typing import Any
+
+from qgis.core import QgsFeatureRequest, QgsField, QgsFieldConstraints, QgsVectorLayer
 
 __all__ = ["deepcopy_layer"]
 
 
 def deepcopy_layer(source_layer: Any) -> Any:
+    """
+
+    :param source_layer:
+    :type source_layer:
+    :return:
+    :rtype:
+    """
     new_layer = source_layer.materialize(
         QgsFeatureRequest().setFilterFids(source_layer.allFeatureIds())
     )
@@ -29,6 +37,13 @@ def deepcopy_layer(source_layer: Any) -> Any:
 
 
 def deepcopy_layer_old(layer: Any) -> Any:
+    """
+
+    :param layer:
+    :type layer:
+    :return:
+    :rtype:
+    """
     new_layer = layer.materialize(
         QgsFeatureRequest().setFilterFids(layer.allFeatureIds())
     )

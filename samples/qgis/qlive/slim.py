@@ -45,8 +45,6 @@ if True:
     print(raster_.shape)
 
     if False:
-        from matplotlib import pyplot
-
         pyplot.imshow(raster_, cmap="gray")
         pyplot.show()
     else:

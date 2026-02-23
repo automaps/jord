@@ -1,4 +1,5 @@
 def asudhua():
+    """ """
     from shapely.ops import polygonize, polygonize_full
 
     lines = [

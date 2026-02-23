@@ -1,7 +1,8 @@
 import logging
+from typing import Any, Callable, List, Mapping, Sequence, Union
+
 import shapely
 from shapely import unary_union
-from typing import Any, Callable, List, Mapping, Sequence, Union
 
 from .geometry_types import is_multi
 from .morphology import clean_shape, closing
@@ -74,6 +75,7 @@ def overlap_groups(
 if __name__ == "__main__":
 
     def demo():
+        """ """
         from shapely.geometry import box
         from pprint import pprint
 

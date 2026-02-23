@@ -5,6 +5,7 @@ __all__ = ["QLayerEditSession", "RasterDataProviderEditSession"]
 
 
 class QLayerEditSession(AlsoDecorator):
+    """ """
 
     def __init__(self, map_layer: QgsMapLayer):
         self.map_layer = map_layer
@@ -20,6 +21,7 @@ class QLayerEditSession(AlsoDecorator):
 
 
 class RasterDataProviderEditSession(AlsoDecorator):
+    """ """
 
     def __init__(
         self, raster_data_provider: QgsRasterDataProvider, auto_reload: bool = True

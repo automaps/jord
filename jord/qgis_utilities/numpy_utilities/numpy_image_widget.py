@@ -4,17 +4,12 @@ __doc__ = r"""
            Created on 02-12-2020
            """
 
-import numpy
-
-
-from qgis.PyQt import QtGui
-
-
-from qgis.PyQt.QtCore import QEvent, Qt
-
-
-from qgis.gui import QgsPixmapLabel
 from typing import Any
+
+import numpy
+from qgis.PyQt import QtGui
+from qgis.PyQt.QtCore import QEvent, Qt
+from qgis.gui import QgsPixmapLabel
 
 from .conversion import get_qimage_from_numpy
 

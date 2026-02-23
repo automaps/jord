@@ -10,12 +10,26 @@ from typing import Union
 
 
 def ensure_ccw_ring(ring: LinearRing) -> LinearRing:
+    """
+
+    :param ring:
+    :type ring:
+    :return:
+    :rtype:
+    """
     if not ring.is_ccw:
         return LinearRing(list(ring.coords)[::-1])
     return ring
 
 
 def ensure_cw_ring(ring: LinearRing) -> LinearRing:
+    """
+
+    :param ring:
+    :type ring:
+    :return:
+    :rtype:
+    """
     if ring.is_ccw:
         return LinearRing(list(ring.coords)[::-1])
     return ring

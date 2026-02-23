@@ -1,25 +1,12 @@
 import logging
 
-
 from qgis.PyQt.QtGui import QColor
-
-
 from qgis.core import (
     QgsCategorizedSymbolRenderer,
-    QgsExpression,
-    QgsExpressionContext,
-    QgsExpressionContextUtils,
-    QgsFeature,
-    QgsFeatureRequest,
-    QgsProject,
     QgsRendererCategory,
-    QgsSimpleFillSymbolLayer,
     QgsSymbol,
-    QgsVectorLayer,
     QgsVectorLayerUtils,
 )
-
-
 from qgis.utils import iface
 
 _logger = logging.getLogger(__name__)
@@ -28,6 +15,15 @@ _logger = logging.getLogger(__name__)
 def styled_field_value_categorised2(
     layer, style_attributes_layer, field_name="location_type"
 ):
+    """
+
+    :param layer:
+    :type layer:
+    :param style_attributes_layer:
+    :type style_attributes_layer:
+    :param field_name:
+    :type field_name:
+    """
     expression_str = f'represent_value("{field_name}")'
 
     render_categories = []
@@ -93,6 +89,13 @@ def styled_field_value_categorised2(
 
 
 def expression_field_value_categorised_do_not_use(layer, field_name="location_type"):
+    """
+
+    :param layer:
+    :type layer:
+    :param field_name:
+    :type field_name:
+    """
     expression_str = f'represent_value("{field_name}")'
 
     # expression = QgsExpression(expression_str)

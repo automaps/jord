@@ -1,9 +1,6 @@
 from enum import Enum
 
-
 from qgis._3d import Qgs3DTypes
-
-
 from qgis.core import (
     QgsMultiBandColorRenderer,
     QgsPalettedRasterRenderer,

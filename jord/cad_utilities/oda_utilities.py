@@ -1,7 +1,7 @@
 from pathlib import Path
+from typing import Optional
 
 from ezdxf.addons import odafc
-from typing import Optional
 
 __doc__ = r"""
 
@@ -38,6 +38,17 @@ def convert_to_dxf(
     ] = r"C:\Program Files\ODA\ODAFileConverter 25.4.0\ODAFileConverter.exe",
     target_dir: Optional[Path] = None,
 ) -> Path:
+    """
+
+    :param dwg_file_path:
+    :type dwg_file_path:
+    :param oda_converter_path:
+    :type oda_converter_path:
+    :param target_dir:
+    :type target_dir:
+    :return:
+    :rtype:
+    """
     # Load a DWG file
     # doc = odafc.readfile('my.dwg')
 
@@ -77,6 +88,7 @@ def convert_to_dxf(
 if __name__ == "__main__":
 
     def asdijai():
+        """ """
         win_path = Path(odafc.win_exec_path)
         print(win_path, win_path.exists())
 

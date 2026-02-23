@@ -1,21 +1,13 @@
-# !/usr/bin/python
-
 import logging
+from typing import Any, Collection, Optional, Union
 
-
-from qgis.analysis import QgsGcpGeometryTransformer, QgsGcpTransformerInterface
-
-
+from qgis.analysis import QgsGcpGeometryTransformer
 from qgis.core import (
     Qgis,
-    QgsCoordinateReferenceSystem,
-    QgsCoordinateTransform,
     QgsLayerTreeGroup,
     QgsLayerTreeLayer,
     QgsLayerTreeNode,
-    QgsProject,
 )
-from typing import Any, Collection, Optional, Union
 
 _logger = logging.getLogger(__name__)
 
@@ -33,6 +25,17 @@ def transform_sub_tree_features(
     transformer: QgsGcpGeometryTransformer,
     pre_transformer: Optional[Any] = None,
 ) -> None:
+    """
+
+    :param selected_nodes:
+    :type selected_nodes:
+    :param transformer:
+    :type transformer:
+    :param pre_transformer:
+    :type pre_transformer:
+    :return:
+    :rtype:
+    """
     if isinstance(selected_nodes, QgsLayerTreeLayer):
         transform_features(
             selected_nodes, transformer=transformer, pre_transformer=pre_transformer

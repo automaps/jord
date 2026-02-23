@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 """This script uploads a plugin package to the plugin repository.
 Authors: A. Pasotti, V. Picavet
 git sha              : $TemplateVCSFormat
@@ -7,8 +6,9 @@ git sha              : $TemplateVCSFormat
 import getpass
 import sys
 import xmlrpc.client
-from future.standard_library import install_aliases
 from optparse import OptionParser
+
+from future.standard_library import install_aliases
 
 install_aliases()
 

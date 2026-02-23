@@ -2,6 +2,7 @@ import logging
 import time
 from itertools import tee
 from typing import Any, Callable, Iterable, List, Mapping, Optional, Union
+
 from warg import TripleNumber, n_uint_mix_generator_builder, passes_kws_to
 
 from jord.typing_utilities.type_solving import (
@@ -72,10 +73,8 @@ def add_qgis_single_feature_layer(
     """
 
     from qgis.core import (
-        QgsVectorLayer,
         QgsFeature,
         QgsVectorLayer,
-        QgsRasterLayer,
         QgsProject,
         QgsWkbTypes,
     )
@@ -342,7 +341,6 @@ def add_qgis_multi_feature_layer(
         QgsFeature,
         QgsVectorLayer,
         QgsProject,
-        QgsFeatureSink,
         QgsWkbTypes,
     )
 

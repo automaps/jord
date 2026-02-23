@@ -1,6 +1,6 @@
+import sys
 from pathlib import Path
 
-import sys
 from warg import cprint
 
 PACKAGE_ROOT = Path(__file__).parent.parent.parent

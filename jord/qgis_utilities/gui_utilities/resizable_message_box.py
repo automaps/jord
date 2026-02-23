@@ -1,8 +1,7 @@
-from qgis.PyQt.QtCore import QEvent
-
-
-from qgis.PyQt.QtWidgets import QMessageBox, QTextEdit
 from typing import Any
+
+from qgis.PyQt.QtCore import QEvent
+from qgis.PyQt.QtWidgets import QMessageBox, QTextEdit
 
 try:
     _layout_event = QEvent.Type

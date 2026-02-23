@@ -1,7 +1,8 @@
+from typing import Optional, Union
+
 import geopandas
 import momepy
 import shapely
-from typing import Optional, Union
 
 __all__ = ["construct_centerline"]
 
@@ -13,6 +14,21 @@ def construct_centerline(
     merge_lines: bool = True,
     simplify_lines: bool = False,
 ) -> Union[shapely.LineString, shapely.MultiLineString]:
+    """
+
+    :param input_geometry:
+    :type input_geometry:
+    :param interpolation_distance:
+    :type interpolation_distance:
+    :param truncate_endings:
+    :type truncate_endings:
+    :param merge_lines:
+    :type merge_lines:
+    :param simplify_lines:
+    :type simplify_lines:
+    :return:
+    :rtype:
+    """
     if interpolation_distance is None:
         interpolation_distance = input_geometry.minimum_clearance
 

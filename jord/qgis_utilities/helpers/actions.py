@@ -1,8 +1,7 @@
-from qgis.PyQt.QtGui import QIcon
-
-
-from qgis.PyQt.QtWidgets import QAction, QWidget
 from typing import Any, Callable
+
+from qgis.PyQt.QtGui import QIcon
+from qgis.PyQt.QtWidgets import QAction, QWidget
 
 from jord.qgis_utilities.helpers.signals import reconnect_signal
 

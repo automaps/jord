@@ -9,6 +9,11 @@ DEFAULT_PORT = "5555"
 
 
 def default_address() -> str:
+    """
+
+    :return:
+    :rtype:
+    """
     from draugr.python_utilities import in_docker
 
     if in_docker():
@@ -56,6 +61,13 @@ class QliveClient(AlsoDecorator):
         self.socket.close()
 
     def send(self, *args) -> Any:
+        """
+
+        :param args:
+        :type args:
+        :return:
+        :rtype:
+        """
         import zmq
 
         self.socket.send(*args, self.flag)

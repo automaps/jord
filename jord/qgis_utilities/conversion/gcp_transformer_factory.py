@@ -1,9 +1,6 @@
 from pathlib import Path
 
-
 from qgis.analysis import QgsGcpGeometryTransformer, QgsGcpTransformerInterface
-
-
 from qgis.core import QgsPointXY
 
 __all__ = ["get_gcp_transformer_from_file"]
@@ -17,6 +14,17 @@ def get_gcp_transformer_from_file(
     *,
     filter_comments: bool = True
 ) -> QgsGcpGeometryTransformer:
+    """
+
+    :param gcp_points_file_path:
+    :type gcp_points_file_path:
+    :param method:
+    :type method:
+    :param filter_comments:
+    :type filter_comments:
+    :return:
+    :rtype:
+    """
     source_xy, dest_xy = read_gcp_file(
         gcp_points_file_path, filter_comments=filter_comments
     )

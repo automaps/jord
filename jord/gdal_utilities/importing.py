@@ -10,6 +10,11 @@ __all__ = ["import_gdal", "import_osr", "import_ogr", "GDAL", "OSR", "OGR"]
 
 
 def import_gdal() -> ModuleType:
+    """
+
+    :return:
+    :rtype:
+    """
     try:
         import gdal
 
@@ -25,6 +30,11 @@ def import_gdal() -> ModuleType:
 
 
 def import_osr() -> ModuleType:
+    """
+
+    :return:
+    :rtype:
+    """
     try:
         import ors
 
@@ -40,6 +50,11 @@ def import_osr() -> ModuleType:
 
 
 def import_ogr() -> ModuleType:
+    """
+
+    :return:
+    :rtype:
+    """
     try:
         import ogr
 

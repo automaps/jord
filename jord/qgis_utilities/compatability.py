@@ -1,6 +1,6 @@
-from qgis.PyQt import QtGui, QtWidgets, uic
+from qgis.PyQt import QtGui, QtWidgets
 from qgis.PyQt.QtCore import Qt
-from qgis.PyQt.QtWidgets import QDialog, QHBoxLayout, QLabel, QLineEdit, QWidget
+from qgis.PyQt.QtWidgets import QLineEdit
 
 __all__ = [
     "yes_button",
@@ -24,6 +24,8 @@ __all__ = [
     "message_box_warning",
     "normal_font_weight",
     "normal_font_style",
+    "cancel_button",
+    "ok_button",
 ]
 
 __doc__ = (
@@ -34,11 +36,16 @@ try:
     yes_button = QtWidgets.QMessageBox.Yes
     no_button = QtWidgets.QMessageBox.No
     help_button = QtWidgets.QMessageBox.Help
+    cancel_button = QtWidgets.QMessageBox.Cancel
+    ok_button = QtWidgets.QMessageBox.Ok
+
 
 except AttributeError:
     yes_button = QtWidgets.QMessageBox.StandardButton.Yes
     no_button = QtWidgets.QMessageBox.StandardButton.No
     help_button = QtWidgets.QMessageBox.StandardButton.Help
+    cancel_button = QtWidgets.QMessageBox.StandardButton.Cancel
+    ok_button = QtWidgets.QMessageBox.StandardButton.Ok
 
 
 try:

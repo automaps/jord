@@ -32,8 +32,6 @@ with AutoQliveClient(server_address) as qlive:
     raster_ = raster_.astype(numpy.uint8)
 
     if False:
-        from matplotlib import pyplot
-
         print(raster_.shape)
         pyplot.imshow(raster_, cmap="gray")
         pyplot.show()

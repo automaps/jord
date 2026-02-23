@@ -1,13 +1,14 @@
 import logging
-import numpy
-import shapely.geometry
 import time
-import tqdm
 import uuid
 from enum import Enum
 from itertools import tee
-from pandas import DataFrame
 from typing import Any, Iterable, List, Mapping, Optional, Tuple, Union
+
+import numpy
+import shapely.geometry
+import tqdm
+from pandas import DataFrame
 from warg import Number, ensure_existence, passes_kws_to
 
 from jord import PROJECT_APP_PATH
@@ -71,8 +72,6 @@ def add_wkb(qgis_instance_handle: Any, wkb: bytes, *args, **kwargs) -> List:
     :return:
     """
 
-    from qgis.core import QgsGeometry
-
     return add_qgis_single_feature_layer(
         qgis_instance_handle, wkb_geom_constructor(wkb), *args, **kwargs
     )
@@ -101,9 +100,19 @@ def add_wkbs(
 def add_wkb_layer(
     qgis_instance_handle: Any, wkbs: Iterable[bytes], *args, **kwargs
 ) -> List:
+    """
 
-    from qgis.core import QgsGeometry
-
+    :param qgis_instance_handle:
+    :type qgis_instance_handle:
+    :param wkbs:
+    :type wkbs:
+    :param args:
+    :type args:
+    :param kwargs:
+    :type kwargs:
+    :return:
+    :rtype:
+    """
     if isinstance(wkbs, bytes):
         wkbs = [wkbs]
 
@@ -179,8 +188,6 @@ def add_geojson_layer(
       :return:
     """
 
-    from qgis.core import QgsGeometry
-
     return add_qgis_multi_feature_layer(
         qgis_instance_handle,
         # [gj for gj in geojsons],
@@ -229,7 +236,19 @@ def add_wkts(
 def add_wkt_layer(
     qgis_instance_handle: Any, wkts: Iterable[str], *args, **kwargs
 ) -> List:
+    """
 
+    :param qgis_instance_handle:
+    :type qgis_instance_handle:
+    :param wkts:
+    :type wkts:
+    :param args:
+    :type args:
+    :param kwargs:
+    :type kwargs:
+    :return:
+    :rtype:
+    """
     from qgis.core import QgsGeometry
 
     if isinstance(wkts, str):
@@ -284,6 +303,19 @@ def add_shapely_layer(
     *args,
     **kwargs,
 ) -> List:
+    """
+
+    :param qgis_instance_handle:
+    :type qgis_instance_handle:
+    :param geoms:
+    :type geoms:
+    :param args:
+    :type args:
+    :param kwargs:
+    :type kwargs:
+    :return:
+    :rtype:
+    """
     # assert geoms[0] == #TODO: SAME TYPE
     if isinstance(geoms, shapely.geometry.base.BaseGeometry):
         geoms = [geoms]
@@ -357,6 +389,19 @@ def add_dataframe(
 def add_dataframes(
     qgis_instance_handle: Any, dataframes: Mapping[str, DataFrame], *args, **kwargs
 ) -> List:
+    """
+
+    :param qgis_instance_handle:
+    :type qgis_instance_handle:
+    :param dataframes:
+    :type dataframes:
+    :param args:
+    :type args:
+    :param kwargs:
+    :type kwargs:
+    :return:
+    :rtype:
+    """
     return_list = []
     for layer_name, geometry in dataframes.items():
         return_list.append(
@@ -376,6 +421,23 @@ def add_dataframe_layer(
     *args,
     **kwargs,
 ) -> List:
+    """
+
+    :param qgis_instance_handle:
+    :type qgis_instance_handle:
+    :param dataframe:
+    :type dataframe:
+    :param name:
+    :type name:
+    :param geometry_column:
+    :type geometry_column:
+    :param args:
+    :type args:
+    :param kwargs:
+    :type kwargs:
+    :return:
+    :rtype:
+    """
     from geopandas import GeoDataFrame
     from jord.geopandas_utilities import split_on_geom_type
 
@@ -520,6 +582,19 @@ def add_geojsons(
 def add_geojson_layer(
     qgis_instance_handle: Any, geojsons: Iterable[str], *args, **kwargs
 ) -> List:
+    """
+
+    :param qgis_instance_handle:
+    :type qgis_instance_handle:
+    :param geojsons:
+    :type geojsons:
+    :param args:
+    :type args:
+    :param kwargs:
+    :type kwargs:
+    :return:
+    :rtype:
+    """
     if isinstance(geojsons, str):
         geojsons = [geojsons]
 
@@ -544,6 +619,15 @@ def remove_layers(qgis_instance_handle: Any, *args) -> None:
 
 
 def remove_layer(qgis_instance_handle: Any, name: str, *args) -> None:
+    """
+
+    :param qgis_instance_handle:
+    :type qgis_instance_handle:
+    :param name:
+    :type name:
+    :param args:
+    :type args:
+    """
     ...
     # qgis_instance_handle.on_clear_temporary()
 
@@ -602,7 +686,6 @@ def add_raster(
         QgsContrastEnhancement,
         QgsRasterLayer,
         QgsRasterFileWriter,
-        Qgis,
     )
     from jord.qgis_utilities.numpy_utilities.data_type import get_qgis_type
     from jord.qgis_utilities.helpers.sessions import RasterDataProviderEditSession
@@ -799,7 +882,7 @@ def add_no_geom_layer(
     :return:
     """
 
-    from qgis.core import QgsFeature, QgsVectorLayer, QgsProject, QgsFeatureSink
+    from qgis.core import QgsFeature, QgsVectorLayer, QgsProject
 
     import qgis
 

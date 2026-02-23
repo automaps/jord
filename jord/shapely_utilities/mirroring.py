@@ -1,16 +1,19 @@
 __all__ = ["reflection"]
 
 from numbers import Number
+from typing import Callable
+
 from shapely.affinity import scale
 from shapely.geometry import Polygon
 from shapely.ops import transform
-from typing import Callable
 
 # pts = numpy.array([[0, 0], [1, 1], [1, 2], [0, 1]])
 # display(Polygon(pts.dot([[1,0],[0,-1]])))
 
 
-def principal_axis(): ...
+def principal_axis():
+    """ """
+    ...
 
 
 def reflection(x0: Number) -> Callable:
@@ -25,6 +28,7 @@ def reflection(x0: Number) -> Callable:
 if __name__ == "__main__":
 
     def ausdhuashd():
+        """ """
         P = Polygon([[0, 0], [1, 1], [1, 2], [0, 1]])
         print(P)  # POLYGON ((0 0, 1 1, 1 2, 0 1, 0 0))
 

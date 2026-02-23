@@ -1,8 +1,9 @@
 import logging
-import shapely
 from enum import Enum
-from shapely import affinity
 from typing import Collection, Tuple, Union
+
+import shapely
+from shapely import affinity
 
 __all__ = [
     "compute_center_principal_axes",
@@ -28,6 +29,19 @@ def other_mass_projection_is_longer(
     other_axis: shapely.LineString,
     hybrid_normalised_axes_projections: bool = False,
 ) -> bool:
+    """
+
+    :param poly:
+    :type poly:
+    :param first_axis:
+    :type first_axis:
+    :param other_axis:
+    :type other_axis:
+    :param hybrid_normalised_axes_projections:
+    :type hybrid_normalised_axes_projections:
+    :return:
+    :rtype:
+    """
     first_axis_projection_length = first_axis.project(
         poly.centroid, normalized=hybrid_normalised_axes_projections
     )
@@ -46,6 +60,23 @@ def compute_center_principal_axes(
     normalised_projections: bool = False,
     translate_axes: bool = True,
 ) -> Tuple[shapely.LineString, shapely.LineString]:
+    """
+
+    :param poly:
+    :type poly:
+    :param principality_measure:
+    :type principality_measure:
+    :param hybrid_ratio_threshold:
+    :type hybrid_ratio_threshold:
+    :param oppose_hybrid_ratio_cases:
+    :type oppose_hybrid_ratio_cases:
+    :param normalised_projections:
+    :type normalised_projections:
+    :param translate_axes:
+    :type translate_axes:
+    :return:
+    :rtype:
+    """
     if not isinstance(poly, shapely.geometry.base.BaseGeometry):
         assert isinstance(
             poly, Collection
@@ -117,6 +148,17 @@ def compute_center_principal_axes(
 def buffer_principal_axis(
     poly: shapely.geometry.base.BaseGeometry, distance: float = 1.4, **kwargs
 ) -> Union[shapely.Polygon, shapely.MultiPolygon]:
+    """
+
+    :param poly:
+    :type poly:
+    :param distance:
+    :type distance:
+    :param kwargs:
+    :type kwargs:
+    :return:
+    :rtype:
+    """
     pax, sax = compute_center_principal_axes(poly, **kwargs)
     return shapely.buffer(
         pax,
@@ -129,6 +171,17 @@ def buffer_principal_axis(
 def buffer_secondary_axis(
     poly: shapely.geometry.base.BaseGeometry, distance: float = 1.4, **kwargs
 ) -> Union[shapely.Polygon, shapely.MultiPolygon]:
+    """
+
+    :param poly:
+    :type poly:
+    :param distance:
+    :type distance:
+    :param kwargs:
+    :type kwargs:
+    :return:
+    :rtype:
+    """
     pax, sax = compute_center_principal_axes(poly, **kwargs)
     return shapely.buffer(
         sax,
@@ -141,6 +194,7 @@ def buffer_secondary_axis(
 if __name__ == "__main__":
 
     def juashdu():
+        """ """
         door_wkt = """Polygon ((0.41771353596173888 0.45279106470461222, 0.42202990913524002
     0.44398345695594388, 0.42503883676252752 0.4322059060841496, 0.42406995639706679 0.43195837661635911,
     0.42108655796187611 0.44363600107054563, 0.41687005351423739 0.45223982556683989, 0.41178976975322512

@@ -163,14 +163,35 @@ CHECK_STATE_TO_INT = {v: k for k, v in INT_TO_CHECK_STATE.items()}
 
 
 def str_to_check_state(str_: str) -> Any:
+    """
+
+    :param str_:
+    :type str_:
+    :return:
+    :rtype:
+    """
     return INT_TO_CHECK_STATE[int(str_)]
 
 
 def check_state_to_str(check_state: CheckStateEnum) -> Any:
+    """
+
+    :param check_state:
+    :type check_state:
+    :return:
+    :rtype:
+    """
     return str(CHECK_STATE_TO_INT[check_state])
 
 
 def check_state_to_bool(check_state: CheckStateEnum) -> bool:
+    """
+
+    :param check_state:
+    :type check_state:
+    :return:
+    :rtype:
+    """
     return CHECK_STATE_TO_INT[check_state] > 0
 
 

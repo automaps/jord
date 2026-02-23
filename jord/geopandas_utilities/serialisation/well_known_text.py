@@ -1,11 +1,11 @@
+from enum import Enum
 from pathlib import Path
+from typing import Any, Generator, Sequence
 
 import pandas
 import shapely
-from enum import Enum
 from pandas import DataFrame
 from shapely import wkt
-from typing import Any, Generator, Sequence
 
 __all__ = ["load_wkts_from_csv", "csv_wkt_generator", "WktTypeEnum"]
 
@@ -61,6 +61,7 @@ def csv_wkt_generator(
 if __name__ == "__main__":
 
     def uashdu():
+        """ """
         for t in WktTypeEnum:
             print(t)
 

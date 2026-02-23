@@ -1,7 +1,8 @@
 import logging
+from typing import Any, Callable, Mapping, Optional
+
 import shapely.geometry
 from shapely import LineString, Point
-from typing import Any, Callable, Mapping, Optional
 
 from .morphology import clean_shape, closing, opening, zero_buffer
 
@@ -65,10 +66,12 @@ def sanitise(
 if __name__ == "__main__":
 
     def ausdhasu():
+        """ """
         p = Point((1, 1))
         print(clean_shape(p))
 
     def ausdhasu2():
+        """ """
         p = LineString([(1, 1), (1, 1)])
         print(clean_shape(p))
 

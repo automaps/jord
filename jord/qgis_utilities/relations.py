@@ -51,9 +51,19 @@ def add_value_relation_field(
 
 
 def highlight_relationship() -> None:
+    """ """
     parent = iface.activeLayer()  # Get parent layer from the ToC
 
     def selectChildren(fids, foo, bar):
+        """
+
+        :param fids:
+        :type fids:
+        :param foo:
+        :type foo:
+        :param bar:
+        :type bar:
+        """
         relations = QgsProject.instance().relationManager().relationsByName("my_rel")
         rel = relations[0]  # Assuming we only have 1 relation named 'my_rel'
         referencingLayer = rel.referencingLayer()

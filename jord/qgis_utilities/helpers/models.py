@@ -5,8 +5,9 @@ __doc__ = r"""
            """
 
 
-from qgis.PyQt import QtCore
 from typing import Any, Optional, Tuple
+
+from qgis.PyQt import QtCore
 
 __all__ = ["MyTableModel"]
 

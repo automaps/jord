@@ -38,10 +38,12 @@ __all__ = [
 
 import collections
 import logging
+from enum import Enum
+from typing import Iterable, List, Sequence, Tuple, Union
+
 import numpy
 import shapely
 import shapely.geometry
-from enum import Enum
 from shapely.geometry import (
     LineString,
     LinearRing,
@@ -50,7 +52,6 @@ from shapely.geometry import (
     Point,
     box,
 )
-from typing import Iterable, List, Sequence, Tuple, Union
 
 # from sorcery import assigned_names
 from warg import Number, pairs
@@ -649,6 +650,15 @@ def linemerge(
 
 
 def are_incident(v1, v2) -> bool:
+    """
+
+    :param v1:
+    :type v1:
+    :param v2:
+    :type v2:
+    :return:
+    :rtype:
+    """
     v1 /= numpy.linalg.norm(v1)
     v2 /= numpy.linalg.norm(v2)
     angle = numpy.dot(v1, v2)
@@ -863,6 +873,15 @@ def perpendicular_line(l1: LineString, length: float) -> LineString:
 
 
 def add_coordinate(line: LineString, distance: float) -> LineString:
+    """
+
+    :param line:
+    :type line:
+    :param distance:
+    :type distance:
+    :return:
+    :rtype:
+    """
     # Cuts a line in two at a distance from its starting point
     if distance <= 0.0 or distance >= line.length:
         return line
@@ -882,6 +901,15 @@ def add_coordinate(line: LineString, distance: float) -> LineString:
 
 
 def increase_points_line(line: LineString, spacing: float) -> LineString:
+    """
+
+    :param line:
+    :type line:
+    :param spacing:
+    :type spacing:
+    :return:
+    :rtype:
+    """
     line_length = line.length
     cp = Point(line.interpolate(line_length - spacing))
     line = LineString(line.coords[:-1] + [(cp.x, cp.y)] + [line.coords[-1]])
@@ -977,11 +1005,13 @@ def remove_redundant_nodes(
 if __name__ == "__main__":
 
     def iashdh():
+        """ """
         print(
             to_single_line(MultiLineString([[[0, 0], [0, 1]], [[0, 2], [0, 3]]]))
         )  # LINESTRING (0 0, 0 1, 0 2, 0 3)
 
     def ausdh():
+        """ """
         from shapely.geometry import MultiPolygon, Point
 
         pol1 = MultiPolygon([Point(0, 0).buffer(2.0), Point(1, 1).buffer(2.0)])
@@ -991,9 +1021,11 @@ if __name__ == "__main__":
         print(to_lines(pols))
 
     def uahsduhjasd():
+        """ """
         print(extend_lines(MultiLineString([[[0, 0], [0, 1]], [[0, 2], [0, 3]]]), 1))
 
     def juashud():
+        """ """
         print(
             explode_lines(
                 [
@@ -1016,6 +1048,7 @@ if __name__ == "__main__":
     uahsduhjasd()
 
     def uhsaduh():
+        """ """
         v1 = (1, 1)
         v2 = (1, 1)
         v3 = (-1, 1)

@@ -1,12 +1,10 @@
-from pathlib import Path
-
 import logging
 import os
 import sys
-
+from pathlib import Path
+from typing import Any, Optional
 
 from qgis.core import Qgis, QgsMessageLog
-from typing import Any, Optional
 
 __all__ = ["setup_qgs_logger", "add_logging_handler_once", "QgsLogHandler", "level_map"]
 
@@ -188,8 +186,6 @@ def setup_qgs_logger(
         # We will only log exceptions.
         # Enable the 'plugins/use_sentry' QgsSettings option
         # before this will be enabled.
-
-        from qgis.core import QgsSettings
 
         settings = QgsSettings()
         app = "some_app"

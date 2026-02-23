@@ -5,7 +5,6 @@ __doc__ = r"""
            """
 
 from pathlib import Path
-
 from typing import List
 
 from jord.gdal_utilities.enums import GdalAccessEnum

@@ -1,16 +1,23 @@
 import logging
+from typing import Any, Generator, Mapping, Optional, Union
+
 import shapely
-
-
 from qgis.PyQt.QtCore import QDateTime, QVariant
-from typing import Any, Generator, Mapping, Optional, Tuple, Union
+from qgis.core import (
+    QgsGeometry,
+    QgsPoint,
+    QgsWkbTypes,
+)
+
+from jord.qgis_utilities.exceptions import (
+    GeometryIsEmptyError,
+    GeometryIsInvalidError,
+    MissingFeatureError,
+)
 
 _logger = logging.getLogger(__name__)
 
 __all__ = [
-    "MissingFeatureError",
-    "GeometryIsInvalidError",
-    "GeometryIsEmptyError",
     "layer_data_generator",
     "feature_to_shapely",
     "parse_q_value",
@@ -26,6 +33,7 @@ __all__ = [
     "extract_field_value",
     "qgs_geometry_to_shapely",
     "extract_layer_data_single",
+    "set_z_from_m",
 ]
 
 
@@ -34,15 +42,6 @@ NAN_VALUE = "nan"
 NULL_VALUE = "NULL"
 STR_NA_VALUE = "<NA>"
 STR_NONE_VALUE = "None"
-
-
-class MissingFeatureError(Exception): ...
-
-
-class GeometryIsEmptyError(Exception): ...
-
-
-class GeometryIsInvalidError(Exception): ...
 
 
 def parse_q_value(v: Any) -> Any:
@@ -180,6 +179,83 @@ def qgs_geometry_to_shapely(
             return shapely.from_wkb(geom_wkb)
 
     return None
+
+
+def set_z_from_m(layer_feature: Any, raise_on_missing: bool = False) -> Any:
+    """
+    Sets z coordinates from m values for the feature geometry
+
+    :param raise_on_missing:
+    :type raise_on_missing:
+    :param layer_feature:
+    :return:
+    """
+
+    if not layer_feature:
+        if raise_on_missing:
+            raise ValueError("Feature was None")
+        _logger.error("Feature was None")
+        return
+
+    geom = layer_feature.geometry()
+    if not geom:
+        if raise_on_missing:
+            raise ValueError("No geometry found")
+        _logger.error("No geometry found")
+        return layer_feature
+
+    # Validate M dimension
+    if not QgsWkbTypes.hasM(geom.wkbType()):
+        if raise_on_missing:
+            raise ValueError("Geometry does not have M values")
+        _logger.error("Geometry does not have M values")
+        return layer_feature
+
+    # Extract vertices with M values
+    vertices = geom.vertices()
+    new_vertices = []
+
+    while vertices.hasNext():
+        vertex = vertices.next()
+        if raise_on_missing and vertex.m() is None:
+            raise ValueError(f"M value missing for vertex {vertex}")
+        else:
+            assert vertex.m() is not None, f"M value missing for vertex {vertex}"
+        new_vertices.append(QgsPoint(vertex.x(), vertex.y(), vertex.m()))
+
+    # Create new geometry
+    geom_type = QgsWkbTypes.geometryType(geom.wkbType())
+    if geom_type == QgsWkbTypes.PointGeometry:
+        assert len(new_vertices) == 1, "Point geometry must have exactly one vertex"
+        new_geom = QgsGeometry.fromPointXYZ(
+            new_vertices[0].x(), new_vertices[0].y(), new_vertices[0].z()
+        )
+
+    elif geom_type == QgsWkbTypes.LineGeometry:
+        assert len(new_vertices) >= 2, "Line geometry must have at least two vertices"
+        new_geom = QgsGeometry.fromPolyline(new_vertices)
+
+    elif geom_type == QgsWkbTypes.PolygonGeometry:
+        rings = geom.asPolygon()
+        assert rings, "Invalid polygon geometry"
+        new_rings = []
+        vertex_index = 0
+        for ring in rings:
+            assert len(ring) >= 4, "Polygon ring must have at least 4 vertices"
+            ring_vertices = []
+            for _ in ring:
+                if vertex_index < len(new_vertices):
+                    ring_vertices.append(new_vertices[vertex_index])
+                    vertex_index += 1
+            new_rings.append(ring_vertices)
+        new_geom = QgsGeometry.fromPolygonXYZ(new_rings)
+
+    else:
+        _logger.error(f"Unsupported geometry type: {geom_type}")
+        return layer_feature
+
+    layer_feature.setGeometry(new_geom)
+    return layer_feature
 
 
 def feature_to_shapely(

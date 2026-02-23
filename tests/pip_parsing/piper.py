@@ -13,9 +13,6 @@ __all__ = [
     "is_package_updatable",
 ]
 
-from importlib.metadata import Distribution
-from pathlib import Path
-
 import ensurepip
 import json
 import logging
@@ -23,14 +20,17 @@ import os
 import subprocess
 import sys
 from enum import Enum
-from packaging import version
-from packaging.version import InvalidVersion, Version
+from importlib.metadata import Distribution
+from pathlib import Path
 from typing import Iterable, List, Optional, Tuple, Union
 from urllib.error import HTTPError
 from urllib.request import (  # TODO: should use QgsNetworkAccessManager instead for networking
     Request,
     urlopen,
 )
+
+from packaging import version
+from packaging.version import InvalidVersion, Version
 
 # from warg import is_windows # avoid dependency import not standard python pkgs.
 CUR_OS = sys.platform
@@ -40,6 +40,13 @@ IS_MAC = CUR_OS.startswith("darwin")
 
 # @passes_kws_to(subprocess.check_call)
 def catching_callable(*args, **kwargs):
+    """
+
+    :param args:
+    :type args:
+    :param kwargs:
+    :type kwargs:
+    """
     try:
         subprocess.check_call(*args, **kwargs)
     except subprocess.CalledProcessError as e:
@@ -161,8 +168,6 @@ other options:
 """
 
     if False:
-        import pip
-
         pip.main(args)
 
     elif False:
@@ -179,6 +184,11 @@ other options:
 
 
 def is_pip_installed() -> bool:
+    """
+
+    :return:
+    :rtype:
+    """
     pip_present = True
     try:
         import pip
@@ -188,6 +198,11 @@ def is_pip_installed() -> bool:
 
 
 def install_pip_if_not_present(always_upgrade: bool = True) -> None:
+    """
+
+    :param always_upgrade:
+    :type always_upgrade:
+    """
     if not is_pip_installed() or always_upgrade:
         if False:
             ensurepip.bootstrap(upgrade=True)
@@ -214,6 +229,11 @@ def import_or_install(package):
 
 
 def pip_installed():
+    """
+
+    :return:
+    :rtype:
+    """
     import subprocess
 
     pip_check = subprocess.run([str(get_qgis_python_interpreter_path()), "-m", "pip"])
@@ -221,6 +241,13 @@ def pip_installed():
 
 
 def is_requirement_installed(requirement_name: str) -> bool:
+    """
+
+    :param requirement_name:
+    :type requirement_name:
+    :return:
+    :rtype:
+    """
     current_version = get_installed_version(requirement_name)
     if current_version == "Broken":
         return False
@@ -234,10 +261,24 @@ def is_requirement_installed(requirement_name: str) -> bool:
 
 
 def requirement_has_version(requirement_name: str) -> bool:
+    """
+
+    :param requirement_name:
+    :type requirement_name:
+    :return:
+    :rtype:
+    """
     return get_requirement_version(requirement_name) is not None
 
 
 def get_requirement_version(requirement_name: str) -> Optional[str]:
+    """
+
+    :param requirement_name:
+    :type requirement_name:
+    :return:
+    :rtype:
+    """
     s = requirement_name.split("==")
     if len(s) == 2:
         return s[-1]
@@ -247,6 +288,15 @@ def get_requirement_version(requirement_name: str) -> Optional[str]:
 def get_installed_version(
     requirement_name: str, reload: bool = True
 ) -> Optional[Union[str, version.Version]]:
+    """
+
+    :param requirement_name:
+    :type requirement_name:
+    :param reload:
+    :type reload:
+    :return:
+    :rtype:
+    """
     import importlib
 
     if reload:
@@ -275,6 +325,13 @@ def get_installed_version(
 
 
 def get_newest_version(requirement_name: str) -> Optional[version.Version]:
+    """
+
+    :param requirement_name:
+    :type requirement_name:
+    :return:
+    :rtype:
+    """
     try:
         return version.parse(get_versions_from_index(requirement_name)[-1])
     except HTTPError:
@@ -282,6 +339,15 @@ def get_newest_version(requirement_name: str) -> Optional[version.Version]:
 
 
 def get_charset(headers, default: str = "utf-8"):
+    """
+
+    :param headers:
+    :type headers:
+    :param default:
+    :type default:
+    :return:
+    :rtype:
+    """
     # this is annoying.
     try:
         charset = headers.get_content_charset(default)
@@ -298,6 +364,15 @@ def get_charset(headers, default: str = "utf-8"):
 
 
 def json_get(url: str, headers: Tuple = (("Accept", "application/json"),)) -> str:
+    """
+
+    :param url:
+    :type url:
+    :param headers:
+    :type headers:
+    :return:
+    :rtype:
+    """
     response = urlopen(Request(url=url, headers=dict(headers)))
     code = response.code
 
@@ -311,6 +386,15 @@ def json_get(url: str, headers: Tuple = (("Accept", "application/json"),)) -> st
 
 
 def get_data_from_index(name: str, index: str = DEFAULT_PIP_INDEX):
+    """
+
+    :param name:
+    :type name:
+    :param index:
+    :type index:
+    :return:
+    :rtype:
+    """
     uri = f"{index.rstrip('/')}/{name.split('[')[0]}/json"
     data = json_get(uri)
     return data
@@ -319,6 +403,15 @@ def get_data_from_index(name: str, index: str = DEFAULT_PIP_INDEX):
 def get_versions_from_index(
     name: str, index: str = DEFAULT_PIP_INDEX
 ) -> Union[None, tuple[Version], Version]:
+    """
+
+    :param name:
+    :type name:
+    :param index:
+    :type index:
+    :return:
+    :rtype:
+    """
     try:
         pypi_data = get_data_from_index(name, index)
         releases = pypi_data["releases"]
@@ -338,10 +431,19 @@ def get_versions_from_index(
             return None
 
 
-def pip_freeze_list() -> List: ...
+def pip_freeze_list() -> List:
+    """ """
+    ...
 
 
 def is_requirement_updatable(requirement_name: str) -> bool:
+    """
+
+    :param requirement_name:
+    :type requirement_name:
+    :return:
+    :rtype:
+    """
     if not is_requirement_installed(requirement_name):
         return True
 
@@ -401,8 +503,6 @@ def install_requirements_from_name(
         args += ["--upgrade"]
 
     if False:
-        import pip
-
         pip.main(args)
     elif False:
         SP_CALLABLE(["pip"] + args)
@@ -426,8 +526,6 @@ def remove_requirements_from_name(*requirements_name: Iterable[str]) -> None:
         args = ["uninstall", *requirements_name, "-y"]
 
         if False:
-            import pip  # DEPRECATE
-
             pip.main(args)
 
         elif False:
@@ -440,18 +538,46 @@ def remove_requirements_from_name(*requirements_name: Iterable[str]) -> None:
 
 
 def is_package_up_to_date(query: str) -> bool:
+    """
+
+    :param query:
+    :type query:
+    :return:
+    :rtype:
+    """
     return is_requirement_updatable(query)
 
 
 def is_package_installed(query: str) -> bool:
+    """
+
+    :param query:
+    :type query:
+    :return:
+    :rtype:
+    """
     return is_requirement_installed(query)
 
 
 def is_package_updatable(query: str) -> bool:
+    """
+
+    :param query:
+    :type query:
+    :return:
+    :rtype:
+    """
     return is_requirement_updatable(query)
 
 
 def strip_item_state(query: str) -> str:
+    """
+
+    :param query:
+    :type query:
+    :return:
+    :rtype:
+    """
     for state in InstallStateEnum:
         query = query.replace(state.value, "")
     return query.strip()
@@ -460,15 +586,19 @@ def strip_item_state(query: str) -> str:
 if __name__ == "__main__":
 
     def fasga():
+        """ """
         print(is_package_updatable("warg"))
 
     def gasdsa():
+        """ """
         print(get_versions_from_index("warg"))
 
     def uhasudh():
+        """ """
         print(get_newest_version("warg"))
 
     def uhasudasgfagh():
+        """ """
         print(get_versions_from_index("warg"))
 
     # uhasudasgfagh()
@@ -476,6 +606,7 @@ if __name__ == "__main__":
     # uhasudh()
 
     def ia():
+        """ """
         print(
             get_newest_version("warg"),
             get_installed_version("warg"),
