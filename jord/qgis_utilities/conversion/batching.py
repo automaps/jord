@@ -3,11 +3,15 @@ from typing import Any, Collection, Optional, Union
 
 from qgis.analysis import QgsGcpGeometryTransformer
 from qgis.core import (
-    Qgis,
     QgsLayerTreeGroup,
     QgsLayerTreeLayer,
     QgsLayerTreeNode,
 )
+
+from jord.qgis_utilities.conversion.gcp_transformer_factory import (
+    transform_layer_features,
+)
+from jord.qgis_utilities.helpers import LayerEditingContext
 
 _logger = logging.getLogger(__name__)
 
@@ -115,41 +119,8 @@ def transform_features(
         _logger.error(f"{layer.name()} is not valid!")
         return
 
-    layer.startEditing()
+    with LayerEditingContext("Layer geometry transformation", layer):
 
-    _logger.warning(
-        f"Transforming geometry of layer with name: {tree_layer.layer().name()}"
-    )
+        transform_layer_features(layer, pre_transformer, transformer, tree_layer)
 
-    for idx, feat in enumerate(layer.getFeatures()):
-        if not feat.hasGeometry():
-            if False:
-                assert (
-                    feat.hasGeometry()
-                ), f"Feature {idx} of {layer.name()} has no geometry"
-            else:
-                _logger.error(
-                    f"Feature {idx} of {layer.name()} has no geometry, skipping"
-                )
-                continue
-        geometry = feat.geometry()
-        if pre_transformer:
-            geometry.transform(
-                pre_transformer, Qgis.TransformDirection.ForwardTransform
-            )
-
-        geom, ok = transformer.transform(geometry)
-
-        if pre_transformer:
-            geom.transform(pre_transformer, Qgis.TransformDirection.ReverseTransform)
-
-        if not ok:
-            _logger.error(
-                f"Error while transforming {geom} in layer {tree_layer.layer().name()}"
-            )
-        feat.setGeometry(geom)
-        layer.updateFeature(feat)
-
-    layer.endEditCommand()
-    layer.commitChanges()
     layer.triggerRepaint()

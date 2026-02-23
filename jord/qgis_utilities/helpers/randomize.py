@@ -7,6 +7,8 @@ from typing import Collection, Union, Any
 
 from qgis.core import QgsLayerTreeGroup, QgsLayerTreeLayer, QgsLayerTreeNode
 
+from .layer_editing_context import LayerEditingContext
+
 _logger = logging.getLogger(__name__)
 
 
@@ -80,27 +82,16 @@ def randomize_field(tree_layer: Any, field_name: str) -> None:  #: QgsLayerTreeL
     field_idx = layer.fields().indexFromName(field_name)
 
     if field_idx >= 0:
-        was_editing = False
-        if layer.isEditable():
-            layer.beginEditCommand(f"Regenerate {field_name}")
-            was_editing = True
-        else:
-            layer.startEditing()
+        with LayerEditingContext(f"Regenerate {field_name}", layer):
 
-        _logger.warning(
-            f"Randomizing {field_name}:{field_idx} in {tree_layer.layer().name()}"
-        )
+            _logger.warning(
+                f"Randomizing {field_name}:{field_idx} in {tree_layer.layer().name()}"
+            )
 
-        for i in range(layer.featureCount() + 1):
-            new_value = uuid.uuid4().hex
-            _logger.warning(f"Setting {field_name} to {new_value} for feature {i}")
-            layer.changeAttributeValue(i, field_idx, new_value)
+            for i in range(layer.featureCount() + 1):
+                new_value = uuid.uuid4().hex
+                _logger.warning(f"Setting {field_name} to {new_value} for feature {i}")
+                layer.changeAttributeValue(i, field_idx, new_value)
 
-        if was_editing:
-            layer.endEditCommand()
-        else:
-            # end_editing = not was_editing
-            # layer.rollBack() # to roll back to the original values
-            layer.commitChanges(stopEditing=True)
     else:
         _logger.error(f"Did not find {field_name} in {layer.name()}")
